@@ -1,0 +1,172 @@
+<resources>
+    <string name="app_name">PhotoShare</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- SharedPreferences -->
+    <string name="login_password">login_password</string>
+    <string name="shared_preferences_file_name">sp_login</string>
+    <string name="login_account_name">login_account_name</string>
+    <string name="login_whether_login">login_whether_login</string>
+    <string name="login_remember_password">login_remember_password</string>
+
+
+    <!-- 开始界面 -->
+    <string name="begin_activity_text1">分享你眼中的世界</string>
+    <string name="begin_activity_text2">——— 支持 IPV6 网络 ———</string>
+
+
+    <!-- 登录界面 -->
+    <string name="login_activity_username">Username</string>
+    <string name="login_activity_password">Password</string>
+    <string name="login_activity_login_button">Login</string>
+    <string name="login_activity_signup_button">Sign up now</string>
+    <string name="login_activity_welcome_back">Welcome Back ~</string>
+    <string name="login_activity_remember_pwd">Remember Password</string>
+
+
+    <!-- 注册界面 -->
+    <string name="signup_activity_signup_button">Start now</string>
+    <string name="signup_activity_username">Username Here</string>
+    <string name="signup_activity_password">Password Here</string>
+    <string name="signup_activity_start_exploring">Start Exploring ~</string>
+
+
+    <!--底部导航栏-->
+    <string name="bottom_nav_person">个人</string>
+    <string name="bottom_nav_photo_share">分享</string>
+    <string name="bottom_nav_photo_explore">探索</string>
+
+
+    <!--图文列表展示页-->
+    <string name="photo_explore_list_fragment_head_title">搜索</string>
+    <string name="photo_explore_list_fragment_quire_input">回车搜索</string>
+    <string name="photo_explore_list_fragment_quire_button">搜索</string>
+    <string name="photo_explore_big_fragment_head_title">探索</string>
+    <!--图文搜索页-->
+    <string name="photo_quire_fragment_head_title">搜索结果</string>
+    <!--图文详情页-->
+    <string name="photo_details_fragment_username">发布者</string>
+    <string name="photo_details_fragment_title">标题</string>
+    <string name="photo_details_fragment_content">内容</string>
+    <string name="photo_details_fragment_focus">+ 关注</string>
+    <string name="photo_details_fragment_like">双击屏幕点赞</string>
+    <string name="photo_details_fragment_id">ID</string>
+    <string name="photo_details_fragment_code">Code</string>
+    <!--图片详情页-->
+    <string name="photo_enlarge_fragment_hint">1 / 1</string>
+    <!--错误信息页-->
+    <string name="error_fragment_code">Code 5311</string>
+    <string name="error_fragment_hint">接口每日使用次数已用尽</string>
+
+
+    <!--一级评论详情页-->
+    <string name="photo_comment_first_fragment_all_comment">全部评论</string>
+    <string name="photo_comment_first_fragment_comment_num">评论</string>
+    <string name="photo_comment_first_fragment_add_comment">分享想法</string>
+    <string name="photo_comment_first_fragment_send_button">发布</string>
+    <!--一级评论详情页item-->
+    <string name="photo_comment_first_fragment_item_time">时间</string>
+    <string name="photo_comment_first_fragment_item_reply">回复</string>
+    <string name="photo_comment_first_fragment_item_host">楼主</string>
+    <string name="photo_comment_first_fragment_item_content">内容</string>
+    <string name="photo_comment_first_fragment_item_username">用户</string>
+    <string name="photo_comment_first_fragment_item_more">查看回复</string>
+
+    <!--二级评论详情页-->
+    <string name="photo_comment_second_fragment_all_reply">全部回复</string>
+    <string name="photo_comment_second_fragment_first_username">用户</string>
+    <string name="photo_comment_second_fragment_first_content">内容</string>
+    <string name="photo_comment_second_fragment_first_time">时间</string>
+    <string name="photo_comment_second_fragment_reply_num">回复</string>
+    <string name="photo_comment_second_fragment_add_comment">分享想法</string>
+    <string name="photo_comment_second_fragment_send_button">回复</string>
+    <string name="photo_comment_second_fragment_host">楼主</string>
+    <!--二级评论详情页item-->
+    <string name="photo_comment_second_fragment_item_time">时间</string>
+    <string name="photo_comment_second_fragment_item_content">内容</string>
+    <string name="photo_comment_second_fragment_item_username">用户</string>
+
+
+    <!--个人主页 -->
+    <string name="home_fragment_sex">性别</string>
+    <string name="home_fragment_like">Like</string>
+    <string name="home_fragment_my_updata">My</string>
+    <string name="home_fragment_collect">Collect</string>
+    <string name="home_fragment_about_us">About us</string>
+    <string name="home_fragment_not_filled_sex">未填写</string>
+    <string name="home_fragment_not_filled_name">用户名</string>
+    <!--个人详情页-->
+    <string name="person_information_fragment_id">ID</string>
+    <string name="person_information_fragment_sex">性别</string>
+    <string name="person_information_fragment_name">昵称</string>
+    <string name="person_information_fragment_sign">签名</string>
+    <string name="person_information_fragment_avatar">头像</string>
+    <string name="person_information_fragment_location">地址</string>
+    <string name="person_information_fragment_nation">国别</string>
+    <string name="person_information_fragment_quit">退出登录</string>
+    <string name="person_information_fragment_not_filled">未填写</string>
+    <!--个人修改页-->
+    <string name="person_modify_fragment_title">修改信息</string>
+    <string name="person_modify_fragment_sex">性别</string>
+    <string name="person_modify_fragment_name">昵称</string>
+    <string name="person_modify_fragment_avatar">头像</string>
+    <string name="person_modify_fragment_introduce">签名</string>
+    <string name="person_modify_fragment_sex_filled">保密</string>
+    <string name="person_modify_fragment_sign_filled">请输入新签名</string>
+    <string name="person_modify_fragment_name_filled">请输入新昵称</string>
+    <string name="person_modify_fragment_avatar_filled">点击更改</string>
+    <string name="person_modify_fragment_confirm_button">保存修改</string>
+    <!--个人头像选择页-->
+    <string name="person_avatar_modify_fragment_title">选择一张你喜欢的图片</string>
+    <string name="person_avatar_modify_fragment_hint">接口次数用尽,请明日再来</string>
+    <!--设置页-->
+    <string name="settings_fragment_quit">退出登录</string>
+    <string name="settings_fragment_version">1.0</string>
+    <string name="settings_fragment_check_upload">检查更新</string>
+    <string name="settings_fragment_cache">0.0 B</string>
+    <string name="settings_fragment_clear_cache">清除缓存</string>
+    <string name="settings_fragment_feed_back">意见反馈</string>
+    <string name="settings_fragment_about_us">关于我们</string>
+    <string name="settings_fragment_title">设置</string>
+    <!--设置页底部弹窗-->
+    <string name="dialog_setting_clean_cache_hint">此操作会清除所有缓存,下次加载将会消耗流量,是否继续?</string>
+    <string name="dialog_setting_clean_cache_confirm">确认</string>
+    <string name="dialog_setting_clean_cache_cancel">取消</string>
+    <!--关于我们-->
+    <string name="about_us_fragment_app_name">图片分享</string>
+    <string name="about_us_fragment_connect_us">作者 : 孙昊君</string>
+    <string name="about_us_fragment_version">Version 1.0</string>
+    <!--图文列表-->
+    <string name="person_list_fragment_updata_title">我的分享</string>
+    <string name="person_list_fragment_collect_title">我的收藏</string>
+    <string name="person_list_fragment_like_title">我的点赞</string>
+    <string name="person_list_fragment_like_hint">暂无点赞，快去点赞吧!</string>
+    <string name="person_list_fragment_collect_hint">暂无收藏，快去收藏吧!</string>
+    <string name="person_list_fragment_updata_hint">暂无分享，快去分享吧!</string>
+    <string name="person_list_fragment_updata_title_hint">长按删除图文</string>
+
+    <!--item-->
+    <string name="item_username">用户名</string>
+    <string name="item_content">内容</string>
+    <string name="item_title">标题</string>
+    <string name="item_like_num">0</string>
+    <string name="item_collect_num">0</string>
+
+
+    <!--图片上传页-->
+    <string name="photo_share_fragment_add_photo">Add Photo Here ~</string>
+    <!--图片上传页详情-->
+    <string name="photo_share_upload_details_fragment_title">标题</string>
+    <string name="photo_share_upload_details_fragment_context">内容</string>
+    <string name="photo_share_details_fragment_confirm">确认</string>
+    <string name="photo_share_upload_fragment_hint">上传图片</string>
+    <string name="photo_share_upload_details_fragment_get">随机获取文案</string>
+    <string name="photo_share_upload_details_fragment_add">确认上传图文</string>
+    <string name="photo_share_upload_fragment_hint2">不喜欢的图片可以点击删除哦</string>
+    <string name="photo_share_upload_details_fragment_hint">填写内容</string>
+    <!--图片上传页底部弹窗-->
+    <string name="dialog_share_choose_cancel">取消</string>
+    <string name="dialog_share_choose_album">从相册获取</string>
+    <string name="dialog_share_choose_camera">拍照获取</string>
+
+</resources>

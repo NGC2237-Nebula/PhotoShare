@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_d"
+    tools:context=".menu.explore.Fragment_PhotoCheck">
+
+    <ImageView
+        android:id="@+id/iv_photo_check_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="matrix" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+
+        app:cardBackgroundColor="@color/transparent"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="15dp">
+
+        <ImageView
+            android:id="@+id/iv_photo_check_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:background="@color/black_transparent_20"
+            android:src="@drawable/ic_baseline_arrow_back_white" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="35dp"
+
+        app:cardBackgroundColor="@color/transparent"
+        app:cardCornerRadius="17dp"
+        app:cardElevation="0dp">
+
+        <TextView
+            android:id="@+id/tv_photo_check_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@color/black_transparent_20"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="7dp"
+            android:text="@string/photo_enlarge_fragment_hint"
+            android:textColor="@color/white_transparent_60"
+            android:textSize="15sp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_photo_check_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+
+        app:cardBackgroundColor="@color/transparent"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="15dp">
+
+        <ImageView
+            android:id="@+id/iv_photo_check_download"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="7dp"
+            android:background="@color/black_transparent_20"
+            android:src="@drawable/ic_net_download" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_photo_check_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
+
+        android:layout_toStartOf="@+id/cv_photo_check_download"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="0dp">
+
+        <ImageView
+            android:id="@+id/iv_photo_check_share"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/black_transparent_20"
+            android:padding="8dp"
+            android:src="@drawable/ic_net_share" />
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

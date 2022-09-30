@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:background="@color/black_transparent_30"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_person_list_collect_image"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_logo" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_person_list_collect_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignBottom="@+id/iv_person_list_collect_image"
+                android:layout_alignParentStart="true"
+                android:layout_margin="15dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:cardBackgroundColor="@color/transparent"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="15dp">
+
+                <!--标题-->
+                <TextView
+                    android:id="@+id/tv_person_list_collect_title"
+                    style="@style/TextAppearance.AppCompat.Subhead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:background="@color/black_transparent_30"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:text="@string/item_title"
+                    android:textColor="@color/white_a"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_person_list_collect_content"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/iv_person_list_collect_image"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+
+                android:padding="8dp"
+                android:text="@string/item_content"
+                android:textColor="@color/white_transparent_90"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv_person_list_collect_title" />
+
+
+            <TextView
+                android:id="@+id/tv_person_list_collect_name"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/tv_person_list_collect_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+
+                android:padding="8dp"
+                android:text="@string/item_username"
+                android:textColor="@color/white_transparent_90"
+
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv_person_list_collect_title" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView >
+
+</RelativeLayout>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/ic_background_deep"
+    tools:context=".menu.person.Fragment_Settings">
+
+    <RelativeLayout
+        android:id="@+id/rl_settings_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_transparent_20">
+
+        <TextView
+            android:id="@+id/tv_settings_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="18dp"
+            android:text="@string/settings_fragment_title"
+            android:textColor="@color/white_transparent_90"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/iv_settings_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_arrow_back_white" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lv_settings_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/rl_settings_title">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_settings_about_us"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginHorizontal="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:text="@string/settings_fragment_about_us"
+                android:textColor="@color/white_transparent_90"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:layout_toStartOf="@+id/iv_settings_avatar4"
+                android:text=""
+                android:textColor="@color/white_transparent_90"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/iv_settings_avatar4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="25dp"
+                android:src="@drawable/ic_baseline_pointer_white" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_settings_feed_back"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginHorizontal="5dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:background="@color/white_transparent_20" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:text="@string/settings_fragment_feed_back"
+                android:textColor="@color/white_transparent_90"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:id="@+id/iv_settings_avatar2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="25dp"
+                android:src="@drawable/ic_baseline_pointer_white" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:layout_marginHorizontal="0dp"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white_transparent_20" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_settings_clear_cache"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginHorizontal="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:text="@string/settings_fragment_clear_cache"
+                android:textColor="@color/white_transparent_90"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_settings_cache"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="30dp"
+                android:text="@string/settings_fragment_cache"
+                android:textColor="@color/white_transparent_60"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_settings_check_updates"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginHorizontal="5dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginHorizontal="20dp"
+                android:background="@color/white_transparent_20" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:text="@string/settings_fragment_check_upload"
+                android:textColor="@color/white_transparent_90"
+                android:textSize="17sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="30dp"
+                android:text="@string/settings_fragment_version"
+                android:textColor="@color/white_transparent_60"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_settings_quit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="60dp"
+        android:layout_below="@+id/lv_settings_list"
+        android:background="@drawable/defined_button_style"
+        android:text="@string/settings_fragment_quit" />
+
+</RelativeLayout>

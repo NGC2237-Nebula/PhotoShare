@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/ic_background_light"
+    tools:context=".Activity_Signup">
+
+
+    <ImageView
+        android:id="@+id/iv_signup_arrow"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="35dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_baseline_arrow_back_white" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="115dp">
+
+        <TextView
+            android:id="@+id/tv_signup_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/signup_activity_start_exploring"
+            android:textColor="@color/white_transparent_90"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/tv_signup_welcome"
+            android:layout_marginTop="10dp"
+            android:background="@color/white_transparent_90" />
+
+    </RelativeLayout>
+
+
+    <!--账号输入框-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="9dp"
+            android:src="@drawable/ic_baseline_person_outline_white" />
+
+        <EditText
+            android:id="@+id/et_signup_username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/defined_box_white_stroke_style"
+            android:gravity="center"
+            android:hint="@string/signup_activity_username"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/white_transparent_90"
+            android:textColorHint="@color/white_transparent_60"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <!--密码输入框-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="18dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="9dp"
+            android:src="@drawable/ic_baseline_lock_white" />
+
+        <EditText
+            android:id="@+id/et_signup_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/defined_box_white_stroke_style"
+            android:gravity="center"
+            android:hint="@string/signup_activity_password"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/white_transparent_90"
+            android:textColorHint="@color/white_transparent_60"
+            android:textSize="15sp"
+            tools:ignore="TextFields" />
+    </RelativeLayout>
+
+    <!--按键-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="60dp">
+
+        <Button
+            android:id="@+id/bt_signup_signup"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/defined_button_style"
+            android:text="@string/signup_activity_signup_button"
+            android:textSize="15sp" />
+
+    </RelativeLayout >
+
+
+</LinearLayout>

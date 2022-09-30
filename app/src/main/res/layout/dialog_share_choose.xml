@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="10dp"
+        app:cardBackgroundColor="@color/white_transparent_60"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="18dp">
+
+        <TextView
+            android:id="@+id/dialog_share_choose_camera"
+            android:text="@string/dialog_share_choose_camera"
+            android:textColor="@color/black_c"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:typeface="monospace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white_transparent_60"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="18dp">
+
+        <TextView
+            android:id="@+id/dialog_share_choose_album"
+            android:text="@string/dialog_share_choose_album"
+            android:textColor="@color/black_c"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:typeface="monospace"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="@color/white_transparent_60"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="18dp">
+
+        <TextView
+            android:id="@+id/dialog_share_choose_cancel"
+            android:text="@string/dialog_share_choose_cancel"
+            android:textColor="@color/black_c"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:typeface="monospace"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

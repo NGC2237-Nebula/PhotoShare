@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_margin="7dp"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:background="@color/black_c"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--图片-->
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="130dp">
+
+            <ImageView
+                android:id="@+id/iv_photo_explore_list_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_main" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="15dp"
+
+                    app:cardBackgroundColor="@color/transparent"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="15dp">
+
+                    <!--标题-->
+                    <TextView
+                        android:id="@+id/tv_photo_explore_list_title"
+                        style="@style/TextAppearance.AppCompat.Subhead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:background="@color/black_transparent_50"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/item_title"
+                        android:textColor="@color/white_a"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp">
+
+            <!--内容-->
+            <TextView
+                android:id="@+id/tv_photo_explore_list_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="8dp"
+
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:padding="3dp"
+                android:text="@string/item_content"
+                android:textColor="@color/white_a"
+                android:textSize="14sp" />
+
+            <!--发布者-->
+            <TextView
+                android:id="@+id/tv_photo_explore_list_name"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/tv_photo_explore_list_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+
+                android:padding="3dp"
+                android:text="@string/item_username"
+                android:textColor="@color/white_d"
+                android:textSize="11sp" />
+
+            <!--点赞-->
+            <RelativeLayout
+                android:id="@+id/rl_photo_explore_list_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="15dp"
+                tools:ignore="RelativeOverlap">
+
+                <ImageView
+                    android:id="@+id/iv_photo_explore_list_like"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_baseline_like_gray" />
+
+                <TextView
+                    android:id="@+id/tv_photo_explore_list_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/iv_photo_explore_list_like"
+                    android:text="@string/item_like_num"
+                    android:textColor="@color/white_d"
+                    android:textSize="11sp" />
+
+            </RelativeLayout>
+
+            <!--收藏-->
+            <RelativeLayout
+                android:id="@+id/rl_photo_explore_list_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="15dp">
+
+                <ImageView
+                    android:id="@+id/iv_photo_explore_list_comment"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_baseline_collect_gray" />
+
+                <TextView
+                    android:id="@+id/tv_photo_explore_list_collect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@+id/iv_photo_explore_list_comment"
+                    android:text="@string/item_collect_num"
+                    android:textColor="@color/white_d"
+                    android:textSize="11sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout >

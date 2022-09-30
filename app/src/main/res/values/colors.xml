@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--浅色主题-->
+    <color name="light_theme_0">#DBDDDF</color>
+    <color name="light_theme_1">#70FFFFFF</color>
+    <color name="light_theme_2">#FFFFFFFF</color>
+    <color name="light_theme_3">#9D9D9D</color>
+
+    <!--深色主题-->
+    <color name="dark_theme_0">#FFFFFFFF</color>
+    <color name="dark_theme_1">#DBDDDF</color>
+    <color name="dark_theme_2">#70FFFFFF</color>
+    <color name="dark_theme_3">#9D9D9D</color>
+
+
+    <!--顶部导航栏-->
+    <color name="top_nav">#1B1B1B</color>
+
+    <!--底部导航栏-->
+    <color name="bottom_nav_click">#FFFFFFFF</color>
+    <color name="bottom_nav_default">#70FFFFFF</color>
+
+    <!--白-->
+    <color name="white_a">#FFFFFFFF</color>
+    <color name="white_b">#DBDDDF</color>
+    <color name="white_c">#70FFFFFF</color>
+    <color name="white_d">#969696</color>
+
+    <color name="white_transparent_90">#E6FFFFFF</color>
+    <color name="white_transparent_80">#CCFFFFFF</color>
+    <color name="white_transparent_70">#B3FFFFFF</color>
+    <color name="white_transparent_60">#99FFFFFF</color>
+    <color name="white_transparent_20">#33FFFFFF</color>
+    <color name="white_transparent_10">#19FFFFFF</color>
+    <color name="white_transparent_5">#0DFFFFFF</color>
+
+    <!--黑-->
+    <color name="black_a">#000000</color>
+    <color name="black_b">#111111</color>
+    <color name="black_c">#191919</color>
+    <color name="black_d">#1E1E1E</color>
+    <color name="black_e">#272727</color>
+
+    <color name="black_transparent_95">#F2000000</color>
+    <color name="black_transparent_80">#CC000000</color>
+    <color name="black_transparent_70">#B3000000</color>
+    <color name="black_transparent_50">#80000000</color>
+    <color name="black_transparent_40">#66000000</color>
+    <color name="black_transparent_30">#4D000000</color>
+    <color name="black_transparent_20">#33000000</color>
+    <color name="black_transparent_10">#1A000000</color>
+
+    <color name="black_e_transparent_90">#E6272727</color>
+    <color name="black_e_transparent_80">#CC272727</color>
+    <color name="black_e_transparent_60">#99272727</color>
+
+    <!--灰-->
+    <color name="gray">#373737</color>
+    <color name="gray_b">#303031</color>
+    <color name="gray_transparent_80">#CC373737</color>
+
+    <!--蓝-->
+    <color name="blue_a">#558FFE</color>
+    <color name="blue_b">#7D8598</color>
+    <color name="blue_c">#1D1D27</color>
+    <color name="blue_d">#4377DA</color>
+
+    <!--全透明-->
+    <color name="transparent">#00000000</color>
+
+</resources>

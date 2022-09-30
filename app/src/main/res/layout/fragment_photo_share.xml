@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@mipmap/ic_background_light"
+    tools:context=".menu.share.Fragment_PhotoShare">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_photo_share_updata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@+id/rl_photo_share_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+
+        app:cardBackgroundColor="@color/transparent"
+        app:cardCornerRadius="9dp"
+        app:cardElevation="0dp">
+
+        <ImageButton
+            android:id="@+id/bt_photo_share_updata"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@color/black_transparent_30"
+            android:src="@drawable/ic_baseline_photo_camera_white_big" />
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/rl_photo_share_text"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        tools:context=".menu.share.Fragment_PhotoShare">
+
+        <TextView
+            android:id="@+id/tv_photo_share_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/photo_share_fragment_add_photo"
+            android:textColor="@color/white_transparent_80"
+            android:textSize="25sp" />
+
+        <ImageView
+            android:id="@+id/iv_photo_share_hint"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/tv_photo_share_text"
+            android:src="@drawable/ic_baseline_hint_white" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

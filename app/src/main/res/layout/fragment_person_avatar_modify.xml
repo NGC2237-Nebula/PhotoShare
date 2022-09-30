@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_d"
+    tools:context=".menu.person.Fragment_PersonAvatarModify">
+
+    <RelativeLayout
+        android:id="@+id/rl_photo_avatar_modify_head"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageView
+            android:id="@+id/iv_person_avatar_modify_back"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_arrow_back_white" />
+
+        <TextView
+            android:id="@+id/tv_person_avatar_modify_head"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="15dp"
+            android:padding="5dp"
+            android:text="@string/person_avatar_modify_fragment_title"
+            android:textColor="@color/white_transparent_60"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/sw_person_avatar_modify_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_photo_avatar_modify_head"
+        android:layout_marginBottom="60dp" />
+
+    <TextView
+        android:id="@+id/tv_person_avatar_modify_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/person_avatar_modify_fragment_hint"
+        android:textColor="@color/white_transparent_60"
+        android:textSize="18sp"
+        android:visibility="invisible" />
+
+</RelativeLayout>

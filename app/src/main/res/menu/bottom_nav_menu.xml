@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_baseline_home_black"
+        android:title="@string/bottom_nav_person" />
+
+    <item
+        android:id="@+id/navigation_photo_explore"
+        android:icon="@drawable/ic_baseline_photo_explore_white"
+        android:title="@string/bottom_nav_photo_explore" />
+
+    <item
+        android:id="@+id/navigation_photo_share"
+        android:icon="@drawable/ic_baseline_photo_camera_white"
+        android:title="@string/bottom_nav_photo_share" />
+
+</menu>

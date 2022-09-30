@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_d"
+    tools:context=".menu.explore.Fragment_PhotoExploreList">
+
+    <RelativeLayout
+        android:id="@+id/rl_photo_explore_list_head"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/black_c"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp">
+
+            <RelativeLayout
+                android:id="@+id/rl_photo_explore_list_convert"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="13dp"
+                    android:src="@drawable/ic_baseline_list_white" />
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_baseline_photo_gray" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+            android:id="@+id/rl_photo_explore_list_show_quire_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="30dp">
+
+            <ImageView
+                android:id="@+id/iv_photo_explore_list_head_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_search_white" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@+id/iv_photo_explore_list_head_image"
+                android:text="@string/photo_explore_list_fragment_head_title"
+                android:textColor="@color/white_transparent_80"
+                android:textSize="17sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/sw_photo_explore_list_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_photo_explore_list_head"
+        android:layout_marginBottom="60dp">
+
+        <ListView
+            android:id="@+id/lv_photo_explore_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="3dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_photo_explore_list_quire_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:layout_below="@+id/rl_photo_explore_list_head"
+        android:layout_alignBottom="@+id/sw_photo_explore_list_swipe"
+        android:background="#33000000" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_photo_explore_list_quire_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/rl_photo_explore_list_head"
+
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="12dp"
+
+        app:cardBackgroundColor="@color/black_e_transparent_90"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/et_photo_explore_list_quire"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@+id/rl_photo_explore_list_quire_button"
+                android:background="@drawable/defined_box_transparent_style"
+
+                android:gravity="center"
+                android:hint="@string/photo_explore_list_fragment_quire_input"
+
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:textColor="@color/white_transparent_70"
+                android:textColorHint="@color/white_transparent_70"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_alignEnd="@+id/et_photo_explore_list_quire"
+                android:layout_marginVertical="15dp"
+                android:background="@color/white_transparent_80" />
+
+            <RelativeLayout
+                android:id="@+id/rl_photo_explore_list_quire_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="10dp">
+
+                <Spinner
+                    android:id="@+id/sp_photo_explore_list_quire_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_vertical"
+                    android:popupBackground="@color/transparent"
+                    android:spinnerMode="dropdown" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

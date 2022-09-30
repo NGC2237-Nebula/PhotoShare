@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_photo_explore">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.photoshare.menu.person.Fragment_Home"
+        android:label="@string/bottom_nav_person"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_PersonDetails"
+            app:destination="@id/fragment_PersonInformation" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_AboutUs"
+            app:destination="@id/fragment_AboutUs" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_PhotoLikeList"
+            app:destination="@id/fragment_PersonLikeList" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_PhotoCollectList"
+            app:destination="@id/fragment_PersonCollectList" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_PersonUpdataList"
+            app:destination="@id/fragment_PersonUpdataList" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_Settings"
+            app:destination="@id/fragment_Settings" />
+        <action
+            android:id="@+id/action_navigation_home_to_fragment_PersonAvatarCheck"
+            app:destination="@id/fragment_PersonAvatarCheck" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_PersonInformation"
+        android:name="com.example.photoshare.menu.person.Fragment_PersonInformation"
+        tools:layout="@layout/fragment_person_information" >
+        <action
+            android:id="@+id/action_fragment_PersonDetails_to_fragment_PersonModify"
+            app:destination="@id/fragment_PersonModify" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/navigation_photo_explore"
+        android:name="com.example.photoshare.menu.explore.Fragment_PhotoExploreList"
+        android:label="@string/bottom_nav_photo_explore"
+        tools:layout="@layout/fragment_photo_explore_list" >
+        <action
+            android:id="@+id/action_navigation_photo_find_to_fragment_PhotoDetails"
+            app:destination="@id/fragment_PhotoDetails" />
+        <action
+            android:id="@+id/action_navigation_photo_explore_to_fragment_Error"
+            app:destination="@id/fragment_Error" />
+        <action
+            android:id="@+id/action_navigation_photo_explore_to_fragment_PhotoExploreBig"
+            app:destination="@id/fragment_PhotoExploreBig" />
+        <action
+            android:id="@+id/action_navigation_photo_explore_to_fragment_PhotoQuire"
+            app:destination="@id/fragment_PhotoQuire" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_PhotoDetails"
+        android:name="com.example.photoshare.menu.explore.Fragment_PhotoDetails"
+        tools:layout="@layout/fragment_photo_details" >
+        <action
+            android:id="@+id/action_fragment_PhotoDetails_to_fragment_CommentFirst"
+            app:destination="@id/fragment_CommentFirst" />
+        <action
+            android:id="@+id/action_fragment_PhotoDetails_to_fragment_PhotoCheck"
+            app:destination="@id/fragment_PhotoEnlarge" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_photo_share"
+        android:name="com.example.photoshare.menu.share.Fragment_PhotoShare"
+        android:label="@string/bottom_nav_photo_share"
+        tools:layout="@layout/fragment_photo_share" >
+        <action
+            android:id="@+id/action_navigation_photo_share_to_fragment_PhotoShareUpload"
+            app:destination="@id/fragment_PhotoShareUpload" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_AboutUs"
+        android:name="com.example.photoshare.menu.person.Fragment_AboutUs"
+        android:label="Fragment_AboutUs"
+        tools:layout="@layout/fragment_about_us"/>
+    <fragment
+        android:id="@+id/fragment_PersonLikeList"
+        android:name="com.example.photoshare.menu.person.Fragment_PersonListLike"
+        android:label="Fragment_PersonLikeList"
+        tools:layout="@layout/fragment_person_list_like">
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_PersonUpdataList"
+        android:name="com.example.photoshare.menu.person.Fragment_PersonListMyself"
+        android:label="Fragment_PersonUpdataList"
+        tools:layout="@layout/fragment_person_list_myself">
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_PersonCollectList"
+        android:name="com.example.photoshare.menu.person.Fragment_PersonListCollect"
+        android:label="Fragment_PersonCollectList"
+        tools:layout="@layout/fragment_person_list_collect">
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_PersonModify"
+        android:name="com.example.photoshare.menu.person.Fragment_PersonModify"
+        android:label="Fragment_PersonModify"
+        tools:layout="@layout/fragment_person_modify">
+        <action
+            android:id="@+id/action_fragment_PersonModify_to_fragment_PersonAvatarModify"
+            app:destination="@id/fragment_PersonModifyAvatar" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_CommentFirst"
+        android:name="com.example.photoshare.menu.explore.Fragment_CommentFirst"
+        android:label="Fragment_CommentFirst"
+        tools:layout="@layout/fragment_photo_comment_first">
+        <action
+            android:id="@+id/action_fragment_CommentFirst_to_fragment_CommentSecond"
+            app:destination="@id/fragment_CommentSecond" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_CommentSecond"
+        android:name="com.example.photoshare.menu.explore.Fragment_CommentSecond"
+        android:label="fragment_photo_comment_second"
+        tools:layout="@layout/fragment_photo_comment_second" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_Error"
+        android:name="com.example.photoshare.menu.explore.Fragment_Error"
+        android:label="fragment_error"
+        tools:layout="@layout/fragment_error" />
+    <fragment
+        android:id="@+id/fragment_PhotoEnlarge"
+        android:name="com.example.photoshare.menu.explore.Fragment_PhotoCheck"
+        android:label="fragment_photo_enlarge"
+        tools:layout="@layout/fragment_photo_check" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_PhotoShareUpload"
+        android:name="com.example.photoshare.menu.share.Fragment_PhotoShareUpload"
+        android:label="Fragment_PhotoShareUpload"
+        tools:layout="@layout/fragment_photo_share_upload">
+        <action
+            android:id="@+id/action_fragment_PhotoShareUpload_to_fragment_PhotoShareUploadDetails"
+            app:destination="@id/fragment_PhotoShareUploadDetails" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_PhotoShareUploadDetails"
+        android:name="com.example.photoshare.menu.share.Fragment_PhotoShareUploadDetails"
+        android:label="fragment_photo_share_details"
+        tools:layout="@layout/fragment_photo_share_upload_details" >
+        <action
+            android:id="@+id/action_fragment_PhotoShareUploadDetails_to_navigation_photo_share"
+            app:destination="@id/navigation_photo_share" />
+        <action
+            android:id="@+id/action_fragment_PhotoShareUploadDetails_to_navigation_photo_explore"
+            app:destination="@id/navigation_photo_explore" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_PhotoExploreBig"
+        android:name="com.example.photoshare.menu.explore.Fragment_PhotoExploreBig"
+        android:label="fragment_photo_explore_big"
+        tools:layout="@layout/fragment_photo_explore_big" >
+        <action
+            android:id="@+id/action_fragment_PhotoExploreBig_to_navigation_photo_explore"
+            app:destination="@id/navigation_photo_explore" />
+        <action
+            android:id="@+id/action_fragment_PhotoExploreBig_to_fragment_PhotoDetails"
+            app:destination="@id/fragment_PhotoDetails" />
+        <action
+            android:id="@+id/action_fragment_PhotoExploreBig_to_fragment_Error"
+            app:destination="@id/fragment_Error" />
+        <action
+            android:id="@+id/action_fragment_PhotoExploreBig_to_fragment_PhotoQuire"
+            app:destination="@id/fragment_PhotoQuire" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_PersonModifyAvatar"
+        android:name="com.example.photoshare.menu.person.Fragment_PersonAvatarModify"
+        android:label="fragment_person_modify_avatar"
+        tools:layout="@layout/fragment_person_avatar_modify" />
+    <fragment
+        android:id="@+id/fragment_Settings"
+        android:name="com.example.photoshare.menu.person.Fragment_Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_fragment_Settings_to_fragment_AboutUs"
+            app:destination="@id/fragment_AboutUs" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_PhotoQuire"
+        android:name="com.example.photoshare.menu.explore.Fragment_PhotoQuire"
+        android:label="fragment_photo_quire"
+        tools:layout="@layout/fragment_photo_quire" >
+        <action
+            android:id="@+id/action_fragment_PhotoQuire_to_fragment_PhotoDetails"
+            app:destination="@id/fragment_PhotoDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_PersonAvatarCheck"
+        android:name="com.example.photoshare.menu.person.Fragment_PersonAvatarCheck"
+        android:label="fragment_person_avatar_check"
+        tools:layout="@layout/fragment_person_avatar_check" />
+
+</navigation>

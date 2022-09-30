@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@mipmap/ic_background_light"
+    tools:context=".menu.explore.Fragment_PhotoDetails">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/sw_person_information_swipe"
+        android:layout_marginBottom="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_person_information_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_arrow_back_white"/>
+
+            <!--头像-->
+            <RelativeLayout
+                android:id="@+id/rl_information_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_person_information_avatar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:text="@string/person_information_fragment_avatar"
+                    android:textColor="@color/white_transparent_90"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_person_information_avatar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_toEndOf="@+id/tv_person_information_avatar_title"
+                    android:background="@drawable/defined_box_white_deep_style">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_centerInParent="true"
+                        android:layout_marginVertical="5dp"
+
+                        app:cardBackgroundColor="@color/transparent"
+                        app:cardCornerRadius="5dp">
+
+                        <ImageView
+                            android:id="@+id/iv_person_information_avatar"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/ic_main" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+
+
+            <!--昵称-->
+            <RelativeLayout
+                android:id="@+id/rl_information_name"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1">
+
+                <View
+                    android:layout_width="350dp"
+                    android:layout_height="1dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/white_transparent_20" />
+
+                <TextView
+                    android:id="@+id/tv_person_information_name_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:text="@string/person_information_fragment_name"
+                    android:textColor="@color/white_transparent_90"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_person_information_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginVertical="15dp"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_toEndOf="@+id/tv_person_information_name_title"
+                    android:background="@drawable/defined_box_white_deep_style">
+
+                    <TextView
+                        android:id="@+id/tv_person_information_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/person_information_fragment_not_filled"
+                        android:textColor="@color/white_transparent_80"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!--性别-->
+            <RelativeLayout
+                android:id="@+id/rl_information_sex"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1">
+
+                <View
+                    android:layout_width="350dp"
+                    android:layout_height="1dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/white_transparent_20" />
+
+                <TextView
+                    android:id="@+id/tv_person_information_sex_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/person_information_fragment_sex"
+                    android:textColor="@color/white_transparent_90"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_person_information_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginVertical="15dp"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_toEndOf="@+id/tv_person_information_sex_title"
+                    android:background="@drawable/defined_box_white_deep_style">
+
+                    <TextView
+                        android:id="@+id/tv_person_information_sex"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/person_information_fragment_not_filled"
+                        android:textColor="@color/white_transparent_80"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!--id-->
+            <RelativeLayout
+                android:id="@+id/rl_information_id"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1">
+
+                <View
+                    android:layout_width="350dp"
+                    android:layout_height="1dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/white_transparent_20" />
+
+                <TextView
+                    android:id="@+id/tv_person_information_id_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="35dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/person_information_fragment_id"
+                    android:textColor="@color/white_transparent_90"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_person_information_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginVertical="15dp"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_toEndOf="@+id/tv_person_information_id_title"
+                    android:background="@drawable/defined_box_white_deep_style">
+
+                    <TextView
+                        android:id="@+id/tv_person_information_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/person_information_fragment_not_filled"
+                        android:textColor="@color/white_transparent_80"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!--地区-->
+            <RelativeLayout
+                android:id="@+id/rl_information_location"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1">
+
+                <View
+                    android:layout_width="350dp"
+                    android:layout_height="1dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/white_transparent_20" />
+
+                <TextView
+                    android:id="@+id/tv_person_information_location_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/person_information_fragment_location"
+                    android:textColor="@color/white_transparent_90"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_person_information_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginVertical="15dp"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_toEndOf="@+id/tv_person_information_location_title"
+                    android:background="@drawable/defined_box_white_deep_style">
+
+                    <TextView
+                        android:id="@+id/tv_information_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/person_information_fragment_nation"
+                        android:textColor="@color/white_transparent_80"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!--简介-->
+            <RelativeLayout
+                android:id="@+id/rl_information_sign"
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1">
+
+                <View
+                    android:layout_width="350dp"
+                    android:layout_height="1dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/white_transparent_20" />
+
+                <TextView
+                    android:id="@+id/tv_person_information_sign_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/person_information_fragment_sign"
+                    android:textColor="@color/white_transparent_90"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_person_information_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginEnd="30dp"
+
+                    android:layout_toEndOf="@+id/tv_person_information_sign_title"
+                    android:background="@drawable/defined_box_white_deep_style">
+
+                    <TextView
+                        android:id="@+id/tv_person_information_sign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/person_information_fragment_not_filled"
+                        android:textColor="@color/white_transparent_80"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bt_person_information_quit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/defined_button_style"
+                android:text="@string/person_information_fragment_quit" />
+
+        </LinearLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</RelativeLayout>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@mipmap/ic_background_light"
+    tools:context=".menu.person.Fragment_PersonModify">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_person_modify_arrow_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_arrow_back_white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_modify_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:gravity="center_horizontal"
+                android:text="@string/person_modify_fragment_avatar"
+                android:textColor="@color/white_transparent_90"
+                android:textSize="17sp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_person_modify_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="40dp"
+                android:layout_toEndOf="@+id/tv_modify_avatar"
+                android:background="@drawable/defined_box_white_deep_style"
+                android:textColorHint="@color/white_transparent_60">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_person_modify_avatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_centerVertical="true"
+
+                        android:layout_marginStart="40dp"
+                        android:layout_toEndOf="@+id/tv_person_modify_avatar"
+                        app:cardBackgroundColor="@color/transparent"
+                        app:cardCornerRadius="5dp">
+
+                        <ImageView
+                            android:id="@+id/iv_person_modify_avatar"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/ic_main" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/tv_person_modify_avatar"
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_centerVertical="true"
+
+                        android:text="@string/person_modify_fragment_avatar_filled"
+                        android:textColor="@color/white_transparent_70"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="1">
+
+            <View
+                android:layout_width="350dp"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white_transparent_20" />
+
+            <TextView
+                android:id="@+id/tv_modify_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:text="@string/person_modify_fragment_name"
+                android:textColor="@color/white_transparent_90"
+                android:textSize="17sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_alignEnd="@+id/tv_modify_name"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="40dp"
+                android:layout_toEndOf="@+id/tv_modify_name"
+                android:textColorHint="@color/white_transparent_70">
+
+                <EditText
+                    android:id="@+id/et_person_modify_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:background="@drawable/defined_box_white_deep_style"
+
+                    android:gravity="center"
+                    android:hint="@string/person_modify_fragment_name_filled"
+                    android:textColor="@color/white_transparent_90"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="1">
+
+            <View
+                android:layout_width="350dp"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white_transparent_20" />
+
+            <TextView
+                android:id="@+id/tv_modify_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:gravity="center_horizontal"
+                android:text="@string/person_modify_fragment_sex"
+                android:textColor="@color/white_transparent_90"
+                android:textSize="17sp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_person_modify_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="40dp"
+                android:layout_toEndOf="@+id/tv_modify_sex"
+                android:background="@drawable/defined_box_white_deep_style">
+
+                <TextView
+                    android:id="@+id/sw_person_modify_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginVertical="10dp"
+                    android:text="@string/person_modify_fragment_sex_filled"
+                    android:textColor="@color/white_transparent_70"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="145dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="1">
+
+            <View
+                android:layout_width="350dp"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white_transparent_20" />
+
+            <TextView
+                android:id="@+id/tv_modify_sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                android:gravity="center_horizontal"
+                android:text="@string/person_modify_fragment_introduce"
+                android:textColor="@color/white_transparent_90"
+                android:textSize="17sp" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_alignEnd="@+id/tv_modify_sign"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="40dp"
+
+                android:layout_toEndOf="@+id/tv_modify_sign"
+                android:textColorHint="@color/white_transparent_70">
+
+                <EditText
+                    android:id="@+id/et_person_modify_sign"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:background="@drawable/defined_box_white_deep_style"
+                    android:gravity="center"
+                    android:hint="@string/person_modify_fragment_sign_filled"
+                    android:lines="5"
+                    android:textColor="@color/white_transparent_90"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/bt_person_modify_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/defined_button_style"
+            android:text="@string/person_modify_fragment_confirm_button" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

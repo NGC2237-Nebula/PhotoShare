@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black_d"
+    tools:context=".menu.explore.Fragment_CommentSecond">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_photo_comment_second_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_photo_comment_second_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginVertical="20dp"
+            android:layout_marginEnd="30dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_close_white" />
+
+        <TextView
+            android:id="@+id/tv_photo_comment_second_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+
+            android:text="@string/photo_comment_second_fragment_all_reply"
+            android:textColor="@color/white_b"
+            android:textSize="16sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_photo_comment_second_first"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_photo_comment_second_back">
+
+        <TextView
+            android:id="@+id/tv_comment_first_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignStart="@+id/tv_comment_first_context"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="15dp"
+
+            android:text="@string/photo_comment_second_fragment_first_username"
+            android:textColor="@color/blue_a"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_comment_first_context"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/tv_comment_first_username"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+
+            android:text="@string/photo_comment_second_fragment_first_content"
+            android:textColor="@color/white_b"
+            android:textSize="15sp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_comment_first_host"
+            android:layout_width="47dp"
+            android:layout_height="22dp"
+
+            android:layout_alignTop="@+id/tv_comment_first_username"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="-1dp"
+
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_toEndOf="@+id/tv_comment_first_username"
+
+            app:cardCornerRadius="5dp"
+            app:cardElevation="16dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/blue_a" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="1dp"
+                android:text="@string/photo_comment_second_fragment_host"
+                android:textColor="@color/white_a" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_comment_first_create_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_comment_first_context"
+            android:layout_alignStart="@+id/tv_comment_first_context"
+            android:layout_marginBottom="15dp"
+
+            android:padding="2dp"
+            android:text="@string/photo_comment_second_fragment_first_time"
+            android:textColor="@color/white_c"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/v_photo_comment_second_line"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@+id/rl_photo_comment_second_first"
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/white_transparent_5" />
+
+
+    <TextView
+        android:id="@+id/tv_photo_comment_second_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/v_photo_comment_second_line"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+
+        android:text="@string/photo_comment_second_fragment_reply_num"
+        android:textColor="@color/white_transparent_60"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/sw_photo_comment_second_swipe"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/tv_photo_comment_second_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+
+            android:textColor="@color/white_transparent_60"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/sw_photo_comment_second_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_photo_comment_second_add"
+        android:layout_below="@+id/tv_photo_comment_second_num"
+        android:layout_margin="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp">
+
+        <ListView
+            android:id="@+id/lv_photo_comment_second_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@android:color/transparent"
+            android:scrollbars="none" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_photo_comment_second_add"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/et_photo_comment_second_write"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_toStartOf="@+id/bt_photo_comment_second_send"
+            android:background="@drawable/defined_box_white_deep_style"
+            android:gravity="center"
+            android:hint="@string/photo_comment_second_fragment_add_comment"
+            android:inputType="text"
+            android:textColor="@color/white_transparent_90"
+            android:textColorHint="@color/white_transparent_60"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/bt_photo_comment_second_send"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/blue_a"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/white_a"
+            android:text="@string/photo_comment_second_fragment_send_button" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

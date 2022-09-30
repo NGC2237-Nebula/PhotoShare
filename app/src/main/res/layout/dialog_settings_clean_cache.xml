@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="30dp"
+        app:cardBackgroundColor="@color/white_transparent_80"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="28dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/dialog_setting_clean_cache_hint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="13dp"
+                android:text="@string/dialog_setting_clean_cache_hint"
+                android:textColor="#4377DA"
+                android:textSize="17sp"
+                android:typeface="monospace" />
+
+            <View
+                android:id="@+id/view_div"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/dialog_setting_clean_cache_hint"
+                android:background="@color/black_transparent_30" />
+
+            <TextView
+                android:id="@+id/dialog_setting_clean_cache_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_div"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/dialog_setting_clean_cache_confirm"
+                android:textColor="@color/black_c"
+                android:textSize="16sp"
+                android:typeface="monospace" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/dialog_setting_clean_cache_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="31dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+
+        app:cardBackgroundColor="@color/white_transparent_80"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="18dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_div"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/dialog_setting_clean_cache_cancel"
+            android:textColor="@color/black_c"
+            android:textSize="16sp"
+            android:typeface="monospace"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>
