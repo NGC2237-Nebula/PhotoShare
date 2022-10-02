@@ -320,10 +320,12 @@ public class Fragment_PhotoExploreBig extends Fragment {
      */
     private final View.OnClickListener rlShowQuireListener = v -> {
         if (rlQuireMask.getAlpha() == 0f || cvQuireBar.getAlpha() == 0f) {
+            rlQuireMask.setVisibility(View.VISIBLE);
             animatorQuireBar(QUIRE_BAR_SHOW);
         } else {
             hideKeyboard();
             animatorQuireBar(QUIRE_BAR_HIDE);
+            rlQuireMask.setVisibility(View.INVISIBLE);
         }
     };
     /**
@@ -347,6 +349,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
     private final View.OnClickListener rlQuireMaskListener = v -> {
         hideKeyboard();
         animatorQuireBar(QUIRE_BAR_HIDE);
+        rlQuireMask.setVisibility(View.INVISIBLE);
     };
     /**
      * 选择搜索类型
@@ -433,6 +436,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
 
         // 搜索时的衬托背景
         rlQuireMask = root.findViewById(R.id.rl_photo_explore_big_quire_mask);
+        rlQuireMask.setVisibility(View.INVISIBLE);
         rlQuireMask.setOnClickListener(rlQuireMaskListener);
 
         RelativeLayout rlConvert = root.findViewById(R.id.rl_photo_explore_big_convert);

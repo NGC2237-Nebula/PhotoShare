@@ -271,10 +271,12 @@ public class Fragment_PhotoExploreList extends Fragment {
         @Override
         public void onClick(View v) {
             if (rlQuireMask.getAlpha() == 0f || cvQuireBar.getAlpha() == 0f) {
+                rlQuireMask.setVisibility(View.VISIBLE);
                 setQuireBarState(QUIRE_BAR_SHOW);
             } else {
                 setKeyboardState();
                 setQuireBarState(QUIRE_BAR_HIDE);
+                rlQuireMask.setVisibility(View.INVISIBLE);
             }
         }
     };
@@ -299,6 +301,7 @@ public class Fragment_PhotoExploreList extends Fragment {
     private final View.OnClickListener rlQuireMaskListener = v -> {
         setKeyboardState();
         setQuireBarState(QUIRE_BAR_HIDE);
+        rlQuireMask.setVisibility(View.INVISIBLE);
     };
     /**
      * 选择搜索类型
@@ -395,6 +398,7 @@ public class Fragment_PhotoExploreList extends Fragment {
 
         // 搜索时的衬托背景
         rlQuireMask = root.findViewById(R.id.rl_photo_explore_list_quire_mask);
+        rlQuireMask.setVisibility(View.INVISIBLE);
         rlQuireMask.setOnClickListener(rlQuireMaskListener);
     }
 
