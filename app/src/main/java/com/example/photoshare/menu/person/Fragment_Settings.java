@@ -153,8 +153,8 @@ public class Fragment_Settings extends Fragment {
         window.setWindowAnimations(R.style.BottomDialog);
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        TextView tvConfirm = dialog.findViewById(R.id.dialog_setting_clean_cache_confirm);
-        CardView cvCancel = dialog.findViewById(R.id.dialog_setting_clean_cache_cancel);
+        TextView tvConfirm = dialog.findViewById(R.id.dialog_myself_delete_confirm_confirm);
+        CardView cvCancel = dialog.findViewById(R.id.dialog_myself_delete_confirm_cancel);
 
         tvConfirm.setOnClickListener(tvConfirmListener);
         cvCancel.setOnClickListener(cvCancelListener);

@@ -245,6 +245,9 @@
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/activity_main.xml" value="0.2723076923076923" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/activity_menu.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/activity_signup.xml" value="0.264" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/dialog_delete_confirm.xml" value="0.27708333333333335" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/dialog_settings_clean_cache.xml" value="0.27708333333333335" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/dialog_share_choose.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment__about_us.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment__person_modify.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment__photo_collect_list.xml" value="0.27708333333333335" />
@@ -268,6 +271,8 @@
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/item_photo_collect_list.xml" value="0.264" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/item_photo_like_list.xml" value="0.264" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/item_photo_list.xml" value="0.4" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/spinner_dropdown.xml" value="0.27708333333333335" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/spinner_head.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/menu/bottom_nav_menu.xml" value="0.27708333333333335" />
       </map>
     </option>

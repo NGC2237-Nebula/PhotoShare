@@ -1,4 +1,4 @@
-package com.example.photoshare.tool;
+package com.example.photoshare.customize;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -10,11 +10,11 @@ import android.widget.Toast;
 
 import com.example.photoshare.R;
 
-public class Tool_Toast {
+public class Customize_Toast {
 
     private final View root;
 
-    public Tool_Toast(View root) {
+    public Customize_Toast(View root) {
         this.root = root;
     }
 

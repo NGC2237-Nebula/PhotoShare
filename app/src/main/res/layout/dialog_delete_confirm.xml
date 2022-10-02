@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/transparent"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -21,13 +20,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/dialog_setting_clean_cache_hint"
+                android:id="@+id/dialog_myself_delete_confirm_hint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingHorizontal="30dp"
                 android:paddingVertical="13dp"
-                android:text="@string/dialog_setting_clean_cache_hint"
+                android:text="@string/dialog_myself_delete_confirm_hint"
                 android:textColor="#4377DA"
                 android:textSize="17sp"
                 android:typeface="monospace" />
@@ -37,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@id/dialog_setting_clean_cache_hint"
+                android:layout_below="@id/dialog_myself_delete_confirm_hint"
                 android:background="@color/black_transparent_30" />
 
             <TextView
@@ -47,7 +46,7 @@
                 android:layout_below="@id/view_div"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/dialog_setting_clean_cache_confirm"
+                android:text="@string/dialog_myself_delete_confirm_confirm"
                 android:textColor="@color/black_c"
                 android:textSize="16sp"
                 android:typeface="monospace" />
@@ -75,7 +74,7 @@
             android:layout_below="@id/view_div"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/dialog_setting_clean_cache_cancel"
+            android:text="@string/dialog_myself_delete_confirm_cancel"
             android:textColor="@color/black_c"
             android:textSize="16sp"
             android:typeface="monospace"/>

@@ -3,17 +3,19 @@ package com.example.photoshare.menu.person;
 import static com.example.photoshare.constant.Constant_APP.SHARE_DELETE_POST_URL;
 import static com.example.photoshare.constant.Constant_APP.SHARE_MYSELF_GET_URL;
 
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -53,11 +55,12 @@ public class Fragment_PersonListMyself extends Fragment {
     private int deleteItemPosition;
     private List<Entity_Photo> photoList;
 
-    /* 控件 */
-    private ImageView ivBack;
     private ListView lvPhotoList;
     private TextView tvHint;
     private Adapter_Updata PhotoAdapter;
+
+    private Dialog dialog;
+
 
     /* 标识符 */
     /**
@@ -210,29 +213,37 @@ public class Fragment_PersonListMyself extends Fragment {
     private final AdapterView.OnItemLongClickListener itemDeleteListener = new AdapterView.OnItemLongClickListener() {
         @Override
         public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-            // 确认删除对话框
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("确定删除该分享?");
-
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    deleteItemPosition = position;
-                    shareId = photoList.get(position).getId();
-                    networkRequest(NET_DELETE_MYSELF_PHOTO);
-                }
-            });
-
-            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-
-            builder.create().show();
+            deleteItemPosition = position;
+            dialog.show();
             return false;
         }
     };
+    /**
+     * 底部弹窗 - 确认
+     */
+    private final View.OnClickListener dialogTvConfirmListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            shareId = photoList.get(deleteItemPosition).getId();
+            networkRequest(NET_DELETE_MYSELF_PHOTO);
+            dialog.dismiss();
+        }
+    };
+    /**
+     * 底部弹窗 - 取消
+     */
+    private final View.OnClickListener dialogCvCancelListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            dialog.dismiss();
+        }
+    };
+
+
+
+
+
+
 
 
     /**
@@ -241,16 +252,32 @@ public class Fragment_PersonListMyself extends Fragment {
      */
     private void bindView(View root){
         lvPhotoList = root.findViewById(R.id.lv_list_myself_list);
-        ivBack = root.findViewById(R.id.iv_list_myself_back);
+        /* 控件 */
+        ImageView ivBack = root.findViewById(R.id.iv_list_myself_back);
         tvHint = root.findViewById(R.id.tv_list_list_myself_hint);
         ivBack.setOnClickListener(ivBackListener);
         tvHint.setVisibility(View.INVISIBLE);
+
+        dialog = new Dialog(requireContext(), R.style.BottomDialog);
+        View dialogView = View.inflate(requireContext(), R.layout.dialog_delete_confirm, null);
+        dialog.setContentView(dialogView);
+
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.BottomDialog);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        TextView tvConfirm = dialog.findViewById(R.id.dialog_myself_delete_confirm_confirm);
+        CardView cvCancel = dialog.findViewById(R.id.dialog_myself_delete_confirm_cancel);
+
+        tvConfirm.setOnClickListener(dialogTvConfirmListener);
+        cvCancel.setOnClickListener(dialogCvCancelListener);
     }
 
     /**
      * 初始化 数据
      */
-    private void setDatase(){
+    private void setData(){
         photoList = new ArrayList<>();
         PhotoAdapter = new Adapter_Updata(context, R.layout.item_person_list_myself, photoList);
         lvPhotoList.setAdapter(PhotoAdapter);
@@ -269,7 +296,7 @@ public class Fragment_PersonListMyself extends Fragment {
         View root = inflater.inflate(R.layout.fragment_person_list_myself, container, false);
         context = getContext();
         bindView(root);
-        setDatase();
+        setData();
         return root;
     }
 }

@@ -43,23 +43,6 @@ public final class Constant_APP {
      */
     public static String TIAN_APP_KET = "47add00148ffb647d94adb74e758fe28";
 
-
-    // 第一次测试的
-    /**
-     * 测试账号ID （账号 1234 密码 1234）
-     */
-    public static String USER_1234_ID = "1552956093590802432";
-    /**
-     * 测试账号ID （账号 5678 密码 5678）
-     */
-    public static String USER_5678_ID = "1557370535153897472";
-    /**
-     * 测试账号ID （账号 0987 密码 0987）
-     */
-    public static String USER_0987_ID = "1553600432377565184";
-
-
-
     /* 网址 */
     /**
      * 服务器网址

@@ -31,7 +31,7 @@ import com.example.photoshare.R;
 import com.example.photoshare.parse.Request_Interceptor;
 import com.example.photoshare.parse.Response_PhotoDetails;
 import com.example.photoshare.parse.Response_PhotoList;
-import com.example.photoshare.tool.Tool_Toast;
+import com.example.photoshare.customize.Customize_Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
@@ -143,7 +143,7 @@ public class Fragment_PhotoDetails extends Fragment {
     private TextView tvId;
     private TextView tvCode;
 
-    private Tool_Toast toast;
+    private Customize_Toast toast;
 
 
     private Date startTime = null;
@@ -729,7 +729,7 @@ public class Fragment_PhotoDetails extends Fragment {
     }
 
     private void bindView(View root) {
-        toast = new Tool_Toast(root);
+        toast = new Customize_Toast(root);
 
         tvUsername = root.findViewById(R.id.tv_photo_details_username);
         ivBack = root.findViewById(R.id.iv_photo_details_arrow);

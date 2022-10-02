@@ -132,6 +132,10 @@
     <string name="dialog_setting_clean_cache_hint">此操作会清除所有缓存,下次加载将会消耗流量,是否继续?</string>
     <string name="dialog_setting_clean_cache_confirm">确认</string>
     <string name="dialog_setting_clean_cache_cancel">取消</string>
+    <!--个人上传页底部弹窗-->
+    <string name="dialog_myself_delete_confirm_hint">确定删除该图文分享?</string>
+    <string name="dialog_myself_delete_confirm_confirm">确认</string>
+    <string name="dialog_myself_delete_confirm_cancel">取消</string>
     <!--关于我们-->
     <string name="about_us_fragment_app_name">图片分享</string>
     <string name="about_us_fragment_connect_us">作者 : 孙昊君</string>
