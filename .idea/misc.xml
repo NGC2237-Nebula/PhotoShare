@@ -259,10 +259,13 @@
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_home_temp.xml" value="0.2760416666666667" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_notifications.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_person_details.xml" value="0.264" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_person_information.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_photo_collect_list.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_photo_details.xml" value="0.264" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_photo_details_standby.xml" value="0.264" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_photo_discover.xml" value="0.27708333333333335" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_photo_explore_big.xml" value="0.27708333333333335" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_photo_explore_list.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_photo_find.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_photo_like_list.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_photo_share.xml" value="0.27708333333333335" />

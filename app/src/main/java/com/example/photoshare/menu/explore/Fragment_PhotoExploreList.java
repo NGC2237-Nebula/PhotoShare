@@ -1,5 +1,6 @@
 package com.example.photoshare.menu.explore;
 
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -100,6 +101,14 @@ public class Fragment_PhotoExploreList extends Fragment {
      * 搜索类型
      */
     private String quireType = quireTitle;
+    /**
+     * 隐藏搜索框
+     */
+    private final int QUIRE_BAR_HIDE = 1;
+    /**
+     * 展示搜索框
+     */
+    private final int QUIRE_BAR_SHOW = 2;
     /**
      * 当前登录用户 ID
      */
@@ -234,7 +243,7 @@ public class Fragment_PhotoExploreList extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int position, long l) {
             Entity_Photo photo = photoAdapter.getItem(position);
-            interface_messageSend.sendClickPhoto(photo,position);
+            interface_messageSend.sendClickPhoto(photo, position);
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_photo_find_to_fragment_PhotoDetails);
         }
     };
@@ -256,18 +265,16 @@ public class Fragment_PhotoExploreList extends Fragment {
     private final View.OnClickListener ivJumpBigListener = v ->
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_photo_explore_to_fragment_PhotoExploreBig);
     /**
-     * 展示搜索框
+     * 搜索框展示和隐藏
      */
     private final View.OnClickListener rlShowQuireListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (cvQuireBar.getVisibility() == View.INVISIBLE && rlQuireMask.getVisibility() == View.INVISIBLE) {
-                cvQuireBar.setVisibility(View.VISIBLE);
-                rlQuireMask.setVisibility(View.VISIBLE);
-            } else if (cvQuireBar.getVisibility() == View.VISIBLE || rlQuireMask.getVisibility() == View.VISIBLE) {
-                cvQuireBar.setVisibility(View.INVISIBLE);
-                rlQuireMask.setVisibility(View.INVISIBLE);
-                hideKeyboard();
+            if (rlQuireMask.getAlpha() == 0f || cvQuireBar.getAlpha() == 0f) {
+                setQuireBarState(QUIRE_BAR_SHOW);
+            } else {
+                setKeyboardState();
+                setQuireBarState(QUIRE_BAR_HIDE);
             }
         }
     };
@@ -289,13 +296,9 @@ public class Fragment_PhotoExploreList extends Fragment {
     /**
      * 点击 暗色衬托背景 后取消搜索框
      */
-    private final View.OnClickListener rlQuireMaskListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            cvQuireBar.setVisibility(View.INVISIBLE);
-            rlQuireMask.setVisibility(View.INVISIBLE);
-            hideKeyboard();
-        }
+    private final View.OnClickListener rlQuireMaskListener = v -> {
+        setKeyboardState();
+        setQuireBarState(QUIRE_BAR_HIDE);
     };
     /**
      * 选择搜索类型
@@ -305,6 +308,7 @@ public class Fragment_PhotoExploreList extends Fragment {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             quireType = quireTypeList.get(position);
         }
+
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
         }
@@ -317,7 +321,7 @@ public class Fragment_PhotoExploreList extends Fragment {
     private void searchQuireContent(String type) {
         String quireString = etQuire.getText().toString();
         if (!quireString.equals("")) {
-            ArrayList<Entity_Photo> list ;
+            ArrayList<Entity_Photo> list;
             if (type.equals(quireTitle))
                 list = helper.quireTitleFromTable(database, quireString);
             else
@@ -325,7 +329,7 @@ public class Fragment_PhotoExploreList extends Fragment {
 
             if (list != null) {
                 interface_messageSend.sendQuireContent(list);
-                hideKeyboard();
+                setKeyboardState();
                 Navigation.findNavController(requireView()).navigate(R.id.action_navigation_photo_explore_to_fragment_PhotoQuire);
             } else {
                 Toast.makeText(requireContext(), "没有找到相关内容,换个关键词试试", Toast.LENGTH_SHORT).show();
@@ -337,9 +341,24 @@ public class Fragment_PhotoExploreList extends Fragment {
     }
 
     /**
+     * 设置搜索框的展示以及隐藏
+     *
+     * @param type 搜索框状态
+     */
+    private void setQuireBarState(int type) {
+        if (type == QUIRE_BAR_SHOW) {
+            ObjectAnimator.ofFloat(rlQuireMask, "alpha", 0f, 1f).setDuration(300).start();
+            ObjectAnimator.ofFloat(cvQuireBar, "alpha", 0f, 1f).setDuration(300).start();
+        } else if (type == QUIRE_BAR_HIDE) {
+            ObjectAnimator.ofFloat(rlQuireMask, "alpha", 1f, 0f).setDuration(300).start();
+            ObjectAnimator.ofFloat(cvQuireBar, "alpha", 1f, 0f).setDuration(300).start();
+        }
+    }
+
+    /**
      * 隐藏键盘
      */
-    private void hideKeyboard() {
+    private void setKeyboardState() {
         InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(etQuire.getWindowToken(), 0);
     }
@@ -366,7 +385,6 @@ public class Fragment_PhotoExploreList extends Fragment {
 
         // 搜索框
         cvQuireBar = root.findViewById(R.id.cv_photo_explore_list_quire_bar);
-        cvQuireBar.setVisibility(View.INVISIBLE);
 
         // 搜索框 可编辑文本框
         etQuire = root.findViewById(R.id.et_photo_explore_list_quire);
@@ -377,7 +395,6 @@ public class Fragment_PhotoExploreList extends Fragment {
 
         // 搜索时的衬托背景
         rlQuireMask = root.findViewById(R.id.rl_photo_explore_list_quire_mask);
-        rlQuireMask.setVisibility(View.INVISIBLE);
         rlQuireMask.setOnClickListener(rlQuireMaskListener);
     }
 

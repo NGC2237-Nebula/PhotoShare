@@ -21,7 +21,7 @@ public class Customize_Toast {
     public void makeImgToast(Context context, int imgId, int time) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.toast_img, root.findViewById(R.id.rl_toast_img));
-        
+
         ImageView imageView = view.findViewById(R.id.iv_toast_img);
         imageView.setImageResource(imgId);
 

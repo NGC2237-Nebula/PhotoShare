@@ -102,10 +102,10 @@
         android:id="@+id/rl_photo_explore_list_quire_mask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
         android:layout_below="@+id/rl_photo_explore_list_head"
         android:layout_alignBottom="@+id/sw_photo_explore_list_swipe"
-        android:background="#33000000" />
+        android:background="#80000000"
+        android:alpha="0" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_photo_explore_list_quire_bar"
@@ -116,6 +116,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginHorizontal="12dp"
 
+        android:alpha="0"
         app:cardBackgroundColor="@color/black_e_transparent_90"
         app:cardCornerRadius="25dp"
         app:cardElevation="0dp">

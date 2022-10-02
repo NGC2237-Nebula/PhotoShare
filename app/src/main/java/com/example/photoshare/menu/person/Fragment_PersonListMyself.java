@@ -75,6 +75,7 @@ public class Fragment_PersonListMyself extends Fragment {
 
 
     /* 网络请求 */
+
     /**
      * 网络请求
      */
@@ -121,7 +122,7 @@ public class Fragment_PersonListMyself extends Fragment {
                 new Thread(() -> {
                     Gson gson = new Gson();
                     Response_PhotoList responseParse = gson.fromJson(body, Response_PhotoList.class);
-                    if(responseParse.getData() != null) {
+                    if (responseParse.getData() != null) {
                         ArrayList<Entity_Photo> photoList = responseParse.getData().getRecords();
                         for (Entity_Photo photo : photoList) {
                             Message message = new Message();
@@ -132,6 +133,7 @@ public class Fragment_PersonListMyself extends Fragment {
                 }).start();
             }
         }
+
         @Override
         public void onFailure(@NonNull Call call, IOException e) {
             e.printStackTrace();
@@ -172,12 +174,13 @@ public class Fragment_PersonListMyself extends Fragment {
                     Response_UserGeneral responseParse = gson.fromJson(body, Response_UserGeneral.class);
 
                     Message message = new Message();
-                    if(responseParse.getMsg() == null) message.arg1 = 1;
+                    if (responseParse.getMsg() == null) message.arg1 = 1;
                     else message.arg1 = -1;
                     deleteUpdataPhotoHandler.sendMessage(message);
                 }).start();
             }
         }
+
         @Override
         public void onFailure(@NonNull Call call, IOException e) {
             e.printStackTrace();
@@ -240,17 +243,12 @@ public class Fragment_PersonListMyself extends Fragment {
     };
 
 
-
-
-
-
-
-
     /**
      * 初始化 视图
+     *
      * @param root 根视图
      */
-    private void bindView(View root){
+    private void bindView(View root) {
         lvPhotoList = root.findViewById(R.id.lv_list_myself_list);
         /* 控件 */
         ImageView ivBack = root.findViewById(R.id.iv_list_myself_back);
@@ -277,7 +275,7 @@ public class Fragment_PersonListMyself extends Fragment {
     /**
      * 初始化 数据
      */
-    private void setData(){
+    private void setData() {
         photoList = new ArrayList<>();
         PhotoAdapter = new Adapter_Updata(context, R.layout.item_person_list_myself, photoList);
         lvPhotoList.setAdapter(PhotoAdapter);
@@ -292,7 +290,7 @@ public class Fragment_PersonListMyself extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_person_list_myself, container, false);
         context = getContext();
         bindView(root);

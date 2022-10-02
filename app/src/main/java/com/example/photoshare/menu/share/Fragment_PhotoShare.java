@@ -84,9 +84,9 @@ public class Fragment_PhotoShare extends Fragment {
     private final View.OnClickListener dialogTvCameraListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.CAMERA)) {
-                    requestPermissions(PERMISSIONS_CAMERA,REQUEST_CAMERA);
+                    requestPermissions(PERMISSIONS_CAMERA, REQUEST_CAMERA);
                 }
             } else {
                 openCamera();
@@ -100,9 +100,9 @@ public class Fragment_PhotoShare extends Fragment {
     private final View.OnClickListener dialogTvAlbumListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (ContextCompat.checkSelfPermission(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    requestPermissions(PERMISSIONS_EXTERNAL_STORAGE,REQUEST_EXTERNAL_STORAGE);
+                    requestPermissions(PERMISSIONS_EXTERNAL_STORAGE, REQUEST_EXTERNAL_STORAGE);
                 }
             } else {
                 openAlbum();
@@ -121,13 +121,10 @@ public class Fragment_PhotoShare extends Fragment {
     };
 
 
-
-
-
     /**
      * 打开相机
      */
-    private void openCamera(){
+    private void openCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         ContentValues values = new ContentValues();
         cameraPhotoUri = requireActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
@@ -138,7 +135,7 @@ public class Fragment_PhotoShare extends Fragment {
     /**
      * 打开相册
      */
-    private void openAlbum(){
+    private void openAlbum() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, INTENT_OPEN_ALBUM);
@@ -146,9 +143,10 @@ public class Fragment_PhotoShare extends Fragment {
 
     /**
      * 初始化
+     *
      * @param root 根视图
      */
-    private void init(View root){
+    private void init(View root) {
         BottomNavigationView nav = requireActivity().findViewById(R.id.nav_view);
         nav.setVisibility(View.VISIBLE);
 
@@ -195,7 +193,7 @@ public class Fragment_PhotoShare extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK && data != null) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
             if (requestCode == INTENT_OPEN_ALBUM) {
                 interface_messageSend.sendPhotoUri(data.getData());
                 Navigation.findNavController(requireView()).navigate(R.id.action_navigation_photo_share_to_fragment_PhotoShareUpload);
@@ -206,7 +204,7 @@ public class Fragment_PhotoShare extends Fragment {
         }
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_photo_share, container, false);
         context = getActivity();
         init(root);
@@ -216,9 +214,9 @@ public class Fragment_PhotoShare extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        try{
-            interface_messageSend = (Interface_MessageSend)context;
-        }catch (ClassCastException e){
+        try {
+            interface_messageSend = (Interface_MessageSend) context;
+        } catch (ClassCastException e) {
             throw new ClassCastException();
         }
     }

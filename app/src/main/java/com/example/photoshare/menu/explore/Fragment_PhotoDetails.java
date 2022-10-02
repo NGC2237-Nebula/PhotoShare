@@ -294,13 +294,13 @@ public class Fragment_PhotoDetails extends Fragment {
                     toast.makeImgToast(context, R.drawable.ic_baseline_like_red, Toast.LENGTH_SHORT);
                     ivLike.setImageResource(R.drawable.ic_baseline_like_white);
                     hasLike = true;
-                    interface_messageSend.setPhotoLikeState(photoPosition,true);
+                    interface_messageSend.setPhotoLikeState(photoPosition, true);
                 }
                 if (msg.arg1 == 2) {
                     toast.makeTextToast(context, "该图已经点赞", Toast.LENGTH_SHORT);
                     ivLike.setImageResource(R.drawable.ic_baseline_like_white);
                     hasLike = true;
-                    interface_messageSend.setPhotoLikeState(photoPosition,true);
+                    interface_messageSend.setPhotoLikeState(photoPosition, true);
                 }
                 if (msg.arg1 == -1) {
                     toast.makeTextToast(context, "点赞失败", Toast.LENGTH_SHORT);
@@ -354,7 +354,7 @@ public class Fragment_PhotoDetails extends Fragment {
                     toast.makeTextToast(context, "网络错误", Toast.LENGTH_SHORT);
                 ivLike.setImageResource(R.drawable.ic_baseline_like_border_white);
                 hasLike = false;
-                interface_messageSend.setPhotoLikeState(photoPosition,false);
+                interface_messageSend.setPhotoLikeState(photoPosition, false);
             }
         }
     };
@@ -444,13 +444,13 @@ public class Fragment_PhotoDetails extends Fragment {
                     toast.makeImgToast(context, R.drawable.ic_baseline_collect_yellow, Toast.LENGTH_SHORT);
                     ivCollect.setImageResource(R.drawable.ic_baseline_collect_white);
                     hasCollect = true;
-                    interface_messageSend.setPhotoCollectState(photoPosition,true);
+                    interface_messageSend.setPhotoCollectState(photoPosition, true);
                 }
                 if (msg.arg1 == 2) {
                     toast.makeTextToast(context, "该图已经收藏", Toast.LENGTH_SHORT);
                     ivCollect.setImageResource(R.drawable.ic_baseline_collect_white);
                     hasCollect = true;
-                    interface_messageSend.setPhotoCollectState(photoPosition,true);
+                    interface_messageSend.setPhotoCollectState(photoPosition, true);
                 }
                 if (msg.arg1 == -1) {
                     toast.makeTextToast(context, "收藏失败", Toast.LENGTH_SHORT);
@@ -502,7 +502,7 @@ public class Fragment_PhotoDetails extends Fragment {
                     toast.makeTextToast(context, "网络错误", Toast.LENGTH_SHORT);
                 ivCollect.setImageResource(R.drawable.ic_baseline_collect_border_white);
                 hasCollect = false;
-                interface_messageSend.setPhotoCollectState(photoPosition,false);
+                interface_messageSend.setPhotoCollectState(photoPosition, false);
             }
         }
     };

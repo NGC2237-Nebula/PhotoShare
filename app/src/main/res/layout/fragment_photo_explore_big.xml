@@ -48,7 +48,6 @@
 
         </androidx.cardview.widget.CardView>
 
-
         <RelativeLayout
             android:id="@+id/rl_photo_explore_big_show_quire_button"
             android:layout_width="wrap_content"
@@ -106,15 +105,15 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/rl_photo_explore_big_head"
         android:layout_alignBottom="@+id/sw_photo_explore_big_swipe"
-        android:background="#33000000"
-        android:visibility="invisible" />
+        android:background="#80000000"
+        android:alpha="0"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_photo_explore_big_quire_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@+id/rl_photo_explore_big_head"
-
+        android:alpha="0"
 
         android:layout_marginTop="15dp"
         android:layout_marginHorizontal="12dp"
