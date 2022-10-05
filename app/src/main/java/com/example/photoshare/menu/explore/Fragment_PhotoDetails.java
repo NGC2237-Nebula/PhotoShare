@@ -26,6 +26,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.photoshare.constant.Constant_APP;
 import com.example.photoshare.Activity_Menu;
 import com.example.photoshare.entity.Entity_Photo;
+import com.example.photoshare.interfaces.Interface_ClickViewSend;
 import com.example.photoshare.interfaces.Interface_MessageSend;
 import com.example.photoshare.R;
 import com.example.photoshare.parse.Request_Interceptor;
@@ -374,7 +375,6 @@ public class Fragment_PhotoDetails extends Fragment {
                     for (Entity_Photo photo : photoList)
                         if (photo.getId().equals(photoId)) {
                             photoLikeId = photo.getLikeId();
-                            Log.d("LOG - 获取LikeId", "当前 photoLikeId : " + photoLikeId);
                             if (photoLikeId == null) {
                                 Message message = new Message();
                                 message.what = HANDLER_ALREADY_CANCEL_LIKE;
@@ -522,7 +522,6 @@ public class Fragment_PhotoDetails extends Fragment {
                     for (Entity_Photo photo : photoList)
                         if (photo.getId().equals(photoId)) {
                             photoCollectId = photo.getCollectId();
-                            Log.d("LOG - 获取CollectId", "当前 CollectId : " + photoCollectId);
                             if (photoCollectId == null) {
                                 Message message = new Message();
                                 message.what = HANDLER_ALREADY_CANCEL_COLLECT;
@@ -617,9 +616,9 @@ public class Fragment_PhotoDetails extends Fragment {
     /**
      * 获取被点击的 viewPager 上的图片按钮
      */
-    private final Adapter_PhotoSlideDetails.ItemControlListener itemControlListener = new Adapter_PhotoSlideDetails.ItemControlListener() {
+    private final Interface_ClickViewSend ivPhotoListener = new Interface_ClickViewSend() {
         @Override
-        public void setItemControl(View view, int position) {
+        public void onItemClick(View view, int position) {
             interface_messageSend.sendViewPagerClickPosition(position);
             Navigation.findNavController(requireView()).navigate(R.id.action_fragment_PhotoDetails_to_fragment_PhotoCheck);
         }
@@ -648,7 +647,7 @@ public class Fragment_PhotoDetails extends Fragment {
 
                 case MotionEvent.ACTION_UP:
                     if (startTime != null && endTime != null && MODE == SECOND) {
-                        long range = getTimeDifferential(startTime, endTime);
+                        long range = countTimeDifferential(startTime, endTime);
                         if (!isRequestLike) {
                             if (range <= 8 * 100) {
                                 networkRequest(NET_PHOTO_LIKE);
@@ -672,7 +671,7 @@ public class Fragment_PhotoDetails extends Fragment {
      * @param endDate   中止时间
      * @return 时间差 (毫秒级)
      */
-    private static long getTimeDifferential(Date startDate, Date endDate) {
+    private static long countTimeDifferential(Date startDate, Date endDate) {
         Calendar startCalender = Calendar.getInstance();
         startCalender.setTime(startDate);
         long start = startCalender.getTimeInMillis();
@@ -697,7 +696,7 @@ public class Fragment_PhotoDetails extends Fragment {
 
         List<String> photoUrlList = new ArrayList<>(Arrays.asList(photo.getImageUrlList()));
         Adapter_PhotoSlideDetails viewPagerAdapter = new Adapter_PhotoSlideDetails(getContext(), photoUrlList);
-        viewPagerAdapter.getItemControl(itemControlListener);
+        viewPagerAdapter.setOnPhotoClick(ivPhotoListener);
 
 
         /* 界面内容填充 */

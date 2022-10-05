@@ -53,15 +53,34 @@ public class Fragment_PhotoCheck extends Fragment {
 
     private final DisplayMetrics dm = new DisplayMetrics();
 
-    private float minScale; // 最小缩放比例
-    private float maxScale; // 最大缩放比例
+    /**
+     * 最小缩放比例
+     */
+    private float minScale;
+    /**
+     * 最大缩放比例
+     */
+    private float maxScale;
 
     private final Matrix matrix = new Matrix();
     private final Matrix savedMatrix = new Matrix();
 
-    private final PointF prev = new PointF();
+    /**
+     * 首次按下点的坐标
+     */
+    private final PointF pre = new PointF();
+    /**
+     * 中间点的坐标
+     */
     private final PointF mid = new PointF();
-    private float dist = 1f;
+    /**
+     * 再次按下点的坐标
+     */
+    private final PointF post = new PointF();
+
+    private float preDist = 1f;
+    private float postDist = 1f;
+
 
     /* 控件 */
     private ImageView ivPhoto;
@@ -73,16 +92,28 @@ public class Fragment_PhotoCheck extends Fragment {
     /* 标识符 */
     private final int NET_REQUEST_SAVE = 1;
     private final int NET_REQUEST_SHOW = 2;
-
-    private static final int NONE = 0; // 初始
-    private static final int DRAG = 1; // 拖动
-    private static final int ZOOM = 2; // 缩放
+    /**
+     * 初始模式
+     */
+    private static final int NONE = 0;
+    /**
+     * 拖动模式
+     */
+    private static final int DRAG = 1;
+    /**
+     * 缩放模式
+     */
+    private static final int ZOOM = 2;
+    /**
+     * 当前模式
+     */
     private int MODE = NONE;
 
     /* 权限 */
     private final int REQUEST_EXTERNAL_STORAGE = 1;
     private final static String[] PERMISSIONS_EXTERNAL_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
 
@@ -129,13 +160,13 @@ public class Fragment_PhotoCheck extends Fragment {
                 // 主点按下
                 case MotionEvent.ACTION_DOWN:
                     savedMatrix.set(matrix);
-                    prev.set(event.getX(), event.getY());
+                    pre.set(event.getX(), event.getY());
                     MODE = DRAG;
                     break;
 
                 // 副点按下
                 case MotionEvent.ACTION_POINTER_DOWN:
-                    dist = calculateDistance(event);
+                    preDist = calculateDistance(event);
                     // 如果连续两点距离大于10，判定为多点模式
                     if (calculateDistance(event) > 10f) {
                         savedMatrix.set(matrix);
@@ -143,6 +174,7 @@ public class Fragment_PhotoCheck extends Fragment {
                         MODE = ZOOM;
                     }
                     break;
+
 
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_POINTER_UP:
@@ -152,12 +184,14 @@ public class Fragment_PhotoCheck extends Fragment {
                 case MotionEvent.ACTION_MOVE:
                     if (MODE == DRAG) {
                         matrix.set(savedMatrix);
-                        matrix.preTranslate(event.getX() - prev.x, event.getY() - prev.y);
-                    } else if (MODE == ZOOM) {
-                        float newDist = calculateDistance(event);
-                        if (newDist > 10f) {
+                        post.set(event.getX(),event.getY());
+                        matrix.preTranslate(post.x - pre.x, post.y - pre.y);
+                    }
+                    else if (MODE == ZOOM) {
+                        postDist = calculateDistance(event);
+                        if (postDist > 10f) {
                             matrix.set(savedMatrix);
-                            float tScale = newDist / dist;
+                            float tScale = postDist / preDist;
                             matrix.postScale(tScale, tScale, mid.x, mid.y);
                         }
                     }
@@ -190,68 +224,47 @@ public class Fragment_PhotoCheck extends Fragment {
     /**
      * 居中图片
      *
-     * @param centerInHorizontal 是否水平居中
-     * @param centerInVertical   是否垂直居中
+     * @param centerHorizontal 是否水平居中
+     * @param centerVertical   是否垂直居中
      */
-    private void centerPhoto(boolean centerInHorizontal, boolean centerInVertical) {
-        Matrix matrix = new Matrix();
-        matrix.set(this.matrix);
+    private void centerPhoto(boolean centerHorizontal, boolean centerVertical) {
 
         RectF rect = new RectF(0, 0, photoBitmap.getWidth(), photoBitmap.getHeight());
-        matrix.mapRect(rect); // 测量rect并将测量结果放入rect中，返回值是判断矩形经过变换后是否仍为矩形。
+        matrix.mapRect(rect); // 将图片的位置赋值给 rect
 
         float height = rect.height();
         float width = rect.width();
 
-        float deltaX = 0;
-        float deltaY = 0;
+        float dx = 0;
+        float dy = 0;
 
-        if (centerInVertical) {
+        if (centerVertical) {
             int screenHeight = dm.heightPixels;
             // 图片小于屏幕，居中显示。
             if (height < screenHeight) {
-                deltaY = (screenHeight - height) / 2 - rect.top;
+                dy = (screenHeight - height) / 2 - rect.top;
             }
             // 图片大于屏幕，上方留空则往上移，下方留空则往下移
             else if (rect.top > 0) {
-                deltaY = -rect.top;
+                dy = -rect.top;
             } else if (rect.bottom < screenHeight) {
-                deltaY = ivPhoto.getHeight() - rect.bottom;
+                dy = ivPhoto.getHeight() - rect.bottom;
             }
         }
-        if (centerInHorizontal) {
+        if (centerHorizontal) {
             int screenWidth = dm.widthPixels;
             // 图片小于屏幕，居中显示。
             if (width < screenWidth) {
-                deltaX = (screenWidth - width) / 2 - rect.left;
+                dx = (screenWidth - width) / 2 - rect.left;
             }
             // 图片大于屏幕，上方留空则往上移，下方留空则往下移
             else if (rect.left > 0) {
-                deltaX = -rect.left;
+                dx = -rect.left;
             } else if (rect.right < screenWidth) {
-                deltaX = screenWidth - rect.right;
+                dx = screenWidth - rect.right;
             }
         }
-        this.matrix.postTranslate(deltaX, deltaY);
-    }
-
-    /**
-     * 设置最小缩放比例
-     */
-    private void setMinScale() {
-        minScale = Math.min(
-                (float) dm.widthPixels / (float) photoBitmap.getWidth(),
-                (float) dm.heightPixels / (float) photoBitmap.getHeight());
-        if (minScale < 1.0) {
-            matrix.postScale(minScale, minScale);
-        }
-    }
-
-    /**
-     * 设置最大缩放比例为 100%
-     */
-    private void setMaxScale() {
-        maxScale = 4f;
+        matrix.postTranslate(dx, dy);
     }
 
     /**
@@ -270,6 +283,27 @@ public class Fragment_PhotoCheck extends Fragment {
         float x = event.getX(0) + event.getX(1);
         float y = event.getY(0) + event.getY(1);
         point.set(x / 2, y / 2);
+    }
+
+    /**
+     * 设置最小缩放比例 - 图片缩放最小为屏幕宽度/高度
+     */
+    private void initMinScale() {
+        // 计算 最小缩放比例
+        minScale = Math.min(
+                (float) dm.widthPixels / (float) photoBitmap.getWidth(),
+                (float) dm.heightPixels / (float) photoBitmap.getHeight());
+        // 如果 缩放比例小于1 ,即图片大小超过屏幕大小,缩放图片为屏幕大小
+        if (minScale < 1.0) {
+            matrix.postScale(minScale, minScale);
+        }
+    }
+
+    /**
+     * 设置最大缩放比例 - 图片缩放最大为原图的4倍
+     */
+    private void initMaxScale() {
+        maxScale = 4f;
     }
 
 
@@ -312,8 +346,8 @@ public class Fragment_PhotoCheck extends Fragment {
         ivPhoto.setOnTouchListener(ivPhotoTouchListener);
 
         requireActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);// 获取分辨率
-        setMinScale();
-        setMaxScale();
+        initMinScale();
+        initMaxScale();
         centerPhoto(true, true);
         ivPhoto.setImageMatrix(matrix);
     }
@@ -345,11 +379,15 @@ public class Fragment_PhotoCheck extends Fragment {
 
             // 发送广播通知系统图库刷新数据
             Uri localUri = Uri.fromFile(file);
-            requireActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, localUri));
+            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, localUri);
+            requireActivity().sendBroadcast(intent);
 
-            if (isSuccess)
+            if (isSuccess) {
                 Toast.makeText(getContext(), "已保存至 " + pathFile + " 目录下", Toast.LENGTH_SHORT).show();
-            else Toast.makeText(requireContext(), "保存失败,请检查网络", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(requireContext(), "保存失败,请检查网络", Toast.LENGTH_SHORT).show();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -367,11 +405,8 @@ public class Fragment_PhotoCheck extends Fragment {
     }
 
 
-    /**
-     * 初始化 视图
-     *
-     * @param root 根视图
-     */
+
+
     private void bindView(View root) {
         nav = requireActivity().findViewById(R.id.nav_view);
         nav.setVisibility(View.INVISIBLE);
@@ -392,9 +427,6 @@ public class Fragment_PhotoCheck extends Fragment {
         tvHint = root.findViewById(R.id.tv_photo_check_hint);
     }
 
-    /**
-     * 初始化 数据
-     */
     @SuppressLint("ClickableViewAccessibility")
     private void setData() {
         String hintString = (position + 1) + " / " + photo.getImageUrlList().length;

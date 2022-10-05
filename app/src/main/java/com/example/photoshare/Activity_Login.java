@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.os.NetworkOnMainThreadException;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
@@ -34,7 +33,6 @@ import com.example.photoshare.tool.Tool_SharedPreferencesManager;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -150,7 +148,6 @@ public class Activity_Login extends AppCompatActivity {
 
 
     /* 网络请求 */
-
     /**
      * 网络请求
      */
@@ -158,19 +155,11 @@ public class Activity_Login extends AppCompatActivity {
         Log.d("LOG", "======== 网络请求 ========");
 
         new Thread(() -> {
-            Request request;
-            RequestBody requestBody;
-
             String urlParam = "?" + "&password=" + password + "&username=" + username;
-            requestBody = new FormBody.Builder().build();
-            request = new Request.Builder().url(Constant_APP.USER_LOGIN_POST_URL + urlParam).post(requestBody).build();
-
-            try {
-                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Request_Interceptor()).build();
-                client.newCall(request).enqueue(loginCallback);
-            } catch (NetworkOnMainThreadException ex) {
-                ex.printStackTrace();
-            }
+            RequestBody requestBody = new FormBody.Builder().build();
+            Request request = new Request.Builder().url(Constant_APP.USER_LOGIN_POST_URL + urlParam).post(requestBody).build();
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Request_Interceptor()).build();
+            client.newCall(request).enqueue(loginCallback);
         }).start();
     }
 
@@ -208,7 +197,7 @@ public class Activity_Login extends AppCompatActivity {
                             message.arg1 = -1;
                             break;
                     }
-                    mLoginHandler.sendMessage(message);
+                    loginHandler.sendMessage(message);
                 });
             }
         }
@@ -221,7 +210,7 @@ public class Activity_Login extends AppCompatActivity {
     /**
      * 网络操作 操作响应
      */
-    private final Handler mLoginHandler = new Handler(Looper.getMainLooper()) {
+    private final Handler loginHandler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
             if (msg.arg1 == 1) {
                 saveInSharedPreferences();
@@ -301,12 +290,18 @@ public class Activity_Login extends AppCompatActivity {
         cbRememberPwd.setChecked(rememberPassword);
     }
 
+    /**
+     * 隐藏 APP 顶部标签栏
+     */
+    private void hideSupportActionBar() {
+        getSupportActionBar().hide();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        hideSupportActionBar();
         initData();
         initView();
     }

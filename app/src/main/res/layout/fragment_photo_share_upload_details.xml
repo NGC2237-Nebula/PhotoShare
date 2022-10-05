@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_d"
-    tools:context=".menu.share.Fragment_PhotoShareUploadDetails">
+    tools:context=".menu.share.Fragment_ShareUploadDetails">
 
     <ScrollView
         android:layout_width="match_parent"

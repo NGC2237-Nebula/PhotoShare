@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.photoshare.R;
+import com.example.photoshare.interfaces.Interface_ClickViewSend;
 
 import java.util.List;
 
@@ -20,18 +21,15 @@ public class Adapter_PhotoSlideDetails extends RecyclerView.Adapter<Adapter_Phot
 
     private final List<String> photoList;
     private final Context context;
-
-    private ItemControlListener itemControlListener;
-    public interface ItemControlListener {
-        void setItemControl(View view, int position);
-    }
-    public void getItemControl(ItemControlListener listener){
-        this.itemControlListener = listener;
-    }
+    private Interface_ClickViewSend listener;
 
     public Adapter_PhotoSlideDetails(Context context, List<String> photoList){
         this.context = context;
         this.photoList = photoList;
+    }
+
+    public void setOnPhotoClick(Interface_ClickViewSend listener){
+        this.listener = listener;
     }
 
     /**
@@ -50,10 +48,10 @@ public class Adapter_PhotoSlideDetails extends RecyclerView.Adapter<Adapter_Phot
     @Override
     public void onBindViewHolder(@NonNull ViewPagerViewHolder viewHolder, @SuppressLint("RecyclerView") int position) {
         Glide.with(context).load(photoList.get(position)).into(viewHolder.ivPhoto);
-        viewHolder.ivPhoto.setOnClickListener(v -> itemControlListener.setItemControl(v, position));
+        viewHolder.ivPhoto.setOnClickListener(v -> listener.onItemClick(v, position)); // 此处的 v 指的是 viewHolder.ivPhoto
 
-        String hintString = (position + 1) + " / " + photoList.size();
-        viewHolder.tvHint.setText(hintString);
+        String hint = (position + 1) + " / " + photoList.size();
+        viewHolder.tvHint.setText(hint);
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.example.photoshare.menu.explore;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,9 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.photoshare.Activity_Menu;
+import com.example.photoshare.R;
 import com.example.photoshare.entity.Entity_Photo;
 import com.example.photoshare.interfaces.Interface_MessageSend;
-import com.example.photoshare.R;
 
 import java.util.ArrayList;
 
@@ -52,23 +51,6 @@ public class Fragment_PhotoQuire extends Fragment {
      */
     private final View.OnClickListener rlBackListener = v ->
             Navigation.findNavController(requireView()).popBackStack();
-
-
-
-
-
-    /**
-     * 加载 本地数据 到适配器中
-     *
-     * @param photoList 本地数据
-     */
-    @SuppressLint("NotifyDataSetChanged")
-    private void addLocalDataInAdapter(ArrayList<Entity_Photo> photoList) {
-        for (Entity_Photo photo : photoList) {
-            photoAdapter.add(photo);
-            photoAdapter.notifyDataSetChanged();
-        }
-    }
 
 
     private void bindView(View root){

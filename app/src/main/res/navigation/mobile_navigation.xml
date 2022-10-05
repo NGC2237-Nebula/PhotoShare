@@ -77,7 +77,7 @@
 
     <fragment
         android:id="@+id/navigation_photo_share"
-        android:name="com.example.photoshare.menu.share.Fragment_PhotoShare"
+        android:name="com.example.photoshare.menu.share.Fragment_Share"
         android:label="@string/bottom_nav_photo_share"
         tools:layout="@layout/fragment_photo_share" >
         <action
@@ -149,7 +149,7 @@
 
     <fragment
         android:id="@+id/fragment_PhotoShareUpload"
-        android:name="com.example.photoshare.menu.share.Fragment_PhotoShareUpload"
+        android:name="com.example.photoshare.menu.share.Fragment_ShareUploadPhoto"
         android:label="Fragment_PhotoShareUpload"
         tools:layout="@layout/fragment_photo_share_upload">
         <action
@@ -159,7 +159,7 @@
 
     <fragment
         android:id="@+id/fragment_PhotoShareUploadDetails"
-        android:name="com.example.photoshare.menu.share.Fragment_PhotoShareUploadDetails"
+        android:name="com.example.photoshare.menu.share.Fragment_ShareUploadDetails"
         android:label="fragment_photo_share_details"
         tools:layout="@layout/fragment_photo_share_upload_details" >
         <action

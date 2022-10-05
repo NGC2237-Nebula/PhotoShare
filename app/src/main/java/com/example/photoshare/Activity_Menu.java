@@ -155,7 +155,7 @@ public class Activity_Menu extends AppCompatActivity implements Interface_Messag
 
 
     /**
-     * Fragment_PhotoShare - 上传图片的 URI
+     * Fragment_Share - 上传图片的 URI
      */
     private Uri photoUri;
 
@@ -231,7 +231,7 @@ public class Activity_Menu extends AppCompatActivity implements Interface_Messag
 
 
     /**
-     * Fragment_PhotoShareUpload - 传送上传成功的 imageCode、imageFileList
+     * Fragment_ShareUploadPhoto - 传送上传成功的 imageCode、imageFileList
      */
     private String imageCode;
     private ArrayList<File> imageFileList;

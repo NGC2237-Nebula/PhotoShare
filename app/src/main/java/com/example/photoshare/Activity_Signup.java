@@ -81,7 +81,30 @@ public class Activity_Signup extends AppCompatActivity {
         startActivity(intent);
     };
 
+
     /* 网络请求 */
+
+    /**
+     * 网络请求
+     */
+    private void networkRequest() {
+        Log.d("LOG", "======== 网络请求 ========");
+        new Thread(() -> {
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("password", password);
+                jsonObject.put("username", username);
+                RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), jsonObject.toString());
+                Request request = new Request.Builder().url(Constant_APP.USER_REGISTER_POST_URL).post(requestBody).build();
+
+                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Request_Interceptor()).build();
+                client.newCall(request).enqueue(signupCallback);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
     /**
      * 网络请求 回调
      */
@@ -95,21 +118,21 @@ public class Activity_Signup extends AppCompatActivity {
 
             if (response.isSuccessful()) {
                 runOnUiThread(() -> {
-                    /* 响应体解析 */
-                    Gson gson = new Gson();
-                    Response_UserGeneral responseParse = gson.fromJson(body, Response_UserGeneral.class);
+                    Response_UserGeneral responseParse = new Gson().fromJson(body, Response_UserGeneral.class);
 
-                    /* 信息传送 */
                     Message message = new Message();
                     if (responseParse.getMsg() == null) message.arg1 = 1;
                     else if (responseParse.getMsg().equals("用户名已存在")) message.arg1 = 2;
-                    else if (responseParse.getMsg().equals("password must not be blank")) message.arg1 = 3;
-                    else if (responseParse.getMsg().equals("username must not be blank")) message.arg1 = 4;
+                    else if (responseParse.getMsg().equals("password must not be blank"))
+                        message.arg1 = 3;
+                    else if (responseParse.getMsg().equals("username must not be blank"))
+                        message.arg1 = 4;
                     else message.arg1 = -1;
-                    mSignupHandler.sendMessage(message);
+                    signupHandler.sendMessage(message);
                 });
             }
         }
+
         @Override
         public void onFailure(@NonNull Call call, IOException e) {
             e.printStackTrace();
@@ -118,15 +141,13 @@ public class Activity_Signup extends AppCompatActivity {
     /**
      * 网络操作 操作响应
      */
-    private final Handler mSignupHandler = new Handler(Looper.getMainLooper()) {
+    private final Handler signupHandler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
             if (msg.arg1 == 1) {
                 Toast.makeText(Activity_Signup.this, "注册成功,请输入账号、密码登录!", Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setClass(Activity_Signup.this, Activity_Login.class);
-
                 startActivity(intent);
             }
             if (msg.arg1 == 2)
@@ -139,45 +160,17 @@ public class Activity_Signup extends AppCompatActivity {
                 Toast.makeText(Activity_Signup.this, "网络连接失败!", Toast.LENGTH_SHORT).show();
         }
     };
-    /**
-     * 网络请求
-     */
-    private void networkRequest() {
-        Log.d("LOG", "======== 网络请求 ========");
-        new Thread(() -> {
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("password", password);
-                jsonObject.put("username", username);
-                RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), jsonObject.toString());
-                Request request = new Request.Builder()
-                        .url(Constant_APP.USER_REGISTER_POST_URL)
-                        .post(requestBody)
-                        .build();
-
-                Request_Interceptor requestInterceptor = new Request_Interceptor();
-                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(requestInterceptor).build();
-                client.newCall(request).enqueue(signupCallback);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-
-
 
 
     /**
      * 初始化 视图
      */
-    private void initView(){
-        /* 绑定视图 */
+    private void initView() {
         etUsername = findViewById(R.id.et_signup_username);
         etPassword = findViewById(R.id.et_signup_password);
         Button btSignup = findViewById(R.id.bt_signup_signup);
         ImageView ivArrow = findViewById(R.id.iv_signup_arrow);
 
-        /* 监听器 */
         btSignup.setOnClickListener(btSignupListener);
         ivArrow.setOnClickListener(ivArrowListener);
     }
@@ -185,11 +178,11 @@ public class Activity_Signup extends AppCompatActivity {
     /**
      * 初始化 数据
      */
-    private void initData(){
+    private void initData() {
         Intent intent = getIntent();
         password = intent.getStringExtra(USER_PASSWORD);
         username = intent.getStringExtra(USER_USERNAME);
-        if (!username.equals("") || !password.equals("")){
+        if (!username.equals("") || !password.equals("")) {
             etUsername.setText(username);
             etPassword.setText(password);
         }

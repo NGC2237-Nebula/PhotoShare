@@ -12,20 +12,14 @@ import androidx.cardview.widget.CardView;
 
 import com.example.photoshare.entity.Entity_Comment;
 import com.example.photoshare.R;
+import com.example.photoshare.interfaces.Interface_ClickViewSend;
 
 import java.util.List;
 
 public class Adapter_CommentFirst extends ArrayAdapter<Entity_Comment> {
 
     private final int resourceId;
-
-    private ItemControlListener itemControlListener;
-    public interface ItemControlListener {
-        void setItemControl(View view, int position);
-    }
-    public void getItemControl(ItemControlListener listener){
-        this.itemControlListener = listener;
-    }
+    private Interface_ClickViewSend listener;
 
     private static class ViewHolder {
         TextView tvUsername;
@@ -33,6 +27,10 @@ public class Adapter_CommentFirst extends ArrayAdapter<Entity_Comment> {
         TextView tvCreateTime;
         CardView cvIsHost;
         RelativeLayout rlMore;
+    }
+
+    public void setOnCommentMoreClick(Interface_ClickViewSend listener){
+        this.listener = listener;
     }
 
     public Adapter_CommentFirst(Context context, int resourceId, List<Entity_Comment> data) {
@@ -65,12 +63,7 @@ public class Adapter_CommentFirst extends ArrayAdapter<Entity_Comment> {
         viewHolder.tvContent.setText(comment.getContent());
         viewHolder.tvUsername.setText(usernameString);
         viewHolder.tvCreateTime.setText(comment.getCreateTime());
-        viewHolder.rlMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemControlListener.setItemControl(v,position);
-            }
-        });
+        viewHolder.rlMore.setOnClickListener(v -> listener.onItemClick(v,position)); // 此处的 v 指的是 viewHolder.rlMore
         return view;
     }
 }

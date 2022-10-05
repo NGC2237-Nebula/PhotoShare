@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/ic_background_light"
-    tools:context=".menu.share.Fragment_PhotoShare">
+    tools:context=".menu.share.Fragment_Share">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_photo_share_updata"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_centerInParent="true"
-        tools:context=".menu.share.Fragment_PhotoShare">
+        tools:context=".menu.share.Fragment_Share">
 
         <TextView
             android:id="@+id/tv_photo_share_text"

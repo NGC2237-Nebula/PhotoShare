@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.os.NetworkOnMainThreadException;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -34,10 +33,10 @@ import androidx.navigation.Navigation;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.photoshare.Activity_Menu;
+import com.example.photoshare.R;
 import com.example.photoshare.constant.Constant_APP;
 import com.example.photoshare.entity.Entity_Photo;
 import com.example.photoshare.interfaces.Interface_MessageSend;
-import com.example.photoshare.R;
 import com.example.photoshare.parse.Request_Interceptor;
 import com.example.photoshare.parse.Response_PhotoList;
 import com.example.photoshare.tool.Tool_SQLiteOpenHelper;
@@ -102,14 +101,6 @@ public class Fragment_PhotoExploreList extends Fragment {
      */
     private String quireType = quireTitle;
     /**
-     * 隐藏搜索框
-     */
-    private final int QUIRE_BAR_HIDE = 1;
-    /**
-     * 展示搜索框
-     */
-    private final int QUIRE_BAR_SHOW = 2;
-    /**
      * 当前登录用户 ID
      */
     private String userId = null;
@@ -134,6 +125,25 @@ public class Fragment_PhotoExploreList extends Fragment {
     private Interface_MessageSend interface_messageSend;
 
 
+    /* 标识符 */
+    /**
+     * 隐藏搜索框
+     */
+    private final int HIDE_QUIRE_BAR = 1;
+    /**
+     * 展示搜索框
+     */
+    private final int SHOW_QUIRE_BAR = 2;
+    /**
+     * 隐藏软键盘
+     */
+    private final int HIDE_KEYBOARD = 1;
+    /**
+     * 展示软键盘
+     */
+    private final int SHOW_KEYBOARD = 2;
+
+
     /* 网络请求 */
 
     /**
@@ -142,15 +152,10 @@ public class Fragment_PhotoExploreList extends Fragment {
     private void networkRequest() {
         Log.d("LOG", "======== 网络请求 ========");
         new Thread(() -> {
-            Request request;
             String urlParam = "?" + "userId=" + userId;
-            request = new Request.Builder().url(Constant_APP.SHARE_GET_URL + urlParam).get().build();
-            try {
-                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Request_Interceptor()).build();
-                client.newCall(request).enqueue(photoShowCallback);
-            } catch (NetworkOnMainThreadException ex) {
-                ex.printStackTrace();
-            }
+            Request request = new Request.Builder().url(Constant_APP.SHARE_GET_URL + urlParam).get().build();
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Request_Interceptor()).build();
+            client.newCall(request).enqueue(photoShowCallback);
         }).start();
     }
 
@@ -271,12 +276,11 @@ public class Fragment_PhotoExploreList extends Fragment {
         @Override
         public void onClick(View v) {
             if (rlQuireMask.getAlpha() == 0f || cvQuireBar.getAlpha() == 0f) {
-                rlQuireMask.setVisibility(View.VISIBLE);
-                setQuireBarState(QUIRE_BAR_SHOW);
+                setKeyboardState(SHOW_KEYBOARD, etQuire);
+                setQuireBarState(SHOW_QUIRE_BAR);
             } else {
-                setKeyboardState();
-                setQuireBarState(QUIRE_BAR_HIDE);
-                rlQuireMask.setVisibility(View.INVISIBLE);
+                setKeyboardState(HIDE_KEYBOARD, etQuire);
+                setQuireBarState(HIDE_QUIRE_BAR);
             }
         }
     };
@@ -299,9 +303,8 @@ public class Fragment_PhotoExploreList extends Fragment {
      * 点击 暗色衬托背景 后取消搜索框
      */
     private final View.OnClickListener rlQuireMaskListener = v -> {
-        setKeyboardState();
-        setQuireBarState(QUIRE_BAR_HIDE);
-        rlQuireMask.setVisibility(View.INVISIBLE);
+        setKeyboardState(HIDE_KEYBOARD, etQuire);
+        setQuireBarState(HIDE_QUIRE_BAR);
     };
     /**
      * 选择搜索类型
@@ -332,7 +335,7 @@ public class Fragment_PhotoExploreList extends Fragment {
 
             if (list != null) {
                 interface_messageSend.sendQuireContent(list);
-                setKeyboardState();
+                setKeyboardState(HIDE_KEYBOARD, etQuire);
                 Navigation.findNavController(requireView()).navigate(R.id.action_navigation_photo_explore_to_fragment_PhotoQuire);
             } else {
                 Toast.makeText(requireContext(), "没有找到相关内容,换个关键词试试", Toast.LENGTH_SHORT).show();
@@ -343,27 +346,43 @@ public class Fragment_PhotoExploreList extends Fragment {
         }
     }
 
+
     /**
-     * 设置搜索框的展示以及隐藏
+     * 设置 搜索框 的展示以及隐藏
      *
-     * @param type 搜索框状态
+     * @param state 搜索框 状态
      */
-    private void setQuireBarState(int type) {
-        if (type == QUIRE_BAR_SHOW) {
+    private void setQuireBarState(int state) {
+        if (state == SHOW_QUIRE_BAR) {
+            rlQuireMask.setVisibility(View.VISIBLE);
+            cvQuireBar.setVisibility(View.VISIBLE);
             ObjectAnimator.ofFloat(rlQuireMask, "alpha", 0f, 1f).setDuration(300).start();
             ObjectAnimator.ofFloat(cvQuireBar, "alpha", 0f, 1f).setDuration(300).start();
-        } else if (type == QUIRE_BAR_HIDE) {
+        } else if (state == HIDE_QUIRE_BAR) {
             ObjectAnimator.ofFloat(rlQuireMask, "alpha", 1f, 0f).setDuration(300).start();
             ObjectAnimator.ofFloat(cvQuireBar, "alpha", 1f, 0f).setDuration(300).start();
+            rlQuireMask.setVisibility(View.INVISIBLE);
+            cvQuireBar.setVisibility(View.INVISIBLE);
         }
     }
 
+
     /**
-     * 隐藏键盘
+     * 设置 系统软键盘 的展示以及隐藏
+     *
+     * @param state    系统软键盘 状态
+     * @param editText 软键盘对应的可编辑文本框
      */
-    private void setKeyboardState() {
+    private void setKeyboardState(int state, EditText editText) {
         InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(etQuire.getWindowToken(), 0);
+        if (imm != null) {
+            if (state == HIDE_KEYBOARD) {
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+            } else if (state == SHOW_KEYBOARD) {
+                editText.requestFocus();
+                imm.showSoftInput(editText, 0);
+            }
+        }
     }
 
 
@@ -388,6 +407,7 @@ public class Fragment_PhotoExploreList extends Fragment {
 
         // 搜索框
         cvQuireBar = root.findViewById(R.id.cv_photo_explore_list_quire_bar);
+        cvQuireBar.setVisibility(View.INVISIBLE);
 
         // 搜索框 可编辑文本框
         etQuire = root.findViewById(R.id.et_photo_explore_list_quire);

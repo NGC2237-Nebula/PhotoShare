@@ -32,7 +32,7 @@ import com.example.photoshare.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-public class Fragment_PhotoShare extends Fragment {
+public class Fragment_Share extends Fragment {
 
     private Context context;
 
@@ -179,14 +179,15 @@ public class Fragment_PhotoShare extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             if (requestCode == REQUEST_EXTERNAL_STORAGE) {
                 dialog.dismiss();
                 openAlbum();
             }
-        if (requestCode == REQUEST_CAMERA) {
-            dialog.dismiss();
-            openCamera();
+            if (requestCode == REQUEST_CAMERA) {
+                dialog.dismiss();
+                openCamera();
+            }
         }
     }
 

@@ -16,12 +16,12 @@ import com.example.photoshare.R;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Adapter_PhotoSlideUpload extends RecyclerView.Adapter<Adapter_PhotoSlideUpload.ViewPagerViewHolder> {
+public class Adapter_PhotoSlide extends RecyclerView.Adapter<Adapter_PhotoSlide.ViewPagerViewHolder> {
 
     private final ArrayList<File> photoList;
     private final Context context;
 
-    public Adapter_PhotoSlideUpload(Context context, ArrayList<File> photoList){
+    public Adapter_PhotoSlide(Context context, ArrayList<File> photoList){
         this.context = context;
         this.photoList = photoList;
     }

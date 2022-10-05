@@ -48,7 +48,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class Fragment_PhotoShareUploadDetails extends Fragment {
+public class Fragment_ShareUploadDetails extends Fragment {
 
     /* 控件 */
     private EditText etTitle;
@@ -262,7 +262,7 @@ public class Fragment_PhotoShareUploadDetails extends Fragment {
      * 初始化 数据
      */
     private void setData() {
-        Adapter_PhotoSlideUpload viewPagerAdapter = new Adapter_PhotoSlideUpload(getContext(), imageFileList);
+        Adapter_PhotoSlide viewPagerAdapter = new Adapter_PhotoSlide(getContext(), imageFileList);
         vpPhoto.setAdapter(viewPagerAdapter);
         vpPhoto.setPageTransformer(new PageTransformer_ZoomOut());
     }

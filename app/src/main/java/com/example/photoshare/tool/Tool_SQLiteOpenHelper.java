@@ -208,63 +208,6 @@ public class Tool_SQLiteOpenHelper extends SQLiteOpenHelper {
 
 
     /**
-     * 修改图片的点赞状态
-     *
-     * @param sqLiteDatabase SQLite数据库
-     * @param id             图片ID
-     * @param photo          图片
-     */
-    public void updataPhotoLikeStateInTable(SQLiteDatabase sqLiteDatabase, int id, Entity_Photo photo) {
-        boolean hasLike = photo.getHasLike();
-        int likeNum = photo.getLikeNum();
-
-        ContentValues contentValues = new ContentValues();
-        if (hasLike) {
-            contentValues.put(Constant_SQLite.PhotoListEntry.COLUMN_NAME_HASLIKE, TRUE);
-            contentValues.put(Constant_SQLite.PhotoListEntry.COLUMN_NAME_LIKENUM, likeNum + 1);
-        } else {
-            contentValues.put(Constant_SQLite.PhotoListEntry.COLUMN_NAME_HASLIKE, FALSE);
-            if (likeNum - 1 < 0)
-                contentValues.put(Constant_SQLite.PhotoListEntry.COLUMN_NAME_LIKENUM, 0);
-            else
-                contentValues.put(Constant_SQLite.PhotoListEntry.COLUMN_NAME_LIKENUM, likeNum - 1);
-        }
-        int updataNum = sqLiteDatabase.update(Constant_SQLite.PhotoListEntry.TABLE_NAME, contentValues,
-                Constant_SQLite.PhotoListEntry._ID + " like ?",
-                new String[]{"" + id});
-    }
-
-    /**
-     * 修改图片的收藏状态
-     *
-     * @param sqLiteDatabase SQLite数据库
-     * @param id             图片ID
-     * @param photo          图片
-     */
-    public void updataPhotoCollectStateInTable(SQLiteDatabase sqLiteDatabase, int id, Entity_Photo photo) {
-        boolean isCollect = photo.getHasCollect();
-        int collectNum = photo.getCollectNum();
-
-        ContentValues contentValues = new ContentValues();
-        if (isCollect) {
-            contentValues.put(Constant_SQLite.PhotoListEntry.COLUMN_NAME_HASCOLLECT, TRUE);
-            contentValues.put(Constant_SQLite.PhotoListEntry.COLUMN_NAME_COLLECTNUM, collectNum + 1);
-        } else {
-            contentValues.put(Constant_SQLite.PhotoListEntry.COLUMN_NAME_HASCOLLECT, FALSE);
-            if (collectNum - 1 < 0)
-                contentValues.put(Constant_SQLite.PhotoListEntry.COLUMN_NAME_COLLECTNUM, 0);
-            else
-                contentValues.put(Constant_SQLite.PhotoListEntry.COLUMN_NAME_COLLECTNUM, collectNum - 1);
-        }
-
-        sqLiteDatabase.update(Constant_SQLite.PhotoListEntry.TABLE_NAME, contentValues,
-                Constant_SQLite.PhotoListEntry._ID + " like ?",
-                new String[]{"" + id});
-
-    }
-
-
-    /**
      * 查询表数据
      *
      * @param sqLiteDatabase SQLite数据库

@@ -20,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,11 +31,10 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.photoshare.Activity_Menu;
-import com.example.photoshare.interfaces.Interface_MessageSend;
-import com.example.photoshare.interfaces.Interface_RecyclerClick;
 import com.example.photoshare.R;
+import com.example.photoshare.interfaces.Interface_ClickViewSend;
+import com.example.photoshare.interfaces.Interface_MessageSend;
 import com.example.photoshare.parse.Request_Interceptor;
 import com.example.photoshare.parse.Response_InternalServerError;
 import com.example.photoshare.parse.Response_PhotoUpload;
@@ -56,11 +54,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Fragment_PhotoShareUpload extends Fragment {
+public class Fragment_ShareUploadPhoto extends Fragment {
 
     /* 控件 */
     private RecyclerView rvPhotoFrame;
-    private BottomNavigationView nav;
 
     /* 接口 */
     private Interface_MessageSend interface_messageSend;
@@ -75,47 +72,7 @@ public class Fragment_PhotoShareUpload extends Fragment {
     private final ArrayList<Uri> uriList = new ArrayList<>();
 
     /* 适配器 */
-    private PhotoAdapter photoAdapter;
-    private class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.photoViewHolder> {
-        private Interface_RecyclerClick mOnItemClickListener;
-
-        public void setOnItemClickListener(Interface_RecyclerClick onItemClickListener) {
-            this.mOnItemClickListener = onItemClickListener;
-        }
-        @NonNull
-        @Override
-        public photoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = View.inflate(getContext(), R.layout.item_photo_share_upload_list, null);
-            return new photoViewHolder(view);
-        }
-        @Override
-        public void onBindViewHolder(@NonNull photoViewHolder holder, int position) {
-            Uri photo = uriList.get(position);
-            Glide.with(requireContext()).load(photo).into(holder.ivPhoto);
-        }
-        @Override
-        public int getItemCount() {
-            return uriList.size();
-        }
-
-        class photoViewHolder extends RecyclerView.ViewHolder {
-            private final ImageView ivPhoto;
-
-            public photoViewHolder(@NonNull View itemView) {
-                super(itemView);
-                ivPhoto = itemView.findViewById(R.id.iv_photo_share_upload_list_image);
-
-                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) ivPhoto.getLayoutParams();
-                params.height = photoLength;
-                ivPhoto.setLayoutParams(params);
-
-                ivPhoto.setOnClickListener(v -> {
-                    if (mOnItemClickListener != null)
-                        mOnItemClickListener.onItemClick(v, getLayoutPosition());
-                });
-            }
-        }
-    }
+    private Adapter_PhotoGrid photoAdapter;
 
     /* 类型码 */
     private final int REQUEST_IMAGE_OPEN = 200;
@@ -267,7 +224,7 @@ public class Fragment_PhotoShareUpload extends Fragment {
     /**
      * 点击删除列表项 监听器
      */
-    private final Interface_RecyclerClick itemClickListener = (view, position) -> {
+    private final Interface_ClickViewSend itemClickListener = (view, position) -> {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setMessage("确定删除该图片?");
         builder.setPositiveButton("确定", (dialog, which) -> removeItem(position));
@@ -343,7 +300,7 @@ public class Fragment_PhotoShareUpload extends Fragment {
     }
 
     private void bindView(View root) {
-        nav = requireActivity().findViewById(R.id.nav_view);
+        BottomNavigationView nav = requireActivity().findViewById(R.id.nav_view);
         nav.setVisibility(View.INVISIBLE);
 
         CardView cvAdd = root.findViewById(R.id.cv_photo_share_upload_add);
@@ -365,8 +322,8 @@ public class Fragment_PhotoShareUpload extends Fragment {
     }
 
     private void setData(){
-        photoAdapter = new PhotoAdapter();
-        photoAdapter.setOnItemClickListener(itemClickListener);
+        photoAdapter = new Adapter_PhotoGrid(requireContext(),uriList,photoLength);
+        photoAdapter.setOnPhotoClickListener(itemClickListener);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),3);
 
         rvPhotoFrame.setAdapter(photoAdapter);

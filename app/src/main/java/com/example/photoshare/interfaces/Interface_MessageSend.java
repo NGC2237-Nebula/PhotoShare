@@ -11,13 +11,13 @@ import java.util.ArrayList;
 
 public interface Interface_MessageSend {
 
-    /* Fragment_PhotoShareUpload */
+    /* Fragment_ShareUploadPhoto */
     /**
      * 刷新后的用户信息
      */
     void sendUser(Entity_User user);
 
-    /* Fragment_PhotoShareUpload */
+    /* Fragment_ShareUploadPhoto */
     /**
      * 传送上传成功的 imageCode
      */
@@ -28,7 +28,7 @@ public interface Interface_MessageSend {
     void sendImageFileList(ArrayList<File> imageFileList);
 
 
-    /* Fragment_PhotoShare */
+    /* Fragment_Share */
     /**
      *  传送选择的图片的 URI
      */

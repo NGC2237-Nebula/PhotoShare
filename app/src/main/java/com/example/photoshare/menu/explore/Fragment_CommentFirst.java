@@ -27,6 +27,7 @@ import com.example.photoshare.constant.Constant_APP;
 import com.example.photoshare.Activity_Menu;
 import com.example.photoshare.entity.Entity_Comment;
 import com.example.photoshare.entity.Entity_Photo;
+import com.example.photoshare.interfaces.Interface_ClickViewSend;
 import com.example.photoshare.interfaces.Interface_MessageSend;
 import com.example.photoshare.R;
 import com.example.photoshare.parse.Request_Interceptor;
@@ -311,12 +312,12 @@ public class Fragment_CommentFirst extends Fragment {
     /**
      * 获取被点击的列表项上的 ”查看更多“ 控件,设置点击事件,传递数据
      */
-    private final Adapter_CommentFirst.ItemControlListener itemControlListener = new Adapter_CommentFirst.ItemControlListener() {
+    private final Interface_ClickViewSend rlMoreListener = new Interface_ClickViewSend() {
         @Override
-        public void setItemControl(View view, int position) {
+        public void onItemClick(View view, int position) {
             interface_messageSend.sendClickFirstComment(firstCommentAdapter.getItem(position));
             nav.setVisibility(View.INVISIBLE);
-            Navigation.findNavController(view).navigate(R.id.action_fragment_CommentFirst_to_fragment_CommentSecond);
+            Navigation.findNavController(requireView()).navigate(R.id.action_fragment_CommentFirst_to_fragment_CommentSecond);
         }
     };
 
@@ -362,7 +363,7 @@ public class Fragment_CommentFirst extends Fragment {
 
         List<Entity_Comment> commentList = new ArrayList<>();
         firstCommentAdapter = new Adapter_CommentFirst(context, R.layout.item_comment_first, commentList);
-        firstCommentAdapter.getItemControl(itemControlListener);
+        firstCommentAdapter.setOnCommentMoreClick(rlMoreListener);
         lvComment.setAdapter(firstCommentAdapter);
 
         firstCommentGet = ((Activity_Menu) context).getFirstCommentList(photo.getId());

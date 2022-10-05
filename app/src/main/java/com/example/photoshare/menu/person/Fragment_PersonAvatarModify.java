@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.photoshare.Activity_Menu;
 import com.example.photoshare.entity.Entity_Photo;
 import com.example.photoshare.interfaces.Interface_MessageSend;
-import com.example.photoshare.interfaces.Interface_RecyclerClick;
+import com.example.photoshare.interfaces.Interface_ClickViewSend;
 import com.example.photoshare.R;
 
 import java.util.ArrayList;
@@ -45,9 +45,9 @@ public class Fragment_PersonAvatarModify extends Fragment {
     private final ArrayList<String> allPhotoUriList = new ArrayList<>();
 
     private class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.photoViewHolder> {
-        private Interface_RecyclerClick mListener;
-        public void setOnItemClickListener(Interface_RecyclerClick onItemClickListener) {
-            this.mListener = onItemClickListener;
+        private Interface_ClickViewSend listener;
+        public void setOnPhotoClickListener(Interface_ClickViewSend listener) {
+            this.listener = listener;
         }
         @NonNull
         @Override
@@ -70,8 +70,8 @@ public class Fragment_PersonAvatarModify extends Fragment {
                 super(itemView);
                 ivPhoto = itemView.findViewById(R.id.iv_person_modify_avatar_image);
                 ivPhoto.setOnClickListener(v -> {
-                    if (mListener != null)
-                        mListener.onItemClick(v, getLayoutPosition());
+                    if (listener != null)
+                        listener.onItemClick(v, getLayoutPosition());
                 });
             }
         }
@@ -99,7 +99,7 @@ public class Fragment_PersonAvatarModify extends Fragment {
     /**
      * 返回点击的图片
      */
-    private final Interface_RecyclerClick itemClickListener = new Interface_RecyclerClick() {
+    private final Interface_ClickViewSend itemClickListener = new Interface_ClickViewSend() {
         @Override
         public void onItemClick(View view, int position) {
             String avatarUri = allPhotoUriList.get(position);
@@ -129,7 +129,7 @@ public class Fragment_PersonAvatarModify extends Fragment {
         ivArrow.setOnClickListener(ivArrowListener);
 
         photoAdapter = new PhotoAdapter();
-        photoAdapter.setOnItemClickListener(itemClickListener);
+        photoAdapter.setOnPhotoClickListener(itemClickListener);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
 
         rvPhotoList = root.findViewById(R.id.sw_person_avatar_modify_swipe);

@@ -11,7 +11,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.NetworkOnMainThreadException;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +39,7 @@ import com.example.photoshare.Activity_Menu;
 import com.example.photoshare.constant.Constant_APP;
 import com.example.photoshare.entity.Entity_Photo;
 import com.example.photoshare.interfaces.Interface_MessageSend;
-import com.example.photoshare.interfaces.Interface_RecyclerClick;
+import com.example.photoshare.interfaces.Interface_ClickViewSend;
 import com.example.photoshare.R;
 import com.example.photoshare.parse.Request_Interceptor;
 import com.example.photoshare.parse.Response_PhotoList;
@@ -104,14 +103,6 @@ public class Fragment_PhotoExploreBig extends Fragment {
      */
     private String quireType = quireTitle;
     /**
-     * 隐藏搜索框
-     */
-    private final int QUIRE_BAR_HIDE = 1;
-    /**
-     * 展示搜索框
-     */
-    private final int QUIRE_BAR_SHOW = 2;
-    /**
      * 当前登录用户 ID
      */
     private String userId = null;
@@ -136,16 +127,36 @@ public class Fragment_PhotoExploreBig extends Fragment {
     /* 接口 */
     private Interface_MessageSend interface_messageSend;
 
+
+    /* 标识符 */
+    /**
+     * 隐藏搜索框
+     */
+    private final int HIDE_QUIRE_BAR = 1;
+    /**
+     * 展示搜索框
+     */
+    private final int SHOW_QUIRE_BAR = 2;
+    /**
+     * 隐藏软键盘
+     */
+    private final int HIDE_KEYBOARD = 1;
+    /**
+     * 展示软键盘
+     */
+    private final int SHOW_KEYBOARD = 2;
+
+
     /* 适配器 */
     private PhotoAdapter photoAdapter;
 
     private final List<Entity_Photo> adapterList = new ArrayList<>();
 
     private class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.photoViewHolder> {
-        private Interface_RecyclerClick mOnItemClickListener;
+        private Interface_ClickViewSend listener;
 
-        public void setOnItemClickListener(Interface_RecyclerClick onItemClickListener) {
-            this.mOnItemClickListener = onItemClickListener;
+        public void setOnPhotoClickListener(Interface_ClickViewSend listener) {
+            this.listener = listener;
         }
 
         @NonNull
@@ -173,8 +184,8 @@ public class Fragment_PhotoExploreBig extends Fragment {
                 super(itemView);
                 ivPhoto = itemView.findViewById(R.id.iv_explore_photo_big_image);
                 ivPhoto.setOnClickListener(v -> {
-                    if (mOnItemClickListener != null)
-                        mOnItemClickListener.onItemClick(v, getLayoutPosition());
+                    if (listener != null)
+                        listener.onItemClick(v, getLayoutPosition());
                 });
             }
         }
@@ -200,7 +211,6 @@ public class Fragment_PhotoExploreBig extends Fragment {
             }
         }).start();
     }
-
     /**
      * 网络请求 获得图片分享列表
      */
@@ -219,7 +229,6 @@ public class Fragment_PhotoExploreBig extends Fragment {
             e.printStackTrace();
         }
     };
-
     /**
      * 加载 本地数据 到适配器中
      *
@@ -233,7 +242,6 @@ public class Fragment_PhotoExploreBig extends Fragment {
             photoAdapter.notifyDataSetChanged();
         }
     }
-
     /**
      * 解析网络请求结果，添加到适配器中
      *
@@ -257,7 +265,6 @@ public class Fragment_PhotoExploreBig extends Fragment {
             }
         }).start();
     }
-
     /**
      * 响应操作 - 将图片添加到适配器中
      */
@@ -291,7 +298,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
     /**
      * 发送点击图片信息
      */
-    private final Interface_RecyclerClick itemClickListener = new Interface_RecyclerClick() {
+    private final Interface_ClickViewSend viewSendListener = new Interface_ClickViewSend() {
         @Override
         public void onItemClick(View view, int position) {
             Entity_Photo photo = adapterList.get(position);
@@ -320,36 +327,31 @@ public class Fragment_PhotoExploreBig extends Fragment {
      */
     private final View.OnClickListener rlShowQuireListener = v -> {
         if (rlQuireMask.getAlpha() == 0f || cvQuireBar.getAlpha() == 0f) {
-            rlQuireMask.setVisibility(View.VISIBLE);
-            animatorQuireBar(QUIRE_BAR_SHOW);
+            setKeyboardState(SHOW_KEYBOARD, etQuire);
+            setQuireBarState(SHOW_QUIRE_BAR);
         } else {
-            hideKeyboard();
-            animatorQuireBar(QUIRE_BAR_HIDE);
-            rlQuireMask.setVisibility(View.INVISIBLE);
+            setKeyboardState(HIDE_KEYBOARD, etQuire);
+            setQuireBarState(HIDE_QUIRE_BAR);
         }
     };
     /**
      * 搜索框 按回车搜索
      */
-    private final TextView.OnEditorActionListener etQuireListener = new TextView.OnEditorActionListener() {
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                if (quireType.equals(quireTitle))
-                    searchQuireContent(quireTitle);
-                else
-                    searchQuireContent(quireContent);
-            }
-            return false;
+    private final TextView.OnEditorActionListener etQuireListener = (v, actionId, event) -> {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            if (quireType.equals(quireTitle))
+                searchQuireContent(quireTitle);
+            else
+                searchQuireContent(quireContent);
         }
+        return false;
     };
     /**
      * 点击 暗色衬托背景 后取消搜索框
      */
     private final View.OnClickListener rlQuireMaskListener = v -> {
-        hideKeyboard();
-        animatorQuireBar(QUIRE_BAR_HIDE);
-        rlQuireMask.setVisibility(View.INVISIBLE);
+        setKeyboardState(HIDE_KEYBOARD, etQuire);
+        setQuireBarState(HIDE_QUIRE_BAR);
     };
     /**
      * 选择搜索类型
@@ -380,7 +382,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
 
             if (list != null) {
                 interface_messageSend.sendQuireContent(list);
-                hideKeyboard();
+                setKeyboardState(HIDE_KEYBOARD,etQuire);
                 Navigation.findNavController(requireView()).navigate(R.id.action_fragment_PhotoExploreBig_to_fragment_PhotoQuire);
             } else {
                 Toast.makeText(requireContext(), "没有找到相关内容,换个关键词试试", Toast.LENGTH_SHORT).show();
@@ -391,28 +393,47 @@ public class Fragment_PhotoExploreBig extends Fragment {
         }
     }
 
+
     /**
-     * 设置搜索框的展示以及隐藏
+     * 设置 搜索框 的展示以及隐藏
      *
-     * @param type 搜索框状态
+     * @param state 搜索框 状态
      */
-    private void animatorQuireBar(int type) {
-        if (type == QUIRE_BAR_SHOW) {
+    private void setQuireBarState(int state) {
+        if (state == SHOW_QUIRE_BAR) {
+            rlQuireMask.setVisibility(View.VISIBLE);
+            cvQuireBar.setVisibility(View.VISIBLE);
             ObjectAnimator.ofFloat(rlQuireMask, "alpha", 0f, 1f).setDuration(300).start();
             ObjectAnimator.ofFloat(cvQuireBar, "alpha", 0f, 1f).setDuration(300).start();
-        } else if (type == QUIRE_BAR_HIDE) {
+        } else if (state == HIDE_QUIRE_BAR) {
             ObjectAnimator.ofFloat(rlQuireMask, "alpha", 1f, 0f).setDuration(300).start();
             ObjectAnimator.ofFloat(cvQuireBar, "alpha", 1f, 0f).setDuration(300).start();
+            rlQuireMask.setVisibility(View.INVISIBLE);
+            cvQuireBar.setVisibility(View.INVISIBLE);
         }
     }
 
+
     /**
-     * 隐藏键盘
+     * 设置 系统软键盘 的展示以及隐藏
+     *
+     * @param state    系统软键盘 状态
+     * @param editText 软键盘对应的可编辑文本框
      */
-    private void hideKeyboard() {
+    private void setKeyboardState(int state, EditText editText) {
         InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(etQuire.getWindowToken(), 0);
+        if (imm != null) {
+            if (state == HIDE_KEYBOARD) {
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+            } else if (state == SHOW_KEYBOARD) {
+                editText.requestFocus();
+                imm.showSoftInput(editText, 0);
+            }
+        }
     }
+
+
+
 
     private void bindView(View root) {
         rvPhotoList = root.findViewById(R.id.rv_photo_explore_big);
@@ -426,6 +447,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
 
         // 搜索框
         cvQuireBar = root.findViewById(R.id.cv_photo_explore_big_quire_bar);
+        cvQuireBar.setVisibility(View.INVISIBLE);
 
         // 搜索框 可编辑文本框
         etQuire = root.findViewById(R.id.et_photo_explore_big_quire);
@@ -447,7 +469,8 @@ public class Fragment_PhotoExploreBig extends Fragment {
         // 图文列表
         photoListGet = ((Activity_Menu) context).getAllPhotoList();
         photoAdapter = new PhotoAdapter();
-        photoAdapter.setOnItemClickListener(itemClickListener);
+        photoAdapter.setOnPhotoClickListener(viewSendListener);
+
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         rvPhotoList.setAdapter(photoAdapter);
         rvPhotoList.setLayoutManager(layoutManager);
