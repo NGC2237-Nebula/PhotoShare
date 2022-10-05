@@ -61,7 +61,7 @@ public class Fragment_PhotoExploreList extends Fragment {
     /**
      * 图片适配器
      */
-    private Adapter_PhotoList photoAdapter;
+    private Adapter_PhotoExploreList photoAdapter;
     /**
      * 滑动刷新布局
      */
@@ -432,7 +432,7 @@ public class Fragment_PhotoExploreList extends Fragment {
 
         // 图文列表
         List<Entity_Photo> photoList = new ArrayList<>();
-        photoAdapter = new Adapter_PhotoList(context, R.layout.item_photo_explore_list, photoList);
+        photoAdapter = new Adapter_PhotoExploreList(context, R.layout.item_photo_explore_list, photoList);
         lvPhotoList.setAdapter(photoAdapter);
 
         if (photoListGet != null) addLocalDataInAdapter(photoListGet);

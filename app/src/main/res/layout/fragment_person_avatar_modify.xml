@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_d"
-    tools:context=".menu.person.Fragment_PersonAvatarModify">
+    tools:context=".menu.person.Fragment_AvatarChoose">
 
     <RelativeLayout
         android:id="@+id/rl_photo_avatar_modify_head"

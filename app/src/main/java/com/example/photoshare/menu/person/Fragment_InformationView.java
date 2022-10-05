@@ -48,7 +48,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public class Fragment_PersonInformation extends Fragment {
+public class Fragment_InformationView extends Fragment {
 
     /* 数据 */
     private Entity_User user = null;
@@ -75,9 +75,7 @@ public class Fragment_PersonInformation extends Fragment {
      * 网络请求
      */
     private void networkRequest() {
-        Log.d("LOG", "======== 网络请求 ========");
         new Thread(() -> {
-
             String urlParam = "?" + "&password=" + password + "&username=" + username;
             RequestBody requestBody = new FormBody.Builder().build();
             Request request = new Request.Builder().url(Constant_APP.USER_LOGIN_POST_URL + urlParam).post(requestBody).build();
@@ -145,7 +143,7 @@ public class Fragment_PersonInformation extends Fragment {
      * 跳转到修改界面
      */
     private final View.OnClickListener jumpModifyListener = v ->
-            Navigation.findNavController(requireView()).navigate(R.id.action_fragment_PersonDetails_to_fragment_PersonModify);
+            Navigation.findNavController(requireView()).navigate(R.id.action_fragment_InformationView_to_fragment_InformationModify);
     /**
      * 跳转到个人主页
      */

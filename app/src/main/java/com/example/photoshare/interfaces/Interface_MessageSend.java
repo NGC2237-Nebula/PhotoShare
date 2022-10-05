@@ -80,7 +80,7 @@ public interface Interface_MessageSend {
     void sendQuireContent(ArrayList<Entity_Photo> photoList);
 
 
-    /* Fragment_PersonAvatarModify */
+    /* Fragment_AvatarChoose */
     /**
      * 用户选择的头像图片Uri
      */

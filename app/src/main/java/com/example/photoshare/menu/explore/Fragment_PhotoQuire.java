@@ -32,7 +32,7 @@ public class Fragment_PhotoQuire extends Fragment {
     /**
      * 图片适配器
      */
-    private Adapter_PhotoList photoAdapter;
+    private Adapter_PhotoExploreList photoAdapter;
 
     /* 监听器 */
     /**
@@ -65,7 +65,7 @@ public class Fragment_PhotoQuire extends Fragment {
         ArrayList<Entity_Photo> photoList = ((Activity_Menu) context).getQuirePhotoList();
 
         // 图文列表
-        photoAdapter = new Adapter_PhotoList(context, R.layout.item_photo_explore_list, photoList);
+        photoAdapter = new Adapter_PhotoExploreList(context, R.layout.item_photo_explore_list, photoList);
         lvPhotoList.setAdapter(photoAdapter);
     }
 

@@ -46,7 +46,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Fragment_PersonListMyself extends Fragment {
+public class Fragment_ListMyself extends Fragment {
 
     /* 数据 */
     private Context context;
@@ -57,7 +57,7 @@ public class Fragment_PersonListMyself extends Fragment {
 
     private ListView lvPhotoList;
     private TextView tvHint;
-    private Adapter_Updata PhotoAdapter;
+    private Adapter_ListMyself adapter;
 
     private Dialog dialog;
 
@@ -145,8 +145,8 @@ public class Fragment_PersonListMyself extends Fragment {
     private final Handler showUpdataPhotoHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
-            PhotoAdapter.add((Entity_Photo) msg.obj);
-            PhotoAdapter.notifyDataSetChanged();
+            adapter.add((Entity_Photo) msg.obj);
+            adapter.notifyDataSetChanged();
         }
     };
     /**
@@ -194,7 +194,7 @@ public class Fragment_PersonListMyself extends Fragment {
         public void handleMessage(Message msg) {
             if (msg.arg1 == 1) {
                 photoList.remove(deleteItemPosition);
-                PhotoAdapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
                 Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, "删除失败", Toast.LENGTH_SHORT).show();
@@ -277,8 +277,8 @@ public class Fragment_PersonListMyself extends Fragment {
      */
     private void setData() {
         photoList = new ArrayList<>();
-        PhotoAdapter = new Adapter_Updata(context, R.layout.item_person_list_myself, photoList);
-        lvPhotoList.setAdapter(PhotoAdapter);
+        adapter = new Adapter_ListMyself(context, R.layout.item_person_list_myself, photoList);
+        lvPhotoList.setAdapter(adapter);
         lvPhotoList.setOnItemLongClickListener(itemDeleteListener);
         networkRequest(NET_GET_MYSELF_PHOTO);
     }

@@ -20,7 +20,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.bumptech.glide.Glide;
 import com.example.photoshare.constant.Constant_APP;
 import com.example.photoshare.Activity_Menu;
 import com.example.photoshare.entity.Entity_Photo;
@@ -38,57 +37,33 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class Fragment_PersonListCollect extends Fragment {
+public class Fragment_ListCollect extends Fragment {
 
     /* 控件 */
-    private RecyclerView rvPhotoList;
-    private ImageView ivBack;
     private TextView tvHint;
 
     /* 数据 */
     private String userId = null;
+    private final List<Entity_Photo> photoArrayList = new ArrayList<>();
 
     /* 适配器 */
-    private static class photoViewHolder extends RecyclerView.ViewHolder {
-        private final ImageView ivPhoto;
-        private final TextView tvTitle;
-        private final TextView tvContent;
-        private final TextView tvName;
-
-        public photoViewHolder(@NonNull View itemView) {
-            super(itemView);
-            ivPhoto = itemView.findViewById(R.id.iv_person_list_collect_image);
-            tvTitle = itemView.findViewById(R.id.tv_person_list_collect_title);
-            tvName = itemView.findViewById(R.id.tv_person_list_collect_name);
-            tvContent = itemView.findViewById(R.id.tv_person_list_collect_content);
-        }
-    }
-
-    private class PhotoAdapter extends RecyclerView.Adapter<photoViewHolder> {
-        @NonNull
-        @Override
-        public photoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = View.inflate(getContext(), R.layout.item_person_list_collect, null);
-            return new photoViewHolder(view);
-        }
-        @Override
-        public void onBindViewHolder(@NonNull photoViewHolder holder, int position) {
-            Entity_Photo photo = photoArrayList.get(position);
-            Glide.with(requireContext()).load(photo.getImageUrlList()[0]).into(holder.ivPhoto);
-            holder.tvTitle.setText(photo.getTitle());
-            holder.tvName.setText(photo.getUsername());
-            holder.tvContent.setText(photo.getContent());
-        }
-        @Override
-        public int getItemCount() {
-            return photoArrayList.size();
-        }
-    }
-    private final List<Entity_Photo> photoArrayList = new ArrayList<>();
-    private PhotoAdapter photoAdapter;
-
+    private Adapter_ListCollect adapter;
 
     /* 网络请求 */
+    private void networkRequest() {
+        new Thread(() -> {
+            Request request;
+            String urlParam = "?" + "userId=" + userId;
+            request = new Request.Builder().url(Constant_APP.COLLECT_GET_URL + urlParam).get().build();
+            try {
+                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Request_Interceptor()).build();
+                client.newCall(request).enqueue(showCollectListCallback);
+            } catch (NetworkOnMainThreadException ex) {
+                ex.printStackTrace();
+            }
+        }).start();
+    }
+
     private final okhttp3.Callback showCollectListCallback = new okhttp3.Callback() {
         @Override
         public void onResponse(@NonNull Call call, Response response) throws IOException {
@@ -120,7 +95,7 @@ public class Fragment_PersonListCollect extends Fragment {
         @Override
         public void handleMessage(Message msg) {
             photoArrayList.add((Entity_Photo) msg.obj);
-            photoAdapter.notifyDataSetChanged();
+            adapter.notifyDataSetChanged();
         }
     };
 
@@ -131,36 +106,23 @@ public class Fragment_PersonListCollect extends Fragment {
         }
     };
 
-    private void networkRequest() {
-        new Thread(() -> {
-            Request request;
-            String urlParam = "?" + "userId=" + userId;
-            request = new Request.Builder().url(Constant_APP.COLLECT_GET_URL + urlParam).get().build();
-            try {
-                OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Request_Interceptor()).build();
-                client.newCall(request).enqueue(showCollectListCallback);
-            } catch (NetworkOnMainThreadException ex) {
-                ex.printStackTrace();
-            }
-        }).start();
-    }
-
 
     /* 监听器 */
     private final View.OnClickListener ivBackListener = v ->
             Navigation.findNavController(requireView()).popBackStack();
 
 
+
     private void init(View root){
-        rvPhotoList = root.findViewById(R.id.rv_collect_list);
-        ivBack = root.findViewById(R.id.iv_list_collect_back);
+        RecyclerView rvPhotoList = root.findViewById(R.id.rv_collect_list);
+        ImageView ivBack = root.findViewById(R.id.iv_list_collect_back);
         tvHint = root.findViewById(R.id.tv_list_collect_hint);
 
         tvHint.setVisibility(View.INVISIBLE);
         ivBack.setOnClickListener(ivBackListener);
 
-        photoAdapter = new PhotoAdapter();
-        rvPhotoList.setAdapter(photoAdapter);
+        adapter = new Adapter_ListCollect(requireContext(),photoArrayList);
+        rvPhotoList.setAdapter(adapter);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvPhotoList.setLayoutManager(layoutManager);
         networkRequest();

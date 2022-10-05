@@ -15,67 +15,30 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.photoshare.Activity_Menu;
-import com.example.photoshare.entity.Entity_Photo;
-import com.example.photoshare.interfaces.Interface_MessageSend;
-import com.example.photoshare.interfaces.Interface_ClickViewSend;
 import com.example.photoshare.R;
+import com.example.photoshare.entity.Entity_Photo;
+import com.example.photoshare.interfaces.Interface_ClickViewSend;
+import com.example.photoshare.interfaces.Interface_MessageSend;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class Fragment_PersonAvatarModify extends Fragment {
+public class Fragment_AvatarChoose extends Fragment {
 
     /* 数据 */
-    private ArrayList<Entity_Photo> photoList;
+    private final ArrayList<String> allPhotoUriList = new ArrayList<>();
+    private ArrayList<Entity_Photo> allPhotoList;
 
     /* 控件 */
-    private ImageView ivArrow;
-    private RecyclerView rvPhotoList;
     private TextView tvHint;
 
     /* 接口 */
     private Interface_MessageSend interface_messageSend;
 
     /* 适配器 */
-    private PhotoAdapter photoAdapter;
-
-    private final ArrayList<String> allPhotoUriList = new ArrayList<>();
-
-    private class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.photoViewHolder> {
-        private Interface_ClickViewSend listener;
-        public void setOnPhotoClickListener(Interface_ClickViewSend listener) {
-            this.listener = listener;
-        }
-        @NonNull
-        @Override
-        public photoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = View.inflate(getContext(), R.layout.item_person_modify_avatar, null);
-            return new photoViewHolder(view);
-        }
-        @Override
-        public void onBindViewHolder(@NonNull photoViewHolder holder, int position) {
-            String photoUri = allPhotoUriList.get(position);
-            Glide.with(requireContext()).load(photoUri).into(holder.ivPhoto);
-        }
-        @Override
-        public int getItemCount() {
-            return allPhotoUriList.size();
-        }
-        class photoViewHolder extends RecyclerView.ViewHolder {
-            private final ImageView ivPhoto;
-            public photoViewHolder(@NonNull View itemView) {
-                super(itemView);
-                ivPhoto = itemView.findViewById(R.id.iv_person_modify_avatar_image);
-                ivPhoto.setOnClickListener(v -> {
-                    if (listener != null)
-                        listener.onItemClick(v, getLayoutPosition());
-                });
-            }
-        }
-    }
+    private Adapter_AvatarChoose photoAdapter;
 
 
     /**
@@ -125,17 +88,18 @@ public class Fragment_PersonAvatarModify extends Fragment {
         tvHint = root.findViewById(R.id.tv_person_avatar_modify_hint);
         tvHint.setVisibility(View.INVISIBLE);
 
-        ivArrow = root.findViewById(R.id.iv_person_avatar_modify_back);
+        ImageView ivArrow = root.findViewById(R.id.iv_person_avatar_modify_back);
         ivArrow.setOnClickListener(ivArrowListener);
 
-        photoAdapter = new PhotoAdapter();
-        photoAdapter.setOnPhotoClickListener(itemClickListener);
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
 
-        rvPhotoList = root.findViewById(R.id.sw_person_avatar_modify_swipe);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+        photoAdapter = new Adapter_AvatarChoose(requireContext(),allPhotoUriList);
+        photoAdapter.setOnPhotoClickListener(itemClickListener);
+
+        RecyclerView rvPhotoList = root.findViewById(R.id.sw_person_avatar_modify_swipe);
         rvPhotoList.setAdapter(photoAdapter);
         rvPhotoList.setLayoutManager(layoutManager);
-        addAllPhoto(photoList);
+        addAllPhoto(allPhotoList);
     }
 
 
@@ -149,7 +113,7 @@ public class Fragment_PersonAvatarModify extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        photoList = ((Activity_Menu) getActivity()).getAllPhotoList();
+        allPhotoList = ((Activity_Menu) context).getAllPhotoList();
         try {
             interface_messageSend = (Interface_MessageSend) context;
         } catch (ClassCastException e) {

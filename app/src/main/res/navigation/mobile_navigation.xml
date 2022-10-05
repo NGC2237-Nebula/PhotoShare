@@ -12,34 +12,34 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_fragment_PersonDetails"
-            app:destination="@id/fragment_PersonInformation" />
+            app:destination="@id/fragment_InformationView" />
         <action
             android:id="@+id/action_navigation_home_to_fragment_AboutUs"
             app:destination="@id/fragment_AboutUs" />
         <action
-            android:id="@+id/action_navigation_home_to_fragment_PhotoLikeList"
-            app:destination="@id/fragment_PersonLikeList" />
+            android:id="@+id/action_navigation_home_to_fragment_ListLike"
+            app:destination="@id/fragment_ListLike" />
         <action
-            android:id="@+id/action_navigation_home_to_fragment_PhotoCollectList"
-            app:destination="@id/fragment_PersonCollectList" />
+            android:id="@+id/action_navigation_home_to_fragment_ListCollect"
+            app:destination="@id/fragment_ListCollect" />
         <action
-            android:id="@+id/action_navigation_home_to_fragment_PersonUpdataList"
-            app:destination="@id/fragment_PersonUpdataList" />
+            android:id="@+id/action_navigation_home_to_fragment_ListMySelf"
+            app:destination="@id/fragment_ListMySelf" />
         <action
             android:id="@+id/action_navigation_home_to_fragment_Settings"
             app:destination="@id/fragment_Settings" />
         <action
-            android:id="@+id/action_navigation_home_to_fragment_PersonAvatarCheck"
-            app:destination="@id/fragment_PersonAvatarCheck" />
+            android:id="@+id/action_navigation_home_to_fragment_AvatarView"
+            app:destination="@id/fragment_AvatarView" />
     </fragment>
 
     <fragment
-        android:id="@+id/fragment_PersonInformation"
-        android:name="com.example.photoshare.menu.person.Fragment_PersonInformation"
+        android:id="@+id/fragment_InformationView"
+        android:name="com.example.photoshare.menu.person.Fragment_InformationView"
         tools:layout="@layout/fragment_person_information" >
         <action
-            android:id="@+id/action_fragment_PersonDetails_to_fragment_PersonModify"
-            app:destination="@id/fragment_PersonModify" />
+            android:id="@+id/action_fragment_InformationView_to_fragment_InformationModify"
+            app:destination="@id/fragment_InformationModify" />
     </fragment>
 
 
@@ -91,33 +91,33 @@
         android:label="Fragment_AboutUs"
         tools:layout="@layout/fragment_about_us"/>
     <fragment
-        android:id="@+id/fragment_PersonLikeList"
-        android:name="com.example.photoshare.menu.person.Fragment_PersonListLike"
+        android:id="@+id/fragment_ListLike"
+        android:name="com.example.photoshare.menu.person.Fragment_ListLike"
         android:label="Fragment_PersonLikeList"
         tools:layout="@layout/fragment_person_list_like">
     </fragment>
 
     <fragment
-        android:id="@+id/fragment_PersonUpdataList"
-        android:name="com.example.photoshare.menu.person.Fragment_PersonListMyself"
+        android:id="@+id/fragment_ListMySelf"
+        android:name="com.example.photoshare.menu.person.Fragment_ListMyself"
         android:label="Fragment_PersonUpdataList"
         tools:layout="@layout/fragment_person_list_myself">
     </fragment>
 
     <fragment
-        android:id="@+id/fragment_PersonCollectList"
-        android:name="com.example.photoshare.menu.person.Fragment_PersonListCollect"
+        android:id="@+id/fragment_ListCollect"
+        android:name="com.example.photoshare.menu.person.Fragment_ListCollect"
         android:label="Fragment_PersonCollectList"
         tools:layout="@layout/fragment_person_list_collect">
     </fragment>
     <fragment
-        android:id="@+id/fragment_PersonModify"
-        android:name="com.example.photoshare.menu.person.Fragment_PersonModify"
+        android:id="@+id/fragment_InformationModify"
+        android:name="com.example.photoshare.menu.person.Fragment_InformationModify"
         android:label="Fragment_PersonModify"
         tools:layout="@layout/fragment_person_modify">
         <action
-            android:id="@+id/action_fragment_PersonModify_to_fragment_PersonAvatarModify"
-            app:destination="@id/fragment_PersonModifyAvatar" />
+            android:id="@+id/action_fragment_PersonModify_to_fragment_AvatarChoose"
+            app:destination="@id/fragment_AvatarChoose" />
     </fragment>
     <fragment
         android:id="@+id/fragment_CommentFirst"
@@ -188,8 +188,8 @@
             app:destination="@id/fragment_PhotoQuire" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_PersonModifyAvatar"
-        android:name="com.example.photoshare.menu.person.Fragment_PersonAvatarModify"
+        android:id="@+id/fragment_AvatarChoose"
+        android:name="com.example.photoshare.menu.person.Fragment_AvatarChoose"
         android:label="fragment_person_modify_avatar"
         tools:layout="@layout/fragment_person_avatar_modify" />
     <fragment
@@ -211,8 +211,8 @@
             app:destination="@id/fragment_PhotoDetails" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_PersonAvatarCheck"
-        android:name="com.example.photoshare.menu.person.Fragment_PersonAvatarCheck"
+        android:id="@+id/fragment_AvatarView"
+        android:name="com.example.photoshare.menu.person.Fragment_AvatarView"
         android:label="fragment_person_avatar_check"
         tools:layout="@layout/fragment_person_avatar_check" />
 

@@ -52,7 +52,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 
-public class Fragment_PersonModify extends Fragment {
+public class Fragment_InformationModify extends Fragment {
 
     Context context;
 
@@ -166,7 +166,7 @@ public class Fragment_PersonModify extends Fragment {
      * 头像按钮 监听器 - 选择头像
      */
     private final View.OnClickListener rlAvatarListener = v ->
-            Navigation.findNavController(requireView()).navigate(R.id.action_fragment_PersonModify_to_fragment_PersonAvatarModify);
+            Navigation.findNavController(requireView()).navigate(R.id.action_fragment_PersonModify_to_fragment_AvatarChoose);
 
 
 

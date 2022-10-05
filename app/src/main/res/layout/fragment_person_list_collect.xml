@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/ic_background_deep"
-    tools:context=".menu.person.Fragment_PersonListCollect">
+    tools:context=".menu.person.Fragment_ListCollect">
 
     <RelativeLayout
         android:layout_width="match_parent"

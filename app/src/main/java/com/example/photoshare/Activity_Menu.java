@@ -54,7 +54,7 @@ public class Activity_Menu extends AppCompatActivity implements Interface_Messag
 
 
     /**
-     * Fragment_PersonInformation - 刷新后的用户信息
+     * Fragment_InformationView - 刷新后的用户信息
      */
     @Override
     public void sendUser(Entity_User user) {
@@ -256,7 +256,7 @@ public class Activity_Menu extends AppCompatActivity implements Interface_Messag
 
 
     /**
-     * Fragment_PersonAvatarModify - 用户选择的头像图片Uri
+     * Fragment_AvatarChoose - 用户选择的头像图片Uri
      */
     private String modifyAvatar = null;
 

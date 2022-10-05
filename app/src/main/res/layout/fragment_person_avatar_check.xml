@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_d"
-    tools:context=".menu.person.Fragment_PersonAvatarCheck">
+    tools:context=".menu.person.Fragment_AvatarView">
 
 
     <androidx.cardview.widget.CardView

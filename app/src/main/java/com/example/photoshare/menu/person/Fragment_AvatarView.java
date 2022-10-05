@@ -18,7 +18,7 @@ import com.example.photoshare.entity.Entity_User;
 import com.example.photoshare.R;
 
 
-public class Fragment_PersonAvatarCheck extends Fragment {
+public class Fragment_AvatarView extends Fragment {
 
     private String userAvatar = null;
     private Entity_User user = null;

@@ -19,7 +19,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,7 +33,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.bumptech.glide.Glide;
 import com.example.photoshare.Activity_Menu;
 import com.example.photoshare.constant.Constant_APP;
 import com.example.photoshare.entity.Entity_Photo;
@@ -122,6 +120,10 @@ public class Fragment_PhotoExploreBig extends Fragment {
      * 数据库
      */
     private SQLiteDatabase database;
+    /**
+     * 图片列表
+     */
+    private final List<Entity_Photo> photoList = new ArrayList<>();
 
 
     /* 接口 */
@@ -148,48 +150,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
 
 
     /* 适配器 */
-    private PhotoAdapter photoAdapter;
-
-    private final List<Entity_Photo> adapterList = new ArrayList<>();
-
-    private class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.photoViewHolder> {
-        private Interface_ClickViewSend listener;
-
-        public void setOnPhotoClickListener(Interface_ClickViewSend listener) {
-            this.listener = listener;
-        }
-
-        @NonNull
-        @Override
-        public photoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = View.inflate(getContext(), R.layout.item_photo_explore_big, null);
-            return new photoViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull photoViewHolder holder, int position) {
-            Entity_Photo photo = adapterList.get(position);
-            Glide.with(requireContext()).load(photo.getImageUrlList()[0]).into(holder.ivPhoto);
-        }
-
-        @Override
-        public int getItemCount() {
-            return adapterList.size();
-        }
-
-        class photoViewHolder extends RecyclerView.ViewHolder {
-            private final ImageView ivPhoto;
-
-            public photoViewHolder(@NonNull View itemView) {
-                super(itemView);
-                ivPhoto = itemView.findViewById(R.id.iv_explore_photo_big_image);
-                ivPhoto.setOnClickListener(v -> {
-                    if (listener != null)
-                        listener.onItemClick(v, getLayoutPosition());
-                });
-            }
-        }
-    }
+    private Adapter_PhotoExploreBig photoAdapter;
 
 
     /* 网络请求 */
@@ -198,7 +159,6 @@ public class Fragment_PhotoExploreBig extends Fragment {
      * 网络请求
      */
     private void networkRequest() {
-        Log.d("LOG", "======== 网络请求 ========");
         new Thread(() -> {
             Request request;
             String urlParam = "?" + "userId=" + userId;
@@ -211,6 +171,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
             }
         }).start();
     }
+
     /**
      * 网络请求 获得图片分享列表
      */
@@ -229,6 +190,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
             e.printStackTrace();
         }
     };
+
     /**
      * 加载 本地数据 到适配器中
      *
@@ -236,12 +198,13 @@ public class Fragment_PhotoExploreBig extends Fragment {
      */
     @SuppressLint("NotifyDataSetChanged")
     private void addLocalDataInAdapter(ArrayList<Entity_Photo> photoList) {
-        if (!adapterList.isEmpty()) adapterList.clear();
+        if (!this.photoList.isEmpty()) this.photoList.clear();
         for (Entity_Photo photo : photoList) {
-            adapterList.add(photo);
+            this.photoList.add(photo);
             photoAdapter.notifyDataSetChanged();
         }
     }
+
     /**
      * 解析网络请求结果，添加到适配器中
      *
@@ -265,6 +228,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
             }
         }).start();
     }
+
     /**
      * 响应操作 - 将图片添加到适配器中
      */
@@ -272,7 +236,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
         @SuppressLint("NotifyDataSetChanged")
         @Override
         public void handleMessage(Message msg) {
-            adapterList.add((Entity_Photo) msg.obj);
+            photoList.add((Entity_Photo) msg.obj);
             photoAdapter.notifyDataSetChanged();
         }
     };
@@ -301,7 +265,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
     private final Interface_ClickViewSend viewSendListener = new Interface_ClickViewSend() {
         @Override
         public void onItemClick(View view, int position) {
-            Entity_Photo photo = adapterList.get(position);
+            Entity_Photo photo = photoList.get(position);
             interface_messageSend.sendClickPhoto(photo, position);
             Navigation.findNavController(requireView()).navigate(R.id.action_fragment_PhotoExploreBig_to_fragment_PhotoDetails);
         }
@@ -314,7 +278,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
         @Override
         public void onRefresh() {
             if (photoAdapter.getItemCount() != 0) {
-                adapterList.clear();
+                photoList.clear();
                 photoAdapter.notifyDataSetChanged();
             }
             networkRequest();
@@ -382,7 +346,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
 
             if (list != null) {
                 interface_messageSend.sendQuireContent(list);
-                setKeyboardState(HIDE_KEYBOARD,etQuire);
+                setKeyboardState(HIDE_KEYBOARD, etQuire);
                 Navigation.findNavController(requireView()).navigate(R.id.action_fragment_PhotoExploreBig_to_fragment_PhotoQuire);
             } else {
                 Toast.makeText(requireContext(), "没有找到相关内容,换个关键词试试", Toast.LENGTH_SHORT).show();
@@ -433,8 +397,6 @@ public class Fragment_PhotoExploreBig extends Fragment {
     }
 
 
-
-
     private void bindView(View root) {
         rvPhotoList = root.findViewById(R.id.rv_photo_explore_big);
 
@@ -468,7 +430,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
     private void setData(Context context) {
         // 图文列表
         photoListGet = ((Activity_Menu) context).getAllPhotoList();
-        photoAdapter = new PhotoAdapter();
+        photoAdapter = new Adapter_PhotoExploreBig(requireContext(), photoList);
         photoAdapter.setOnPhotoClickListener(viewSendListener);
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
@@ -505,7 +467,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        adapterList.clear();
+        photoList.clear();
     }
 
     @Override

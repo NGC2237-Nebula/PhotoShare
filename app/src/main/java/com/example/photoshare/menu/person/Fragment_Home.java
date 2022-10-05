@@ -52,7 +52,7 @@ public class Fragment_Home extends Fragment {
     private void bindView(View root) {
         civAvatar = root.findViewById(R.id.civ_home_avatar);
         civAvatar.setOnClickListener(v ->
-                Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_fragment_PersonAvatarCheck));
+                Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_fragment_AvatarView));
 
         tvName = root.findViewById(R.id.tv_home_username);
         tvSex = root.findViewById(R.id.tv_home_usersex);
@@ -72,15 +72,15 @@ public class Fragment_Home extends Fragment {
 
         RelativeLayout rlMyself = root.findViewById(R.id.rl_home_my);
         rlMyself.setOnClickListener(v ->
-                Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_fragment_PersonUpdataList));
+                Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_fragment_ListMySelf));
 
         RelativeLayout rlLike = root.findViewById(R.id.rl_home_like);
         rlLike.setOnClickListener(v ->
-                Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_fragment_PhotoLikeList));
+                Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_fragment_ListLike));
 
         RelativeLayout rlCollect = root.findViewById(R.id.rl_home_collect);
         rlCollect.setOnClickListener(v ->
-                Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_fragment_PhotoCollectList));
+                Navigation.findNavController(requireView()).navigate(R.id.action_navigation_home_to_fragment_ListCollect));
 
         RelativeLayout rlAboutUs = root.findViewById(R.id.rl_home_about_us);
         rlAboutUs.setOnClickListener(v ->
