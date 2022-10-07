@@ -40,7 +40,7 @@ public class Activity_Menu extends AppCompatActivity implements Interface_Messag
     private String password = null;
 
     private void parseUserMessage() {
-        Intent intent = getIntent();
+        Intent intent = getIntent();                        //Log.d(打印信息的标签，需要打印出来的标签)
         password = intent.getStringExtra(USER_PASSWORD);
         String userMessage = intent.getStringExtra(USER_MESSAGE);
         if (password == null) Log.d("LOG - Intent", " password 为 null");
@@ -110,6 +110,9 @@ public class Activity_Menu extends AppCompatActivity implements Interface_Messag
         if (allPhotoList != null) helper.refreshTable(database, allPhotoList);
     }
 
+
+
+    //喜欢点赞
     @Override
     public void setPhotoLikeState(int position, boolean hasLike) {
         Entity_Photo photo = allPhotoList.get(position);
@@ -122,6 +125,7 @@ public class Activity_Menu extends AppCompatActivity implements Interface_Messag
         }
     }
 
+        //收藏
     @Override
     public void setPhotoCollectState(int position, boolean hasCollect) {
         Entity_Photo photo = allPhotoList.get(position);
