@@ -38,6 +38,13 @@
         app:civ_border_color="@color/black_transparent_20"
         app:civ_border_width="8dp" />
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/civ_home_avatar"
+        android:layout_alignBottom="@+id/civ_home_avatar"
+        android:src="@drawable/ic_cat_head" />
+
     <TextView
         android:id="@+id/tv_home_username"
         android:layout_width="wrap_content"

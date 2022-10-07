@@ -16,7 +16,7 @@ import com.example.photoshare.R;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Adapter_PhotoSlide extends RecyclerView.Adapter<Adapter_PhotoSlide.ViewPagerViewHolder> {
+public class Adapter_PhotoSlide extends RecyclerView.Adapter<Adapter_PhotoSlide.holder> {
 
     private final ArrayList<File> photoList;
     private final Context context;
@@ -31,8 +31,8 @@ public class Adapter_PhotoSlide extends RecyclerView.Adapter<Adapter_PhotoSlide.
      */
     @NonNull
     @Override
-    public ViewPagerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewPagerViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_photo_share_upload_slide, parent, false));
+    public holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_photo_share_upload_slide, parent, false));
     }
 
     /**
@@ -40,7 +40,7 @@ public class Adapter_PhotoSlide extends RecyclerView.Adapter<Adapter_PhotoSlide.
      */
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onBindViewHolder(@NonNull ViewPagerViewHolder viewHolder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull holder viewHolder, @SuppressLint("RecyclerView") int position) {
         Glide.with(context).load(photoList.get(position)).into(viewHolder.ivPhoto);
     }
 
@@ -55,9 +55,9 @@ public class Adapter_PhotoSlide extends RecyclerView.Adapter<Adapter_PhotoSlide.
     /**
      * 绑定布局以及属性
      */
-    static class ViewPagerViewHolder extends RecyclerView.ViewHolder{
-        ImageView ivPhoto;
-        public ViewPagerViewHolder(@NonNull View itemView) {
+    static class holder extends RecyclerView.ViewHolder{
+        private final ImageView ivPhoto;
+        public holder(@NonNull View itemView) {
             super(itemView);
             ivPhoto = itemView.findViewById(R.id.iv_photo_share_upload_photo);
         }

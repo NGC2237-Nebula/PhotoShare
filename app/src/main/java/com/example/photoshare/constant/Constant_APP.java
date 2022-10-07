@@ -38,6 +38,9 @@ public final class Constant_APP {
      */
     public static String APP_SECRET = "25054a88208f79a564c16b801dff2932eda37";
 
+    public static String Y_APP_ID = "28f6422b72374dc193ce88d5c9ed3d03";
+    public static String Y_APP_SECRET = "98975c86b769ef3884396a3c2aa6e3d402b47";
+
     /**
      * 天行API appKey
      */

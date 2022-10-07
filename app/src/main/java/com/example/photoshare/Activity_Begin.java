@@ -100,9 +100,9 @@ public class Activity_Begin extends AppCompatActivity {
      * 网络请求 响应操作
      */
     private final Handler mHandler = new Handler(Looper.getMainLooper()) {
-        public void handleMessage(Message msg) {
-            if (msg.arg1 == 1) jumpToMenu();
-            else if (msg.arg1 == 2) jumpToLogin();
+        public void handleMessage(Message message) {
+            if (message.arg1 == 1) jumpToMenu();
+            else if (message.arg1 == 2) jumpToLogin();
         }
     };
     /**

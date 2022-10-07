@@ -18,20 +18,6 @@ public class Customize_Toast {
         this.root = root;
     }
 
-    public void makeImgToast(Context context, int imgId, int time) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.toast_img, root.findViewById(R.id.rl_toast_img));
-
-        ImageView imageView = view.findViewById(R.id.iv_toast_img);
-        imageView.setImageResource(imgId);
-
-        Toast toast = new Toast(context);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.setDuration(time);
-        toast.setView(view);
-        toast.show();
-    }
-
     public void makeTextToast(Context context, String text, int time) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.toast_text, root.findViewById(R.id.rl_toast_text));

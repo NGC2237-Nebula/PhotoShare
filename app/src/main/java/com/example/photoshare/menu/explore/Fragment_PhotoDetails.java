@@ -1,5 +1,7 @@
 package com.example.photoshare.menu.explore;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -135,6 +137,8 @@ public class Fragment_PhotoDetails extends Fragment {
     private ImageView ivLike;
     private ImageView ivCollect;
     private ImageView ivComment;
+    private ImageView ivAnimatorLike;
+    private ImageView ivAnimatorCollect;
 
     private RelativeLayout rlContent;
 
@@ -292,7 +296,7 @@ public class Fragment_PhotoDetails extends Fragment {
             isRequestLike = false;
             if (msg.what == HANDLER_PHOTO_LIKE) {
                 if (msg.arg1 == 1) {
-                    toast.makeImgToast(context, R.drawable.ic_baseline_like_red, Toast.LENGTH_SHORT);
+                    setCardiacAnimator(ivAnimatorLike);
                     ivLike.setImageResource(R.drawable.ic_baseline_like_white);
                     hasLike = true;
                     interface_messageSend.setPhotoLikeState(photoPosition, true);
@@ -441,7 +445,7 @@ public class Fragment_PhotoDetails extends Fragment {
             isRequestCollect = false;
             if (msg.what == HANDLER_PHOTO_COLLECT) {
                 if (msg.arg1 == 1) {
-                    toast.makeImgToast(context, R.drawable.ic_baseline_collect_yellow, Toast.LENGTH_SHORT);
+                    setCardiacAnimator(ivAnimatorCollect);
                     ivCollect.setImageResource(R.drawable.ic_baseline_collect_white);
                     hasCollect = true;
                     interface_messageSend.setPhotoCollectState(photoPosition, true);
@@ -683,6 +687,20 @@ public class Fragment_PhotoDetails extends Fragment {
         return end - start;
     }
 
+    /**
+     * 设置 心动 效果，用于点赞、收藏时的动画
+     * @param view 视图
+     */
+    private void setCardiacAnimator(View view){
+        ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(view,"scaleX",1f,1.1f,1f);
+        ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(view,"scaleY",1f,1.1f,1f);
+        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(view,"alpha",0f,0.8f,1f,1f,1f,0.8f,0f);
+
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.play(scaleXAnimator).with(scaleYAnimator).with(alphaAnimator);
+        animSet.setDuration(1400);
+        animSet.start();
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     private void setData() {
@@ -746,6 +764,12 @@ public class Fragment_PhotoDetails extends Fragment {
 
         tvId = root.findViewById(R.id.tv_photo_details_id);
         tvCode = root.findViewById(R.id.tv_photo_details_imageCode);
+
+        ivAnimatorLike = root.findViewById(R.id.iv_photo_details_animator_like);
+        ivAnimatorLike.setAlpha(0f);
+
+        ivAnimatorCollect = root.findViewById(R.id.iv_photo_details_animator_collect);
+        ivAnimatorCollect.setAlpha(0f);
 
         BottomNavigationView nav = requireActivity().findViewById(R.id.nav_view);
         nav.setVisibility(View.VISIBLE);

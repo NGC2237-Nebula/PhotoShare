@@ -16,7 +16,7 @@ import com.example.photoshare.interfaces.Interface_ClickViewSend;
 
 import java.util.ArrayList;
 
-public class Adapter_PhotoGrid extends RecyclerView.Adapter<Adapter_PhotoGrid.photoViewHolder> {
+public class Adapter_PhotoGrid extends RecyclerView.Adapter<Adapter_PhotoGrid.holder> {
 
     private final Context context;
     private final int photoLength;
@@ -36,13 +36,13 @@ public class Adapter_PhotoGrid extends RecyclerView.Adapter<Adapter_PhotoGrid.ph
 
     @NonNull
     @Override
-    public Adapter_PhotoGrid.photoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = View.inflate(context, R.layout.item_photo_share_upload_list, null);
-        return new Adapter_PhotoGrid.photoViewHolder(view);
+        return new holder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Adapter_PhotoGrid.photoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull holder holder, int position) {
         Uri photo = uriList.get(position);
         Glide.with(context).load(photo).into(holder.ivPhoto);
     }
@@ -52,10 +52,10 @@ public class Adapter_PhotoGrid extends RecyclerView.Adapter<Adapter_PhotoGrid.ph
         return uriList.size();
     }
 
-    class photoViewHolder extends RecyclerView.ViewHolder {
+    class holder extends RecyclerView.ViewHolder {
         private final ImageView ivPhoto;
 
-        public photoViewHolder(@NonNull View itemView) {
+        public holder(@NonNull View itemView) {
             super(itemView);
             ivPhoto = itemView.findViewById(R.id.iv_photo_share_upload_list_image);
 

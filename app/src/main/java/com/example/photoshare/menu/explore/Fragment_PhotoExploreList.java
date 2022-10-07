@@ -1,5 +1,7 @@
 package com.example.photoshare.menu.explore;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -152,7 +154,7 @@ public class Fragment_PhotoExploreList extends Fragment {
     private void networkRequest() {
         Log.d("LOG", "======== 网络请求 ========");
         new Thread(() -> {
-            String urlParam = "?" + "userId=" + userId;
+            String urlParam = "?" + "size=80" + "&" + "userId=" + userId;
             Request request = new Request.Builder().url(Constant_APP.SHARE_GET_URL + urlParam).get().build();
             OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Request_Interceptor()).build();
             client.newCall(request).enqueue(photoShowCallback);
@@ -353,16 +355,37 @@ public class Fragment_PhotoExploreList extends Fragment {
      * @param state 搜索框 状态
      */
     private void setQuireBarState(int state) {
+        setViewAnimator(rlQuireMask, state);
+        setViewAnimator(cvQuireBar, state);
+    }
+
+    /**
+     * 设置 控件 展示以及隐藏时的动画控制逻辑
+     *
+     * @param view  控件
+     * @param state 控件状态
+     */
+    private void setViewAnimator(View view, int state) {
         if (state == SHOW_QUIRE_BAR) {
-            rlQuireMask.setVisibility(View.VISIBLE);
-            cvQuireBar.setVisibility(View.VISIBLE);
-            ObjectAnimator.ofFloat(rlQuireMask, "alpha", 0f, 1f).setDuration(300).start();
-            ObjectAnimator.ofFloat(cvQuireBar, "alpha", 0f, 1f).setDuration(300).start();
+            ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f).setDuration(300);
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                    view.setVisibility(View.VISIBLE);
+                }
+            });
+            animator.start();
         } else if (state == HIDE_QUIRE_BAR) {
-            ObjectAnimator.ofFloat(rlQuireMask, "alpha", 1f, 0f).setDuration(300).start();
-            ObjectAnimator.ofFloat(cvQuireBar, "alpha", 1f, 0f).setDuration(300).start();
-            rlQuireMask.setVisibility(View.INVISIBLE);
-            cvQuireBar.setVisibility(View.INVISIBLE);
+            ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f).setDuration(300);
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    view.setVisibility(View.INVISIBLE);
+                }
+            });
+            animator.start();
         }
     }
 
@@ -379,7 +402,6 @@ public class Fragment_PhotoExploreList extends Fragment {
             if (state == HIDE_KEYBOARD) {
                 imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
             } else if (state == SHOW_KEYBOARD) {
-                editText.requestFocus();
                 imm.showSoftInput(editText, 0);
             }
         }

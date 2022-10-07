@@ -206,6 +206,7 @@
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.154" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable-v24/round_edit_text.xml" value="0.2235" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable-v24/round_image.xml" value="0.2175" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/defined_bottom_nav_color.xml" value="0.121" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_add.xml" value="0.2195" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_collect.xml" value="0.154" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_collect_border_white.xml" value="0.2215" />
@@ -220,6 +221,7 @@
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_information_white.xml" value="0.196" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_like.xml" value="0.154" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_like_border_white.xml" value="0.229" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_like_red.xml" value="0.1975" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_like_white.xml" value="0.2165" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_modification.xml" value="0.154" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_modification_white.xml" value="0.2535" />
@@ -235,6 +237,7 @@
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_transit_enterexit.xml" value="0.2355" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_updata_gray.xml" value="0.2815" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_updata_white.xml" value="0.2815" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_baseline_zoom_out_white.xml" value="0.1895" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.154" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.154" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/drawable/ic_launcher_background.xml" value="0.154" />
@@ -275,6 +278,7 @@
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_photo_share_details.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/item_photo_collect.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/item_photo_collect_list.xml" value="0.264" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/item_photo_details_slide.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/item_photo_like_list.xml" value="0.264" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/item_photo_list.xml" value="0.4" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/spinner_dropdown.xml" value="0.27708333333333335" />

@@ -175,7 +175,7 @@ public class Fragment_CommentFirst extends Fragment {
 
                 if (commentList.size() != 0) {
                     for (Entity_Comment comment : commentList) {
-                        comment.setIsHost(comment.getUsername().equals(username));
+                        comment.setIsHost(photo.getUsername().equals(username));
                         Message addCommentMessage = new Message();
                         addCommentMessage.obj = comment;
                         addCommentHandler.sendMessage(addCommentMessage);

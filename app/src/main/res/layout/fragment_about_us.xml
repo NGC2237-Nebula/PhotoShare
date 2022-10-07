@@ -81,7 +81,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/iv_about_us_call"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="140dp"
@@ -91,10 +91,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:id="@+id/iv_about_us_github"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginTop="550dp"
-        android:src="@drawable/ic_baseline_photo_share_white"
+        android:src="@drawable/ic_github"
         android:layout_centerVertical="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
