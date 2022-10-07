@@ -58,7 +58,7 @@ public class Activity_Begin extends AppCompatActivity {
      */
     private void jumpToLogin() {
         Intent intent = new Intent(Activity_Begin.this, Activity_Login.class);
-        startActivity(intent);
+        startActivity(intent);//启动Activity_Login组件
     }
 
     /**
@@ -68,18 +68,18 @@ public class Activity_Begin extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setClass(Activity_Begin.this, Activity_Menu.class);
-        intent.putExtra(USER_ID, user.getId());
+        intent.putExtra(USER_ID, user.getId());//重载 数据暂存 (key,value)
         intent.putExtra(USER_MESSAGE, userMessage);
         intent.putExtra(USER_USERNAME, username);
         intent.putExtra(USER_PASSWORD, password);
-        startActivity(intent);
+        startActivity(intent);//跳转
     }
 
 
     /* 网络请求 */
     /**
-     * 网络请求 响应操作
-     */
+     * 网络请求 响应操作                      //传递消息Message 子线程通知主线程更新ui
+     */                                    //放到主线程中去处理?
     private final Handler mHandler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
             if (msg.arg1 == 1) jumpToMenu();

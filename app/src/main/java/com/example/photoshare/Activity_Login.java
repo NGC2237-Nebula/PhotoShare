@@ -108,11 +108,11 @@ public class Activity_Login extends AppCompatActivity {
     private final View.OnClickListener ivPasswordKeyListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            bPwdSwitch = !bPwdSwitch;
+            bPwdSwitch = !bPwdSwitch;//密码可见
             if (bPwdSwitch) {
                 ivPwdSwitch.setImageResource(R.drawable.ic_baseline_visibility_white);
                 etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            } else {
+            } else {//密码不可见
                 ivPwdSwitch.setImageResource(R.drawable.ic_baseline_visibility_off_white);
                 etPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
                 etPassword.setTypeface(Typeface.DEFAULT);

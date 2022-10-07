@@ -7,6 +7,17 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+
+    <!--是否允许备份系统和用户数据-->
+    <!--安全连接自定义证书-->
+    <!--打开手机摄像头拍照-->
+    <!---->
+    <!--将应用图标指定为mipmap目录下的ic_launcher文件-->
+    <!--指定app显示在home主页面上的名称-->
+    <!--不用管-->
+    <!--使用android时禁止自动更改布局方向-->
+    <!--引用主题样式-->
+    <!--指定api级别-->
     <application
         android:allowBackup="false"
         android:networkSecurityConfig="@xml/network_security_config"
@@ -19,6 +30,11 @@
         android:theme="@style/Theme.PhotoShare"
         tools:targetApi="31">
 
+
+
+
+        <!--2.弹出软键盘不希望遮挡-->
+        <!--3.是否支持其他应用调用-->
         <activity
             android:name=".Activity_Menu"
             android:windowSoftInputMode="adjustPan"
@@ -33,6 +49,9 @@
         <activity
             android:name=".Activity_Begin"
             android:exported="true">
+
+            <!--1.决定应用的入口Activity,启动应用时首先显示的Activity-->
+            <!--2.表示activity应该被列入系统的启动器(launcher)(允许用户启动它)-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

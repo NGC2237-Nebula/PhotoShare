@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Entity_Comment {
-    @SerializedName("id")
+    @SerializedName("id")//属性重命名
     private String mId;
     public String getId() {
         return mId;
