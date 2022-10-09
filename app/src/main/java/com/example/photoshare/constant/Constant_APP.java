@@ -30,21 +30,34 @@ public final class Constant_APP {
 
     /* Id */
     /**
-     * appId
+     * PhotoShare
      */
-    public static String APP_ID = "f96bf489a7fa4ee991cd7d0ef1e069ed";
-    /**
-     * appSecret
-     */
-    public static String APP_SECRET = "25054a88208f79a564c16b801dff2932eda37";
+    public static String APP_ID_KEEP = "28f6422b72374dc193ce88d5c9ed3d03";
+    public static String APP_SECRET_KEEP = "98975c86b769ef3884396a3c2aa6e3d402b47";
 
-    public static String Y_APP_ID = "28f6422b72374dc193ce88d5c9ed3d03";
-    public static String Y_APP_SECRET = "98975c86b769ef3884396a3c2aa6e3d402b47";
+    /**
+     * 测试
+     */
+    public static String APP_ID_TEST = "f96bf489a7fa4ee991cd7d0ef1e069ed";
+    public static String APP_SECRET_TEST = "25054a88208f79a564c16b801dff2932eda37";
+
+    /**
+     * 备用
+     */
+    public static String APP_ID_STANDBY = "8e9a031b01df43b2a6a5d9947adef893";
+    public static String APP_SECRET_STANDBY = "89688e526f145d67b41ac8e567152f9e5f668";
+
+    /**
+     * 当前
+     */
+    public static String APP_ID = APP_ID_STANDBY;
+    public static String APP_SECRET = APP_SECRET_STANDBY;
 
     /**
      * 天行API appKey
      */
     public static String TIAN_APP_KET = "47add00148ffb647d94adb74e758fe28";
+
 
     /* 网址 */
     /**

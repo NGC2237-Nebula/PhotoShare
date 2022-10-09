@@ -11,12 +11,21 @@
         android:id="@+id/tv_toast_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="5dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         android:gravity="center"
         android:padding="5dp"
-        android:layout_centerHorizontal="true"
         android:textColor="@color/white_transparent_90"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/iv_toast_img"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="5dp"
+        android:layout_toEndOf="@+id/tv_toast_text"
+        android:src="@drawable/ic_baseline_like_red" />
+
 
 </RelativeLayout>
