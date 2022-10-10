@@ -259,7 +259,7 @@
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment__photo_share_details.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_about_us.xml" value="0.264" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_dashboard.xml" value="0.27708333333333335" />
-        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_home.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_home_temp.xml" value="0.2760416666666667" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_notifications.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/fragment_person_avatar_check.xml" value="0.27708333333333335" />
@@ -284,6 +284,8 @@
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/item_photo_list.xml" value="0.4" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/spinner_dropdown.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/spinner_head.xml" value="0.27708333333333335" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/toast_eye.xml" value="0.6" />
+        <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/toast_img.xml" value="0.27708333333333335" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/layout/toast_text.xml" value="0.8800000000000001" />
         <entry key="..\:/myAPP/PhotoShare/app/src/main/res/menu/bottom_nav_menu.xml" value="0.27708333333333335" />
       </map>

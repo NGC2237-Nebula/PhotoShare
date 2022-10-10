@@ -16,9 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,8 +27,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.photoshare.interfaces.Interface_MessageSend;
 import com.example.photoshare.R;
+import com.example.photoshare.customize.Customize_Toast;
+import com.example.photoshare.interfaces.Interface_MessageSend;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -38,6 +39,7 @@ public class Fragment_Share extends Fragment {
 
     /* 数据 */
     private Uri cameraPhotoUri = null;
+    private Customize_Toast toast;
 
     /* 控件 */
     private Dialog dialog;
@@ -70,10 +72,19 @@ public class Fragment_Share extends Fragment {
 
     /* 监听器 */
     /**
-     * 提示
+     * 提示 图片上传大小
      */
-    private final View.OnClickListener ivHintListener = v ->
-            Toast.makeText(context, "请上传小于 5MB 的图片", Toast.LENGTH_SHORT).show();
+    private final View.OnClickListener rlHintListener = v ->
+            toast.makeEyeToast(context, "请上传小于 5MB 的图片");
+    /**
+     * 提示 鸿蒙系统无法上传图片
+     */
+    private final View.OnClickListener ivHintListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            toast.makeEyeToast(context, "鸿蒙系统因权限问题暂时无法使用上传功能");
+        }
+    };
     /**
      * 打开底部弹窗
      */
@@ -150,12 +161,17 @@ public class Fragment_Share extends Fragment {
         BottomNavigationView nav = requireActivity().findViewById(R.id.nav_view);
         nav.setVisibility(View.VISIBLE);
 
+        toast = new Customize_Toast(root);
+
         // 初始化布局控件
+        ImageView ivHint = root.findViewById(R.id.iv_photo_share_hint);
+        ivHint.setOnClickListener(ivHintListener);
+
         ImageButton btUpload = root.findViewById(R.id.bt_photo_share_updata);
         btUpload.setOnClickListener(btUpdataListener);
 
         RelativeLayout rlHint = root.findViewById(R.id.rl_photo_share_text);
-        rlHint.setOnClickListener(ivHintListener);
+        rlHint.setOnClickListener(rlHintListener);
 
         // 初始化对话框
         dialog = new Dialog(requireContext(), R.style.BottomDialog);

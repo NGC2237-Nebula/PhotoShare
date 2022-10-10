@@ -301,12 +301,12 @@ public class Fragment_PhotoDetails extends Fragment {
                     interface_messageSend.setPhotoLikeState(photoPosition, true);
                 }
                 if (msg.arg1 == 2) {
-                    toast.makeShortToast(context, "该图已经点赞",R.drawable.ic_baseline_like_red);
+                    toast.makeImgToast(context, "该图已经点赞",R.drawable.ic_baseline_like_red);
                     ivLike.setImageResource(R.drawable.ic_baseline_like_white);
                     hasLike = true;
                 }
                 if (msg.arg1 == -1) {
-                    toast.makeShortToast(context, "点赞失败",R.drawable.ic_baseline_error_white);
+                    toast.makeImgToast(context, "点赞失败",R.drawable.ic_baseline_error_white);
                     hasLike = false;
                 }
             }
@@ -352,9 +352,9 @@ public class Fragment_PhotoDetails extends Fragment {
             isRequestCancelLike = false;
             if (msg.what == HANDLER_PHOTO_LIKE_CANCEL) {
                 if (msg.arg1 == 1)
-                    toast.makeShortToast(context, "取消成功",R.drawable.ic_baseline_like_border_white);
+                    toast.makeImgToast(context, "取消成功",R.drawable.ic_baseline_like_white);
                 else if (msg.arg1 == -1)
-                    toast.makeShortToast(context, "网络错误",R.drawable.ic_baseline_error_white);
+                    toast.makeImgToast(context, "网络错误",R.drawable.ic_baseline_error_white);
                 ivLike.setImageResource(R.drawable.ic_baseline_like_border_white);
                 hasLike = false;
                 interface_messageSend.setPhotoLikeState(photoPosition, false);
@@ -449,13 +449,13 @@ public class Fragment_PhotoDetails extends Fragment {
                     interface_messageSend.setPhotoCollectState(photoPosition, true);
                 }
                 if (msg.arg1 == 2) {
-                    toast.makeShortToast(context, "该图已经收藏", R.drawable.ic_baseline_collect_yellow);
+                    toast.makeImgToast(context, "该图已经收藏", R.drawable.ic_baseline_collect_yellow);
                     ivCollect.setImageResource(R.drawable.ic_baseline_collect_white);
                     hasCollect = true;
                     interface_messageSend.setPhotoCollectState(photoPosition, true);
                 }
                 if (msg.arg1 == -1) {
-                    toast.makeShortToast(context, "收藏失败", R.drawable.ic_baseline_error_white);
+                    toast.makeImgToast(context, "收藏失败", R.drawable.ic_baseline_error_white);
                     hasCollect = false;
                 }
             }
@@ -499,9 +499,9 @@ public class Fragment_PhotoDetails extends Fragment {
             isRequestCancelCollect = false;
             if (msg.what == HANDLER_PHOTO_COLLECT_CANCEL) {
                 if (msg.arg1 == 1)
-                    toast.makeShortToast(context, "取消成功", R.drawable.ic_baseline_collect_border_white);
+                    toast.makeImgToast(context, "取消成功", R.drawable.ic_baseline_collect_white);
                 else if (msg.arg1 == -1)
-                    toast.makeShortToast(context, "网络错误", R.drawable.ic_baseline_error_white);
+                    toast.makeImgToast(context, "网络错误", R.drawable.ic_baseline_error_white);
                 ivCollect.setImageResource(R.drawable.ic_baseline_collect_border_white);
                 hasCollect = false;
                 interface_messageSend.setPhotoCollectState(photoPosition, false);
@@ -556,10 +556,10 @@ public class Fragment_PhotoDetails extends Fragment {
     private final Handler hintHandler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
             if (msg.what == HANDLER_ALREADY_CANCEL_LIKE) {
-                toast.makeShortToast(context, "已取消点赞", R.drawable.ic_baseline_like_border_white);
+                toast.makeImgToast(context, "已取消点赞", R.drawable.ic_baseline_like_border_white);
                 ivLike.setImageResource(R.drawable.ic_baseline_like_border_white);
             } else if (msg.what == HANDLER_ALREADY_CANCEL_COLLECT) {
-                toast.makeShortToast(context, "已取消收藏", R.drawable.ic_baseline_collect_border_white);
+                toast.makeImgToast(context, "已取消收藏", R.drawable.ic_baseline_collect_border_white);
                 ivCollect.setImageResource(R.drawable.ic_baseline_collect_border_white);
             }
         }
@@ -574,10 +574,10 @@ public class Fragment_PhotoDetails extends Fragment {
     private final View.OnClickListener ivLikeListener = v -> {
         if (hasLike) {
             if (!isRequestLike) networkRequest(NET_GET_PHOTO_LIKE_ID); // 取消点赞
-            else toast.makeShortToast(context, "请不要频繁点击哦",R.drawable.ic_error_2);
+            else toast.makeImgToast(context, "请不要频繁点击哦",R.drawable.ic_error_2);
         } else {
             if (!isRequestCancelLike) networkRequest(NET_PHOTO_LIKE); // 点赞
-            else toast.makeShortToast(context, "请不要频繁点击哦", R.drawable.ic_error_2);
+            else toast.makeImgToast(context, "请不要频繁点击哦", R.drawable.ic_error_2);
         }
     };
     /**
@@ -586,10 +586,10 @@ public class Fragment_PhotoDetails extends Fragment {
     private final View.OnClickListener ivCollectListener = v -> {
         if (hasCollect) {
             if (!isRequestCollect) networkRequest(NET_GET_PHOTO_COLLECT_ID); // 取消收藏
-            else toast.makeShortToast(context, "请不要频繁点击哦", R.drawable.ic_error_2);
+            else toast.makeImgToast(context, "请不要频繁点击哦", R.drawable.ic_error_2);
         } else {
             if (!isRequestCancelCollect) networkRequest(NET_PHOTO_COLLECT); // 收藏
-            else toast.makeShortToast(context, "请不要频繁点击哦", R.drawable.ic_error_2);
+            else toast.makeImgToast(context, "请不要频繁点击哦", R.drawable.ic_error_2);
         }
     };
     /**
@@ -654,7 +654,7 @@ public class Fragment_PhotoDetails extends Fragment {
                             if (range <= 8 * 100) {
                                 networkRequest(NET_PHOTO_LIKE);
                             }
-                        } else toast.makeShortToast(context, "请不要频繁点击哦", R.drawable.ic_error_2);
+                        } else toast.makeImgToast(context, "请不要频繁点击哦", R.drawable.ic_error_2);
                         startTime = null;
                         endTime = null;
                         MODE = NONE;

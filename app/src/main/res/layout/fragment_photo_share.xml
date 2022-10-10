@@ -7,6 +7,16 @@
     android:background="@mipmap/ic_background_light"
     tools:context=".menu.share.Fragment_Share">
 
+    <ImageView
+        android:id="@+id/iv_photo_share_hint"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:src="@drawable/ic_baseline_hint_white"/>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_photo_share_updata"
         android:layout_width="wrap_content"
@@ -42,22 +52,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/photo_share_fragment_add_photo"
             android:textColor="@color/white_transparent_80"
             android:textSize="25sp" />
-
-        <ImageView
-            android:id="@+id/iv_photo_share_hint"
-            android:layout_width="23dp"
-            android:layout_height="23dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="10dp"
-            android:layout_toEndOf="@+id/tv_photo_share_text"
-            android:src="@drawable/ic_baseline_hint_white" />
 
     </RelativeLayout>
 
