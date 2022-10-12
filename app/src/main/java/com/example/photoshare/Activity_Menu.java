@@ -15,13 +15,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.photoshare.databinding.ActivityMenuBinding;
 import com.example.photoshare.entity.Entity_Comment;
 import com.example.photoshare.entity.Entity_Photo;
 import com.example.photoshare.entity.Entity_User;
 import com.example.photoshare.interfaces.Interface_MessageSend;
 import com.example.photoshare.parse.Response_UserGeneral;
 import com.example.photoshare.tool.Tool_SQLiteOpenHelper;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -270,23 +270,27 @@ public class Activity_Menu extends AppCompatActivity implements Interface_Messag
     }
 
 
-    private ActivityMenuBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        parseUserMessage();
 
+        parseUserMessage();
         helper = new Tool_SQLiteOpenHelper(Activity_Menu.this);
         database = helper.getWritableDatabase();
         allPhotoList = helper.getDataFromTable(database);
 
-        binding = ActivityMenuBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_home, R.id.navigation_photo_explore, R.id.navigation_photo_share).build();
+        setContentView(R.layout.activity_menu);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // 构建AppBarConfiguration，传入一组顶级目的地 ID 传递给构造函数
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration
+                .Builder(R.id.navigation_home, R.id.navigation_photo_explore, R.id.navigation_photo_share).build();
+        // navController 用于管理页面的导航和切换
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+        // AppBarConfiguration 用于App bar的配置，NavController用于页面的导航和切换，将 App bar 和 NavController 绑定起来
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        // BottomNavigationView 为底部导航栏控件，NavController用于页面的导航和切换，将 BottomNavigationView 和 NavController 绑定起来
+        NavigationUI.setupWithNavController(navView, navController);
+
         getSupportActionBar().hide();
     }
 

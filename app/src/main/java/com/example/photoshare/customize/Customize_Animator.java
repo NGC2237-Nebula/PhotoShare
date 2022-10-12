@@ -52,15 +52,14 @@ public class Customize_Animator {
      *
      * @param view 视图
      */
-    public void setCardiacAnimator(View view){
-        ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(view,"scaleX",1f,1.1f,1f);
-        ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(view,"scaleY",1f,1.1f,1f);
-        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(view,"alpha",0f,0.8f,1f,1f,1f,0.8f,0f);
+    public void setCardiacAnimator(View view) {
+        ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(view, "scaleX", 1f, 1.1f, 1f);
+        ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(view, "scaleY", 1f, 1.1f, 1f);
+        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(view, "alpha", 0f, 0.8f, 1f, 1f, 1f, 0.8f, 0f);
 
         AnimatorSet animSet = new AnimatorSet();
         animSet.play(scaleXAnimator).with(scaleYAnimator).with(alphaAnimator);
         animSet.setDuration(1400);
         animSet.start();
     }
-
 }

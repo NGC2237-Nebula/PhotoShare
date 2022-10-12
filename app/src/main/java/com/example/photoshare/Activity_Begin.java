@@ -126,6 +126,7 @@ public class Activity_Begin extends AppCompatActivity {
             RequestBody requestBody = new FormBody.Builder().build();
             Request request = new Request.Builder().url(USER_LOGIN_POST_URL + urlParam).post(requestBody).build();
 
+            // 在拦截器中添加 appId、appSecret
             OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Request_Interceptor()).build();
             client.newCall(request).enqueue(loginCallback);
         }).start();

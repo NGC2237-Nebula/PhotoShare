@@ -175,13 +175,14 @@
         android:id="@+id/rl_photo_explore_list_scroll_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:fabSize="mini"
         android:layout_alignBottom="@+id/sw_photo_explore_list_swipe"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/black_e_transparent_60"
+        android:backgroundTint="@color/black_e_transparent_80"
         android:src="@drawable/ic_baseline_top_white"
         app:borderWidth="0dp"
-        app:rippleColor="@color/black_e_transparent_80" />
+        app:rippleColor="@color/black_e_transparent_90" />
 
 </RelativeLayout>
