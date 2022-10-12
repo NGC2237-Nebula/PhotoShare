@@ -1,8 +1,9 @@
 package com.example.photoshare.menu.explore;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
+import static android.widget.AbsListView.OnScrollListener.SCROLL_STATE_IDLE;
+import static com.example.photoshare.customize.Customize_Animator.HIDE_VIEW;
+import static com.example.photoshare.customize.Customize_Animator.SHOW_VIEW;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -36,14 +37,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.photoshare.Activity_Menu;
-import com.example.photoshare.constant.Constant_APP;
-import com.example.photoshare.entity.Entity_Photo;
-import com.example.photoshare.interfaces.Interface_MessageSend;
-import com.example.photoshare.interfaces.Interface_ClickViewSend;
 import com.example.photoshare.R;
+import com.example.photoshare.constant.Constant_APP;
+import com.example.photoshare.customize.Customize_Animator;
+import com.example.photoshare.entity.Entity_Photo;
+import com.example.photoshare.interfaces.Interface_ClickViewSend;
+import com.example.photoshare.interfaces.Interface_MessageSend;
 import com.example.photoshare.parse.Request_Interceptor;
 import com.example.photoshare.parse.Response_PhotoList;
 import com.example.photoshare.tool.Tool_SQLiteOpenHelper;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -59,6 +62,10 @@ import okhttp3.Response;
 public class Fragment_PhotoExploreBig extends Fragment {
 
     /* 控件 */
+    /**
+     * 动画
+     */
+    private Customize_Animator customizeAnimator;
     /**
      * 刷新布局
      */
@@ -83,6 +90,10 @@ public class Fragment_PhotoExploreBig extends Fragment {
      * 下拉选择框
      */
     private Spinner spQuire;
+    /**
+     * 上划顶部按钮
+     */
+    private FloatingActionButton fabScrollTop;
 
 
     /* 数据 */
@@ -133,14 +144,6 @@ public class Fragment_PhotoExploreBig extends Fragment {
 
 
     /* 标识符 */
-    /**
-     * 隐藏搜索框
-     */
-    private final int HIDE_QUIRE_BAR = 1;
-    /**
-     * 展示搜索框
-     */
-    private final int SHOW_QUIRE_BAR = 2;
     /**
      * 隐藏软键盘
      */
@@ -273,6 +276,37 @@ public class Fragment_PhotoExploreBig extends Fragment {
         }
     };
     /**
+     * 列表监听是否显示 滑动到顶部按钮
+     */
+    private final RecyclerView.OnScrollListener rvPhotoListScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+            if (newState == SCROLL_STATE_IDLE) {
+                // 判断第一条item是否可见，如果不可见则显示回顶部按钮
+                if (recyclerView.getLayoutManager().findViewByPosition(0) != null) {
+                    if (fabScrollTop.getVisibility() == View.VISIBLE) {
+                        // 设置滑动顶部按钮不可见
+                        customizeAnimator.setFadeAnimator(fabScrollTop, HIDE_VIEW);
+                    }
+                } else {
+                    if (fabScrollTop.getVisibility() == View.INVISIBLE) {
+                        // 设置滑动顶部按钮可见
+                        customizeAnimator.setFadeAnimator(fabScrollTop, SHOW_VIEW);
+                    }
+                }
+            }
+        }
+    };
+    /**
+     * 滑动到顶部
+     */
+    private final View.OnClickListener fabScrollTopListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            rvPhotoList.smoothScrollToPosition(0);
+        }
+    };
+    /**
      * 滑动刷新布局
      */
     private final SwipeRefreshLayout.OnRefreshListener swipeListener = new SwipeRefreshLayout.OnRefreshListener() {
@@ -293,12 +327,19 @@ public class Fragment_PhotoExploreBig extends Fragment {
      */
     private final View.OnClickListener rlShowQuireListener = v -> {
         if (rlQuireMask.getAlpha() == 0f || cvQuireBar.getAlpha() == 0f) {
-            setKeyboardState(SHOW_KEYBOARD, etQuire);
-            setQuireBarState(SHOW_QUIRE_BAR);
+            setKeyboardState(etQuire, SHOW_KEYBOARD);
+            setQuireBarState(SHOW_VIEW);
         } else {
-            setKeyboardState(HIDE_KEYBOARD, etQuire);
-            setQuireBarState(HIDE_QUIRE_BAR);
+            setKeyboardState(etQuire, HIDE_KEYBOARD);
+            setQuireBarState(HIDE_VIEW);
         }
+    };
+    /**
+     * 点击 暗色衬托背景 后取消搜索框
+     */
+    private final View.OnClickListener rlQuireMaskListener = v -> {
+        setKeyboardState(etQuire, HIDE_KEYBOARD);
+        setQuireBarState(HIDE_VIEW);
     };
     /**
      * 搜索框 按回车搜索
@@ -311,13 +352,6 @@ public class Fragment_PhotoExploreBig extends Fragment {
                 searchQuireContent(quireContent);
         }
         return false;
-    };
-    /**
-     * 点击 暗色衬托背景 后取消搜索框
-     */
-    private final View.OnClickListener rlQuireMaskListener = v -> {
-        setKeyboardState(HIDE_KEYBOARD, etQuire);
-        setQuireBarState(HIDE_QUIRE_BAR);
     };
     /**
      * 选择搜索类型
@@ -348,7 +382,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
 
             if (list != null) {
                 interface_messageSend.sendQuireContent(list);
-                setKeyboardState(HIDE_KEYBOARD, etQuire);
+                setKeyboardState(etQuire, HIDE_KEYBOARD);
                 Navigation.findNavController(requireView()).navigate(R.id.action_fragment_PhotoExploreBig_to_fragment_PhotoQuire);
             } else {
                 Toast.makeText(requireContext(), "没有找到相关内容,换个关键词试试", Toast.LENGTH_SHORT).show();
@@ -366,39 +400,9 @@ public class Fragment_PhotoExploreBig extends Fragment {
      * @param state 搜索框 状态
      */
     private void setQuireBarState(int state) {
-        setViewAnimator(rlQuireMask, state);
-        setViewAnimator(cvQuireBar, state);
+        customizeAnimator.setFadeAnimator(rlQuireMask, state);
+        customizeAnimator.setFadeAnimator(cvQuireBar, state);
     }
-
-    /**
-     * 设置 控件 展示以及隐藏时的动画控制逻辑
-     * @param view 控件
-     * @param state 控件状态
-     */
-    private void setViewAnimator(View view, int state) {
-        if (state == SHOW_QUIRE_BAR) {
-            ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f).setDuration(300);
-            animator.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-                    super.onAnimationStart(animation);
-                    view.setVisibility(View.VISIBLE);
-                }
-            });
-            animator.start();
-        } else if (state == HIDE_QUIRE_BAR) {
-            ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f).setDuration(300);
-            animator.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    view.setVisibility(View.INVISIBLE);
-                }
-            });
-            animator.start();
-        }
-    }
-
 
 
     /**
@@ -407,7 +411,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
      * @param state    系统软键盘 状态
      * @param editText 软键盘对应的可编辑文本框
      */
-    private void setKeyboardState(int state, EditText editText) {
+    private void setKeyboardState(EditText editText, int state) {
         InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             if (state == HIDE_KEYBOARD) {
@@ -422,6 +426,11 @@ public class Fragment_PhotoExploreBig extends Fragment {
 
     private void bindView(View root) {
         rvPhotoList = root.findViewById(R.id.rv_photo_explore_big);
+        rvPhotoList.addOnScrollListener(rvPhotoListScrollListener);
+
+        fabScrollTop = root.findViewById(R.id.rl_photo_explore_big_scroll_top);
+        fabScrollTop.setVisibility(View.INVISIBLE);
+        fabScrollTop.setOnClickListener(fabScrollTopListener);
 
         swipe = root.findViewById(R.id.sw_photo_explore_big_swipe);
         swipe.setOnRefreshListener(swipeListener);
@@ -451,6 +460,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
     }
 
     private void setData(Context context) {
+        customizeAnimator = new Customize_Animator();
         // 图文列表
         photoListGet = ((Activity_Menu) context).getAllPhotoList();
         photoAdapter = new Adapter_PhotoExploreBig(requireContext(), photoList);

@@ -61,7 +61,7 @@ public class Adapter_PhotoExploreList extends ArrayAdapter<Entity_Photo> {
         if (photo.getLikeNum() != 0) likeString = "" + photo.getLikeNum();
         if (photo.getCollectNum() != 0) collectString = "" + photo.getCollectNum();
 
-        Glide.with(mContext).load(photoUrl).into(viewHolder.ivImage);
+        Glide.with(mContext).load(photoUrl).placeholder(R.color.black_f).into(viewHolder.ivImage);
         viewHolder.tvTitle.setText(photo.getTitle());
         viewHolder.tvName.setText(nameString);
         viewHolder.tvContent.setText(photo.getContent());

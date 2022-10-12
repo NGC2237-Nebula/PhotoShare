@@ -50,8 +50,8 @@ public final class Constant_APP {
     /**
      * 当前
      */
-    public static String APP_ID = APP_ID_STANDBY;
-    public static String APP_SECRET = APP_SECRET_STANDBY;
+    public static String APP_ID = APP_ID_TEST;
+    public static String APP_SECRET = APP_SECRET_TEST;
 
     /**
      * 天行API appKey

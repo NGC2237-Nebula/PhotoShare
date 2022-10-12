@@ -15,8 +15,8 @@
         android:layout_marginVertical="5dp"
         android:gravity="center"
         android:padding="5dp"
-        android:textColor="@color/white_transparent_90"
-        android:textSize="16sp" />
+        android:textColor="@color/white_transparent_70"
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/iv_toast_eye_eye"

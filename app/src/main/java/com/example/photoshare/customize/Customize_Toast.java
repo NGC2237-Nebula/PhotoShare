@@ -35,6 +35,8 @@ public class Customize_Toast {
     }
 
     public void makeEyeToast(Context context, String text) {
+        Toast toast = new Toast(context);
+
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.toast_eye, root.findViewById(R.id.rl_toast_eye));
 
@@ -42,11 +44,9 @@ public class Customize_Toast {
         textView.setText(text);
 
         ImageView imageView = view.findViewById(R.id.iv_toast_eye_eye);
+        imageView.setScaleY(0f);
+        ObjectAnimator.ofFloat(imageView,"scaleY",0f,1f,0f,1f).setDuration(900).start();
 
-        ObjectAnimator animator = ObjectAnimator.ofFloat(imageView,"scaleY",1f,-0.01f,1f,-0.01f,1f);
-        animator.setDuration(1500).start();
-
-        Toast toast = new Toast(context);
         toast.setView(view);
         toast.show();
     }

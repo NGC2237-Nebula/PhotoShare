@@ -39,7 +39,7 @@ public class Adapter_PhotoExploreBig extends RecyclerView.Adapter<Adapter_PhotoE
     @Override
     public void onBindViewHolder(@NonNull Adapter_PhotoExploreBig.photoViewHolder holder, int position) {
         Entity_Photo photo = photoList.get(position);
-        Glide.with(context).load(photo.getImageUrlList()[0]).into(holder.ivPhoto);
+        Glide.with(context).load(photo.getImageUrlList()[0]).placeholder(R.color.black_c).into(holder.ivPhoto);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.example.photoshare.menu.explore;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -24,16 +22,17 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.photoshare.constant.Constant_APP;
 import com.example.photoshare.Activity_Menu;
+import com.example.photoshare.R;
+import com.example.photoshare.constant.Constant_APP;
+import com.example.photoshare.customize.Customize_Animator;
+import com.example.photoshare.customize.Customize_Toast;
 import com.example.photoshare.entity.Entity_Photo;
 import com.example.photoshare.interfaces.Interface_ClickViewSend;
 import com.example.photoshare.interfaces.Interface_MessageSend;
-import com.example.photoshare.R;
 import com.example.photoshare.parse.Request_Interceptor;
 import com.example.photoshare.parse.Response_PhotoDetails;
 import com.example.photoshare.parse.Response_PhotoList;
-import com.example.photoshare.customize.Customize_Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
@@ -127,6 +126,7 @@ public class Fragment_PhotoDetails extends Fragment {
     private boolean isRequestCancelCollect = false;
 
     /* 控件 */
+    private Customize_Animator customizeAnimator;
     private ImageView ivBack;
     private TextView tvUsername;
     private ImageView ivMore;
@@ -295,7 +295,7 @@ public class Fragment_PhotoDetails extends Fragment {
             isRequestLike = false;
             if (msg.what == HANDLER_PHOTO_LIKE) {
                 if (msg.arg1 == 1) {
-                    setCardiacAnimator(ivAnimatorLike);
+                    customizeAnimator.setCardiacAnimator(ivAnimatorLike);
                     ivLike.setImageResource(R.drawable.ic_baseline_like_white);
                     hasLike = true;
                     interface_messageSend.setPhotoLikeState(photoPosition, true);
@@ -443,7 +443,7 @@ public class Fragment_PhotoDetails extends Fragment {
             isRequestCollect = false;
             if (msg.what == HANDLER_PHOTO_COLLECT) {
                 if (msg.arg1 == 1) {
-                    setCardiacAnimator(ivAnimatorCollect);
+                    customizeAnimator.setCardiacAnimator(ivAnimatorCollect);
                     ivCollect.setImageResource(R.drawable.ic_baseline_collect_white);
                     hasCollect = true;
                     interface_messageSend.setPhotoCollectState(photoPosition, true);
@@ -685,20 +685,6 @@ public class Fragment_PhotoDetails extends Fragment {
         return end - start;
     }
 
-    /**
-     * 设置 心动 效果，用于点赞、收藏时的动画
-     * @param view 视图
-     */
-    private void setCardiacAnimator(View view){
-        ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(view,"scaleX",1f,1.1f,1f);
-        ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(view,"scaleY",1f,1.1f,1f);
-        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(view,"alpha",0f,0.8f,1f,1f,1f,0.8f,0f);
-
-        AnimatorSet animSet = new AnimatorSet();
-        animSet.play(scaleXAnimator).with(scaleYAnimator).with(alphaAnimator);
-        animSet.setDuration(1400);
-        animSet.start();
-    }
 
     @SuppressLint("ClickableViewAccessibility")
     private void setData() {
@@ -716,6 +702,8 @@ public class Fragment_PhotoDetails extends Fragment {
 
 
         /* 界面内容填充 */
+        customizeAnimator = new Customize_Animator();
+
         vpPhoto.setAdapter(viewPagerAdapter);
         vpPhoto.setPageTransformer(new PageTransformer_GradualChange());
 

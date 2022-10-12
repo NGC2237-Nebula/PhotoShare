@@ -37,6 +37,7 @@
     <!--黑-->
     <color name="black_a">#000000</color>
     <color name="black_b">#111111</color>
+    <color name="black_f">#141414</color>
     <color name="black_c">#191919</color>
     <color name="black_d">#1E1E1E</color>
     <color name="black_e">#272727</color>
@@ -49,6 +50,7 @@
     <color name="black_transparent_30">#4D000000</color>
     <color name="black_transparent_20">#33000000</color>
     <color name="black_transparent_10">#1A000000</color>
+
 
     <color name="black_e_transparent_90">#E6272727</color>
     <color name="black_e_transparent_80">#CC272727</color>
