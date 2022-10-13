@@ -30,7 +30,7 @@ import com.example.photoshare.R;
 import com.example.photoshare.parse.Request_Interceptor;
 import com.example.photoshare.parse.Response_CopyWriting;
 import com.example.photoshare.parse.Response_PhotoUpload;
-import com.example.photoshare.menu.explore.PageTransformer_ZoomOut;
+import com.example.photoshare.customize.Customize_PageTransformer_ZoomOut;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
@@ -264,7 +264,7 @@ public class Fragment_ShareUploadDetails extends Fragment {
     private void setData() {
         Adapter_PhotoSlide viewPagerAdapter = new Adapter_PhotoSlide(getContext(), imageFileList);
         vpPhoto.setAdapter(viewPagerAdapter);
-        vpPhoto.setPageTransformer(new PageTransformer_ZoomOut());
+        vpPhoto.setPageTransformer(new Customize_PageTransformer_ZoomOut());
     }
 
     /**

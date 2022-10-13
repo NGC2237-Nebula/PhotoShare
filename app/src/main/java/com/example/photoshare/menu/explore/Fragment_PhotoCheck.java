@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -62,23 +63,35 @@ public class Fragment_PhotoCheck extends Fragment {
      */
     private float maxScale;
 
+    /**
+     * 当前 Matrix
+     */
     private final Matrix matrix = new Matrix();
+    /**
+     * 暂存 Matrix
+     */
     private final Matrix savedMatrix = new Matrix();
 
     /**
      * 首次按下点的坐标
      */
-    private final PointF pre = new PointF();
+    private final PointF prePoint = new PointF();
     /**
      * 中间点的坐标
      */
-    private final PointF mid = new PointF();
+    private final PointF midPoint = new PointF();
     /**
      * 再次按下点的坐标
      */
-    private final PointF post = new PointF();
+    private final PointF postPoint = new PointF();
 
+    /**
+     * 两手指首次按下后的距离
+     */
     private float preDist = 1f;
+    /**
+     * 两手指再次按下后的距离
+     */
     private float postDist = 1f;
 
 
@@ -147,7 +160,7 @@ public class Fragment_PhotoCheck extends Fragment {
     /**
      * 点击分享图片
      */
-    private final View.OnClickListener cvShareListener = v -> shareWebPhoto();
+    private final View.OnClickListener cvShareListener = v -> shareWebPhotoString();
     /**
      * 图片触屏监听
      */
@@ -157,42 +170,43 @@ public class Fragment_PhotoCheck extends Fragment {
         public boolean onTouch(View v, MotionEvent event) {
             switch (event.getAction() & MotionEvent.ACTION_MASK) {
 
-                // 主点按下
+                // 主点按下 - 设置模式为移动模式
                 case MotionEvent.ACTION_DOWN:
                     savedMatrix.set(matrix);
-                    pre.set(event.getX(), event.getY());
+                    prePoint.set(event.getX(), event.getY());
                     MODE = DRAG;
                     break;
 
-                // 副点按下
+                // 副点按下 - 设置模式为缩放模式
                 case MotionEvent.ACTION_POINTER_DOWN:
                     preDist = calculateDistance(event);
                     // 如果连续两点距离大于10，判定为多点模式
                     if (calculateDistance(event) > 10f) {
                         savedMatrix.set(matrix);
-                        calculateMidPoint(mid, event);
+                        calculateMidPoint(midPoint, event);
                         MODE = ZOOM;
                     }
                     break;
 
-
+                // 手指抬起 - 重新设置模式为初始模式
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_POINTER_UP:
                     MODE = NONE;
                     break;
 
+                // 手指移动 - 判断模式并进行相应操作
                 case MotionEvent.ACTION_MOVE:
                     if (MODE == DRAG) {
                         matrix.set(savedMatrix);
-                        post.set(event.getX(),event.getY());
-                        matrix.preTranslate(post.x - pre.x, post.y - pre.y);
+                        postPoint.set(event.getX(),event.getY());
+                        matrix.preTranslate(postPoint.x - prePoint.x, postPoint.y - prePoint.y); // 计算平移距离进行位移
                     }
                     else if (MODE == ZOOM) {
                         postDist = calculateDistance(event);
                         if (postDist > 10f) {
                             matrix.set(savedMatrix);
-                            float tScale = postDist / preDist;
-                            matrix.postScale(tScale, tScale, mid.x, mid.y);
+                            float tScale = postDist / preDist; // 计算缩放比例
+                            matrix.postScale(tScale, tScale, midPoint.x, midPoint.y); // 以 midPoint 为中心的进行缩放
                         }
                     }
                     break;
@@ -206,13 +220,12 @@ public class Fragment_PhotoCheck extends Fragment {
 
 
     /* 图片触屏控制 相关函数 */
-
     /**
      * 限制最大最小缩放比例，同时自动居中
      */
     private void limitScale() {
         float[] param = new float[9];
-        matrix.getValues(param); // 将Matrix中的数值拷贝进参数的前9位中
+        matrix.getValues(param); // 将 matrix 中的数值拷贝进 param 的前9位中
         if (MODE == ZOOM) {
             if (param[0] < minScale)
                 matrix.setScale(minScale, minScale); // 设置缩放到matrix中，sx，sy代表缩放的倍数
@@ -230,7 +243,7 @@ public class Fragment_PhotoCheck extends Fragment {
     private void centerPhoto(boolean centerHorizontal, boolean centerVertical) {
 
         RectF rect = new RectF(0, 0, photoBitmap.getWidth(), photoBitmap.getHeight());
-        matrix.mapRect(rect); // 将图片的位置赋值给 rect
+        matrix.mapRect(rect); // 测量rect经过矩阵matrix变换后的位置,将结果放回rect中
 
         float height = rect.height();
         float width = rect.width();
@@ -240,11 +253,11 @@ public class Fragment_PhotoCheck extends Fragment {
 
         if (centerVertical) {
             int screenHeight = dm.heightPixels;
-            // 图片小于屏幕，居中显示。
+            // 图片小于屏幕，计算图片居中显示时上边需要偏移的偏移量。
             if (height < screenHeight) {
                 dy = (screenHeight - height) / 2 - rect.top;
             }
-            // 图片大于屏幕，上方留空则往上移，下方留空则往下移
+            // 图片大于屏幕，上边留空则往上移，下边留空则往下移
             else if (rect.top > 0) {
                 dy = -rect.top;
             } else if (rect.bottom < screenHeight) {
@@ -253,11 +266,11 @@ public class Fragment_PhotoCheck extends Fragment {
         }
         if (centerHorizontal) {
             int screenWidth = dm.widthPixels;
-            // 图片小于屏幕，居中显示。
+            // 图片小于屏幕，，计算图片居中显示时左边需要偏移的偏移量。
             if (width < screenWidth) {
                 dx = (screenWidth - width) / 2 - rect.left;
             }
-            // 图片大于屏幕，上方留空则往上移，下方留空则往下移
+            // 图片大于屏幕，左边留空则往上移，右边留空则往下移
             else if (rect.left > 0) {
                 dx = -rect.left;
             } else if (rect.right < screenWidth) {
@@ -265,6 +278,33 @@ public class Fragment_PhotoCheck extends Fragment {
             }
         }
         matrix.postTranslate(dx, dy);
+        // [minScale,0,0]    [minScale,0,dx]
+        // [0,minScale,0] => [0,minScale,dy]
+        // [0,   0,    1]    [0,    0,    1]
+    }
+
+    /**
+     * 设置最小缩放比例 - 图片缩放最小为屏幕宽度/高度
+     */
+    private void initMinScale() {
+        // 计算 最小缩放比例
+        minScale = Math.min(
+                (float) dm.widthPixels / (float) photoBitmap.getWidth(),
+                (float) dm.heightPixels / (float) photoBitmap.getHeight());
+        // 如果 缩放比例小于1 ,即图片大小超过屏幕大小,缩放图片为屏幕大小
+        if (minScale < 1.0) {
+            matrix.postScale(minScale, minScale);
+            // [1,0,0]    [minScale,0,0]
+            // [0,1,0] => [0,minScale,0]
+            // [0,0,1]    [0,   0,    1]
+        }
+    }
+
+    /**
+     * 设置最大缩放比例 - 图片缩放最大为原图的4倍
+     */
+    private void initMaxScale() {
+        maxScale = 4f;
     }
 
     /**
@@ -285,32 +325,9 @@ public class Fragment_PhotoCheck extends Fragment {
         point.set(x / 2, y / 2);
     }
 
-    /**
-     * 设置最小缩放比例 - 图片缩放最小为屏幕宽度/高度
-     */
-    private void initMinScale() {
-        // 计算 最小缩放比例
-        minScale = Math.min(
-                (float) dm.widthPixels / (float) photoBitmap.getWidth(),
-                (float) dm.heightPixels / (float) photoBitmap.getHeight());
-        // 如果 缩放比例小于1 ,即图片大小超过屏幕大小,缩放图片为屏幕大小
-        if (minScale < 1.0) {
-            matrix.postScale(minScale, minScale);
-        }
-    }
-
-    /**
-     * 设置最大缩放比例 - 图片缩放最大为原图的4倍
-     */
-    private void initMaxScale() {
-        maxScale = 4f;
-    }
-
-
 
 
     /* 网络图片获取、展示、保存 相关函数 */
-
     /**
      * 根据 URL 网络请求获取图片 Bitmap 格式,进行后续操作
      *
@@ -349,7 +366,7 @@ public class Fragment_PhotoCheck extends Fragment {
         initMinScale();
         initMaxScale();
         centerPhoto(true, true);
-        ivPhoto.setImageMatrix(matrix);
+        ivPhoto.setImageMatrix(matrix); // 将计算后的居中设置到图片中
     }
 
     /**
@@ -394,9 +411,9 @@ public class Fragment_PhotoCheck extends Fragment {
     }
 
     /**
-     * 分享网络图片
+     * 分享网络图片 String
      */
-    public void shareWebPhoto() {
+    private void shareWebPhotoString() {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_TEXT, "" + photo.getImageUrlList()[position]);
@@ -404,6 +421,17 @@ public class Fragment_PhotoCheck extends Fragment {
         startActivity(Intent.createChooser(shareIntent, "分享到"));
     }
 
+    /**
+     * 分享网络图片 Bitmap
+     */
+    private void shareWebPhotoBitmap(Bitmap bitmap) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(requireActivity().getContentResolver(), bitmap, null,null));
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        startActivity(Intent.createChooser(intent, "title"));
+    }
 
 
 

@@ -27,6 +27,7 @@ import com.example.photoshare.R;
 import com.example.photoshare.constant.Constant_APP;
 import com.example.photoshare.customize.Customize_Animator;
 import com.example.photoshare.customize.Customize_Toast;
+import com.example.photoshare.customize.Customize_PageTransformer_GradualChange;
 import com.example.photoshare.entity.Entity_Photo;
 import com.example.photoshare.interfaces.Interface_ClickViewSend;
 import com.example.photoshare.interfaces.Interface_MessageSend;
@@ -160,7 +161,6 @@ public class Fragment_PhotoDetails extends Fragment {
 
 
     /* 网络请求 */
-
     /**
      * 网络异步请求
      */
@@ -705,7 +705,7 @@ public class Fragment_PhotoDetails extends Fragment {
         customizeAnimator = new Customize_Animator();
 
         vpPhoto.setAdapter(viewPagerAdapter);
-        vpPhoto.setPageTransformer(new PageTransformer_GradualChange());
+        vpPhoto.setPageTransformer(new Customize_PageTransformer_GradualChange());
 
         tvUsername.setText(photoUsername);
         tvTitle.setText(photoTitle);
