@@ -43,21 +43,36 @@ import com.google.gson.annotations.SerializedName;
 public class Response_InternalServerError {
     @SerializedName("timestamp")
     private String timestamp;
-    public String getTimestamp() { return timestamp; }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
 
     @SerializedName("status")
     private int status;
-    public int getStatus() { return status; }
+
+    public int getStatus() {
+        return status;
+    }
 
     @SerializedName("error")
     private String error;
-    public String getError() { return error; }
+
+    public String getError() {
+        return error;
+    }
 
     @SerializedName("message")
     private String message;
-    public String getMessage() { return message; }
+
+    public String getMessage() {
+        return message;
+    }
 
     @SerializedName("path")
     private String path;
-    public String getPath() { return path; }
+
+    public String getPath() {
+        return path;
+    }
 }

@@ -7,11 +7,6 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
-    <!--是否允许备份系统和用户数据-->
-    <!--安全连接自定义证书-->
-    <!--打开手机摄像头拍照-->
-    <!---->
     <!--将应用图标指定为mipmap目录下的ic_launcher文件-->
     <!--指定app显示在home主页面上的名称-->
     <!--不用管-->
@@ -30,11 +25,7 @@
         android:theme="@style/Theme.PhotoShare"
         tools:targetApi="31">
 
-
-
-
         <!--2.弹出软键盘不希望遮挡-->
-        <!--3.是否支持其他应用调用-->
         <activity
             android:name=".Activity_Menu"
             android:windowSoftInputMode="adjustPan"

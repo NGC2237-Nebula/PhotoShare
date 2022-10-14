@@ -22,6 +22,7 @@ public class Adapter_CommentSecond  extends ArrayAdapter<Entity_Comment> {
         TextView tvCreateTime;
     }
 
+
     public Adapter_CommentSecond(Context context, int resourceId, List<Entity_Comment> data) {
         super(context, resourceId, data);
         this.resourceId = resourceId;

@@ -67,6 +67,8 @@ public class Fragment_CommentFirst extends Fragment {
     private StringBuffer firstCommentGet = null;
 
 
+
+
     /* 控件 */
     private ListView lvComment;
     private TextView tvHint;

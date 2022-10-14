@@ -273,12 +273,10 @@ public class Activity_Menu extends AppCompatActivity implements Interface_Messag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         parseUserMessage();
         helper = new Tool_SQLiteOpenHelper(Activity_Menu.this);
         database = helper.getWritableDatabase();
         allPhotoList = helper.getDataFromTable(database);
-
         setContentView(R.layout.activity_menu);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // 构建AppBarConfiguration，传入一组顶级目的地 ID 传递给构造函数
