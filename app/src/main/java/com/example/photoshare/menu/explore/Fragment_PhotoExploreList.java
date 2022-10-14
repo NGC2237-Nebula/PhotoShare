@@ -265,11 +265,11 @@ public class Fragment_PhotoExploreList extends Fragment {
             if (scrollState == SCROLL_STATE_IDLE) {
                 if (lvPhotoList.getFirstVisiblePosition() == 0) {
                     if (fabScrollTop.getVisibility() == View.VISIBLE) {
-                        customizeAnimator.setFadeAnimator(fabScrollTop, HIDE_VIEW); // 设置滑动顶部按钮不可见
+                        customizeAnimator.setSlideFadeAnimator(fabScrollTop, HIDE_VIEW); // 设置滑动顶部按钮不可见
                     }
                 } else {
                     if (fabScrollTop.getVisibility() == View.INVISIBLE) {
-                        customizeAnimator.setFadeAnimator(fabScrollTop, SHOW_VIEW); // 设置滑动顶部按钮可见
+                        customizeAnimator.setSlideFadeAnimator(fabScrollTop, SHOW_VIEW); // 设置滑动顶部按钮可见
                     }
                 }
             }

@@ -175,7 +175,6 @@
         android:id="@+id/rl_photo_explore_list_scroll_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:fabSize="mini"
         android:layout_alignBottom="@+id/sw_photo_explore_list_swipe"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"

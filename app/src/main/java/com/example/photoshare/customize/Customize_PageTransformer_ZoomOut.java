@@ -10,8 +10,6 @@ public class Customize_PageTransformer_ZoomOut implements ViewPager2.PageTransfo
 
     public void transformPage(View view, float position) {
         Log.d("LOG - PageTransformer","PageTransformer : "+position);
-        int pageWidth = view.getWidth();
-        int pageHeight = view.getHeight();
 
         // [-无穷大,-1) 图片在 当前手机屏幕图片 的左边 2 页
         if (position < -1) {
@@ -23,18 +21,9 @@ public class Customize_PageTransformer_ZoomOut implements ViewPager2.PageTransfo
         // position = 0  图片即 当前手机屏幕图片
         // position = 1  图片在 当前手机屏幕图片 的右边
         else if (position <= 1) {
+            view.setTranslationX(0);
             // 缩放过滤器 - 保证图片缩小时不会小于 设定的最小缩放比例
             float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
-            // 水平、垂直方向上的位移
-            float verticalMargin = pageHeight * (1 - scaleFactor) / 2;
-            float horizontalMargin = pageWidth * (1 - scaleFactor) / 2;
-
-            // 设置 偏移
-            if (position < 0) {
-                view.setTranslationX(horizontalMargin - verticalMargin / 2);
-            } else {
-                view.setTranslationX(-horizontalMargin + verticalMargin / 2);
-            }
             // 设置 缩放 (在 MIN_SCALE 和 1 之间)
             view.setScaleX(scaleFactor);
             view.setScaleY(scaleFactor);

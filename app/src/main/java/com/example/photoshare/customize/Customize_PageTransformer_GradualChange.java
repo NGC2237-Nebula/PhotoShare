@@ -18,12 +18,11 @@ public class Customize_PageTransformer_GradualChange implements ViewPager2.PageT
             view.setAlpha(0);
         }
 
-        // [-1,0]
+        // （-1,0]
         // position = -1 图片在 当前手机屏幕图片 的左边
         // position = 0  图片即 当前手机屏幕图片
         else if (position <= 0) {
-            view.setAlpha(1);
-            view.setTranslationX(0);
+            view.setTranslationX(0);  // 没有抵消滑动的增量
             view.setScaleX(1);
             view.setScaleY(1);
         }
@@ -35,7 +34,7 @@ public class Customize_PageTransformer_GradualChange implements ViewPager2.PageT
             // 根据 position 设置透明度
             view.setAlpha(1 - position);
             // 根据 position 设置偏移量
-            view.setTranslationX(pageWidth * -position);
+            view.setTranslationX(pageWidth * -position); // 添加一个负的偏移量去抵消原本的偏移量
             // 根据 position 设置
             float scaleFactor = MIN_SCALE + (1 - MIN_SCALE) * (1 - Math.abs(position));
             view.setScaleX(scaleFactor);

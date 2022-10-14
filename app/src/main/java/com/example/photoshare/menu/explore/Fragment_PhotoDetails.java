@@ -26,6 +26,7 @@ import com.example.photoshare.Activity_Menu;
 import com.example.photoshare.R;
 import com.example.photoshare.constant.Constant_APP;
 import com.example.photoshare.customize.Customize_Animator;
+import com.example.photoshare.customize.Customize_PageTransformer_ZoomOut;
 import com.example.photoshare.customize.Customize_Toast;
 import com.example.photoshare.customize.Customize_PageTransformer_GradualChange;
 import com.example.photoshare.entity.Entity_Photo;

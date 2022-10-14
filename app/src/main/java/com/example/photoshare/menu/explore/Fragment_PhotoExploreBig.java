@@ -286,12 +286,12 @@ public class Fragment_PhotoExploreBig extends Fragment {
                 if (recyclerView.getLayoutManager().findViewByPosition(0) != null) {
                     if (fabScrollTop.getVisibility() == View.VISIBLE) {
                         // 设置滑动顶部按钮不可见
-                        customizeAnimator.setFadeAnimator(fabScrollTop, HIDE_VIEW);
+                        customizeAnimator.setSlideFadeAnimator(fabScrollTop, HIDE_VIEW);
                     }
                 } else {
                     if (fabScrollTop.getVisibility() == View.INVISIBLE) {
                         // 设置滑动顶部按钮可见
-                        customizeAnimator.setFadeAnimator(fabScrollTop, SHOW_VIEW);
+                        customizeAnimator.setSlideFadeAnimator(fabScrollTop, SHOW_VIEW);
                     }
                 }
             }

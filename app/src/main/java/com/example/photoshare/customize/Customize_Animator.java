@@ -47,6 +47,40 @@ public class Customize_Animator {
     }
 
 
+    public void setSlideFadeAnimator(View view, int state){
+        if (state == SHOW_VIEW) {
+            ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
+            ObjectAnimator animator1 = ObjectAnimator.ofFloat(view,"translationY",100f,0f);
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                    view.setVisibility(View.VISIBLE);
+                }
+            });
+            AnimatorSet animSet = new AnimatorSet();
+            animSet.play(animator).with(animator1);
+            animSet.setDuration(500);
+            animSet.start();
+
+        } else if (state == HIDE_VIEW) {
+            ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f).setDuration(300);
+            ObjectAnimator animator1 = ObjectAnimator.ofFloat(view,"translationY",0f,100f);
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    view.setVisibility(View.INVISIBLE);
+                }
+            });
+            AnimatorSet animSet = new AnimatorSet();
+            animSet.play(animator).with(animator1);
+            animSet.setDuration(500);
+            animSet.start();
+        }
+
+    }
+
     /**
      * 设置 心动 效果，用于点赞、收藏时的动画
      *
