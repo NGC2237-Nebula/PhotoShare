@@ -22,7 +22,7 @@ public class Customize_Animator {
      * @param view  控件
      * @param state 控件状态
      */
-    public void setFadeAnimator(View view, int state) {
+    public void setFadeAnimator(View view, int state) {    /*搜索框*/
         if (state == SHOW_VIEW) {
             ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f).setDuration(300);
             animator.addListener(new AnimatorListenerAdapter() {
@@ -82,7 +82,7 @@ public class Customize_Animator {
     }
 
     /**
-     * 设置 心动 效果，用于点赞、收藏时的动画
+     * 设置 心动 效果，用于点赞、收藏时的动画  Get
      *
      * @param view 视图
      */

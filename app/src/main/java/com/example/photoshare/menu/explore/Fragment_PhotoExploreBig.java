@@ -323,7 +323,7 @@ public class Fragment_PhotoExploreBig extends Fragment {
         }
     };
     /**
-     * 搜索框展示和隐藏
+     * 搜索框展示和隐藏  Get
      */
     private final View.OnClickListener rlShowQuireListener = v -> {
         if (rlQuireMask.getAlpha() == 0f || cvQuireBar.getAlpha() == 0f) {

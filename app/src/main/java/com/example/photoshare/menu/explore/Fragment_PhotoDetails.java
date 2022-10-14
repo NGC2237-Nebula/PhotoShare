@@ -289,13 +289,13 @@ public class Fragment_PhotoDetails extends Fragment {
         }
     };
     /**
-     * 操作响应 - 点赞
+     * 操作响应 - 点赞  Get
      */
     private final Handler likeHandler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
             isRequestLike = false;
             if (msg.what == HANDLER_PHOTO_LIKE) {
-                if (msg.arg1 == 1) {
+                if (msg.arg1 == 1) {        /**/
                     customizeAnimator.setCardiacAnimator(ivAnimatorLike);
                     ivLike.setImageResource(R.drawable.ic_baseline_like_white);
                     hasLike = true;
@@ -437,13 +437,13 @@ public class Fragment_PhotoDetails extends Fragment {
         }
     };
     /**
-     * 操作响应 - 收藏
+     * 操作响应 - 收藏 Get
      */
     private final Handler collectHandler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
             isRequestCollect = false;
             if (msg.what == HANDLER_PHOTO_COLLECT) {
-                if (msg.arg1 == 1) {
+                if (msg.arg1 == 1) {  /**/
                     customizeAnimator.setCardiacAnimator(ivAnimatorCollect);
                     ivCollect.setImageResource(R.drawable.ic_baseline_collect_white);
                     hasCollect = true;

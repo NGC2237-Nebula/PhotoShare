@@ -72,12 +72,12 @@ public class Fragment_Share extends Fragment {
 
     /* 监听器 */
     /**
-     * 提示 图片上传大小
+     * 提示 图片上传大小 Get眨眼动画
      */
     private final View.OnClickListener rlHintListener = v ->
             toast.makeEyeToast(context, "请上传小于 5MB 的图片");
     /**
-     * 提示 鸿蒙系统无法上传图片
+     * 提示 鸿蒙系统无法上传图片 Get眨眼动画
      */
     private final View.OnClickListener ivHintListener = new View.OnClickListener() {
         @Override
