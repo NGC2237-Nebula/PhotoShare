@@ -15,7 +15,6 @@ public class Customize_PageTransformer_ZoomOut implements ViewPager2.PageTransfo
         if (position < -1) {
             view.setAlpha(0);
         }
-
         // [-1,1] 图片在 当前手机屏幕图片 的右边或左边
         // position = -1 图片在 当前手机屏幕图片 的左边
         // position = 0  图片即 当前手机屏幕图片

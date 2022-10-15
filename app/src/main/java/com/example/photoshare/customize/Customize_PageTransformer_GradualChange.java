@@ -18,6 +18,7 @@ public class Customize_PageTransformer_GradualChange implements ViewPager2.PageT
             view.setAlpha(0);
         }
 
+
         // （-1,0]
         // position = -1 图片在 当前手机屏幕图片 的左边
         // position = 0  图片即 当前手机屏幕图片

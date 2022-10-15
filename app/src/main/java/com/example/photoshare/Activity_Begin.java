@@ -42,7 +42,8 @@ import okhttp3.ResponseBody;
  * @author 孙昊君
  */
 
-public class Activity_Begin extends AppCompatActivity {
+public class
+Activity_Begin extends AppCompatActivity {
 
     /* 数据 */
     private String username;
