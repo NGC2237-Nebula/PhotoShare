@@ -22,6 +22,7 @@ public class Customize_Animator {
      * @param view  控件
      * @param state 控件状态
      */
+
     public void setFadeAnimator(View view, int state) {    /*搜索框*/
         if (state == SHOW_VIEW) {
             ObjectAnimator animator = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f).setDuration(300);

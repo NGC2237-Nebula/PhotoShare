@@ -13,6 +13,7 @@ public class Customize_PageTransformer_GradualChange implements ViewPager2.PageT
         Log.d("LOG - PageTransformer", "PageTransformer : " + position);
         int pageWidth = view.getWidth();
 
+
         // [-无穷大,-1) 图片在 当前手机屏幕图片 的左边 2 页
         if (position < -1) {
             view.setAlpha(0);
